@@ -19,8 +19,6 @@ public class Mole : MonoBehaviour
     {
         while (true)
         {
-            hole = FieldController.Instance.Field.GetNewHole();
-
             hole.Status = Hole.HoleStatus.Mole;
             FieldController.Instance.SwitchHoleGFX(hole);
 
@@ -30,6 +28,8 @@ public class Mole : MonoBehaviour
 
             hole.Status = Hole.HoleStatus.Empty;
             FieldController.Instance.SwitchHoleGFX(hole);
+
+            hole = FieldController.Instance.Field.GetNewHole();
         }
     }
 }
