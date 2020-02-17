@@ -23,7 +23,6 @@ public class FieldController : MonoBehaviour
         // i.e. Hole in center of field will sit on the same position as this gameobject
         offset = new Vector3(-(holesX -1)/2, 0, -(holesZ-1)/2);
 
-
         // Create starting field / world
         Field = new Field(holesX,holesZ);
 

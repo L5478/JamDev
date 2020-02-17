@@ -11,6 +11,7 @@ public class Mole : MonoBehaviour
     {
         fieldController = FindObjectOfType<FieldController>();
         hole = fieldController.Field.GetEmptyHole();
+        hole.Status = Hole.HoleStatus.Mole;
 
         transform.position = hole.Position;
     }
