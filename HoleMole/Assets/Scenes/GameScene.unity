@@ -1288,8 +1288,8 @@ MonoBehaviour:
   holePrefab: {fileID: 9000086410223894255, guid: 19d53efc26d79674787a55d30d06841d,
     type: 3}
   emptySpace: 2
-  holesX: 7
-  holesZ: 7
+  holesX: 11
+  holesZ: 9
 --- !u!4 &1139722943
 Transform:
   m_ObjectHideFlags: 0

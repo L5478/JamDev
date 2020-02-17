@@ -5,6 +5,7 @@ using UnityEngine;
 public class Mole : MonoBehaviour
 {
     public float waitTime = 1f;
+    public float spawnTime = 2f;
     private Vector3 offset = new Vector3(0, 0.5f, 0);
 
     private Hole hole;
@@ -22,6 +23,8 @@ public class Mole : MonoBehaviour
     {
         while (true)
         {
+            yield return new WaitForSeconds(spawnTime);
+
             hole.Status = Hole.HoleStatus.Mole;
             FieldController.Instance.SwitchHoleGFX(hole);
 
