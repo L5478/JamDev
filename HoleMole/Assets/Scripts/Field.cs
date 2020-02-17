@@ -35,4 +35,16 @@ public class Field
     {
         return holes[x, z];
     }
+
+    // Get empty Hole
+    public Hole GetEmptyHole()
+    {
+        foreach (Hole hole in holes)
+        {
+            if (hole.Status == Hole.HoleStatus.Empty)
+                return hole;
+        }
+
+        return null;
+    }
 }

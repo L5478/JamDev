@@ -10,26 +10,27 @@ public class FieldController : MonoBehaviour
 
     private Vector3 offset;
 
-    private Field field;
+    public Field Field;
     private Transform[] holeGFX;
 
-    private void Start()
+    private void Awake()
     {
-        // Offset, so Holes will be build around of this gameobject
-        // i.e. Hole in center of field will sit on the same position as this gameobject
-        offset = new Vector3(-(holesX -1)/2, 0, -(holesZ-1)/2);
-
         // Prevent wierd behaviour
         if (emptySpace <= 0)
             emptySpace = 1;
 
+        // Offset, so Holes will be build around of this gameobject
+        // i.e. Hole in center of field will sit on the same position as this gameobject
+        offset = new Vector3(-(holesX -1)/2, 0, -(holesZ-1)/2);
+
+
         // Create starting field / world
-        field = new Field(holesX,holesZ);
+        Field = new Field(holesX,holesZ);
 
         // Loop through field
-        for (int x = 0; x < field.Width; x++)
+        for (int x = 0; x < Field.Width; x++)
         {
-            for (int z = 0; z < field.Depth; z++)
+            for (int z = 0; z < Field.Depth; z++)
             {
                 // Instantiate Hole gameobject, rename it and get all children obejcts (graphics)
                 GameObject holeGO = Instantiate(holePrefab, (new Vector3(x, 0, z) + offset) * emptySpace, Quaternion.identity, this.transform);
@@ -37,7 +38,8 @@ public class FieldController : MonoBehaviour
                 holeGFX = holeGO.GetComponentsInChildren<Transform>();
 
                 // Get right Hole information
-                Hole hole_data = field.GetHoleAt(x, z);
+                Hole hole_data = Field.GetHoleAt(x, z);
+                hole_data.Position = holeGO.transform.position;
 
                 // Set right graphics based on Hole status
                 switch (hole_data.Status)

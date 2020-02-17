@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class Mole : MonoBehaviour
 {
+    private Hole hole;
+    private FieldController fieldController;
 
-    //WorldController worldController;
+    private void Start()
+    {
+        fieldController = FindObjectOfType<FieldController>();
+        hole = fieldController.Field.GetEmptyHole();
 
-
-
-
-    //private Vector3 GetRandomHole()
-    //{
-    //    int rand = Random.Range(0, worldController.holes.Length);
-    //    return worldController.holes[rand].position;
-    //}
+        transform.position = hole.Position;
+    }
 }

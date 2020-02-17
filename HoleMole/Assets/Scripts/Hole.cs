@@ -7,9 +7,11 @@ public class Hole
     private HoleStatus status = HoleStatus.None;
     private int x;
     private int z;
+    private Vector3 position;
     private Field field;
 
     public HoleStatus Status { get => status; set => status = value; }
+    public Vector3 Position { get => position; set => position = value; }
 
     public Hole(int x, int z, Field field)
     {
