@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class FieldController : MonoBehaviour
 {
@@ -16,7 +17,9 @@ public class FieldController : MonoBehaviour
     private Vector3 offset;
 
     public Field Field;
-    private Transform[] holeGFX;
+    private List<Transform> holeGFX = new List<Transform>();
+
+    private Dictionary<Hole, GameObject> holeGODictonary = new Dictionary<Hole, GameObject>();
 
     private void Awake()
     {
@@ -46,59 +49,66 @@ public class FieldController : MonoBehaviour
                 // Instantiate Hole gameobject, rename it and get all children obejcts (graphics)
                 GameObject holeGO = Instantiate(holePrefab, (new Vector3(x, 0, z) + offset) * emptySpace, Quaternion.identity, this.transform);
                 holeGO.name = "Hole_" + x + "_" + z;
-                holeGFX = holeGO.GetComponentsInChildren<Transform>();
 
                 // Get right Hole information
                 Hole hole_data = Field.GetHoleAt(x, z);
                 hole_data.Position = holeGO.transform.position;
 
+                holeGODictonary.Add(hole_data, holeGO);
+
                 // Set right graphics based on Hole status
-                switch (hole_data.Status)
-                {
-                    case Hole.HoleStatus.None:
-                        SetGFXByTag("HoleNone");
-                        break;
-                    case Hole.HoleStatus.Empty:
-                        SetGFXByTag("HoleEmpty");
-                        break;
-                    case Hole.HoleStatus.Mole:
-                        SetGFXByTag("HoleMole");
-                        break;
-                    case Hole.HoleStatus.Plank:
-                        SetGFXByTag("HolePlank");
-                        break;
-                    case Hole.HoleStatus.Water:
-                        SetGFXByTag("HoleWater");
-                        break;
-                    case Hole.HoleStatus.Fire:
-                        SetGFXByTag("HoleFire");
-                        break;
-                    default:
-                        break;
-                }
+                SwitchHoleGFX(hole_data);
             }
         }
     }
 
-    // Set right grahics to Hole gameobject by tag
-    private void SetGFXByTag(string tag)
+    public void SwitchHoleGFX(Hole hole)
     {
-        if (holeGFX == null)
-            return;
+        switch (hole.Status)
+        {
+            case Hole.HoleStatus.None:
+                SetGFXByTag("HoleNone", hole);
+                break;
+            case Hole.HoleStatus.Empty:
+                SetGFXByTag("HoleEmpty", hole);
+                break;
+            case Hole.HoleStatus.Mole:
+                SetGFXByTag("HoleMole", hole);
+                break;
+            case Hole.HoleStatus.Plank:
+                SetGFXByTag("HolePlank", hole);
+                break;
+            case Hole.HoleStatus.Water:
+                SetGFXByTag("HoleWater", hole);
+                break;
+            case Hole.HoleStatus.Fire:
+                SetGFXByTag("HoleFire", hole);
+                break;
+            default:
+                break;
+        }
+    }
 
-        foreach (var GFX in holeGFX)
+    // Set right grahics to Hole gameobject by tag
+    private void SetGFXByTag(string tag, Hole hole)
+    {
+        Debug.Log(tag + "   " + hole.Status);
+        GameObject holeGO = holeGODictonary[hole];
+
+        foreach (var GFX in holeGO.GetComponentsInChildren<Transform>())
         {
             if (GFX.CompareTag("Hole"))
+            { 
                 continue;
-
-            if (GFX.CompareTag(tag))
+            }
+            else if (GFX.CompareTag(tag))
             {
                 GFX.gameObject.SetActive(true);
             }
             else
             {
                 GFX.gameObject.SetActive(false);
-            }   
+            }
         }
     }
 }
