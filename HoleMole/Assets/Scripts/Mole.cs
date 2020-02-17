@@ -24,7 +24,7 @@ public class Mole : MonoBehaviour
 
             transform.position = hole.Position + offset;
 
-            yield return new WaitForSeconds(2);
+            yield return new WaitForSeconds(.5f);
 
             hole.Status = Hole.HoleStatus.Empty;
             FieldController.Instance.SwitchHoleGFX(hole);

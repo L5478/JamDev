@@ -12,6 +12,8 @@ public class Hole
 
     public HoleStatus Status { get => status; set => status = value; }
     public Vector3 Position { get => position; set => position = value; }
+    public int X { get => x; }
+    public int Z { get => z; }
 
     public Hole(int x, int z, Field field)
     {

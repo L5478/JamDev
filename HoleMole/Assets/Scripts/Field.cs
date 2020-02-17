@@ -47,7 +47,7 @@ public class Field
         return null;
     }
 
-
+    // Get randomly hole which status is not None or Mole
     public Hole GetRandomHole()
     {
         List<Hole> hole_list = new List<Hole>();
@@ -64,11 +64,26 @@ public class Field
 
     public Hole GetNewHole()
     {
+        Hole emptyHole;
+
         foreach (Hole hole in holes)
         {
-            if (hole.Status == Hole.HoleStatus.None)
-                return hole;
+            if (hole.Status == Hole.HoleStatus.Empty)
+            {
+                emptyHole = hole;
+
+                foreach (Hole holee in holes)
+                {
+                    if (holee.Status == Hole.HoleStatus.None && holee.X == emptyHole.X-1 && holee.Z == emptyHole.Z-1
+                        || holee.Status == Hole.HoleStatus.None && holee.X == emptyHole.X+1 && holee.Z == emptyHole.Z + 1)
+                    {
+                        return holee;
+                    }
+                }
+            }
         }
+
+
 
         return null;
     }
