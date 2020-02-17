@@ -47,6 +47,7 @@ public class Field
         return null;
     }
 
+
     public Hole GetRandomHole()
     {
         List<Hole> hole_list = new List<Hole>();
@@ -58,5 +59,17 @@ public class Field
         }
 
         return hole_list[Random.Range(0, hole_list.Count)];
+    }
+
+
+    public Hole GetNewHole()
+    {
+        foreach (Hole hole in holes)
+        {
+            if (hole.Status == Hole.HoleStatus.None)
+                return hole;
+        }
+
+        return null;
     }
 }
