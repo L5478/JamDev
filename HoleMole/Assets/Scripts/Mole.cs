@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Mole : MonoBehaviour
 {
+    public float waitTime = 1f;
     private Vector3 offset = new Vector3(0, 0.5f, 0);
 
     private Hole hole;
@@ -13,6 +14,8 @@ public class Mole : MonoBehaviour
         hole = FieldController.Instance.Field.GetRandomHole();
 
         StartCoroutine(SetNewHole());
+
+        PlayerInput.moleHitted += Hit;
     }
 
     private IEnumerator SetNewHole()
@@ -24,7 +27,7 @@ public class Mole : MonoBehaviour
 
             transform.position = hole.Position + offset;
 
-            yield return new WaitForSeconds(.2f);
+            yield return new WaitForSeconds(waitTime);
 
             hole.Status = Hole.HoleStatus.Empty;
             FieldController.Instance.SwitchHoleGFX(hole);
@@ -33,6 +36,21 @@ public class Mole : MonoBehaviour
 
             if (hole == null)
                 hole = FieldController.Instance.Field.GetRandomHole();
+        }
+    }
+
+    private void Hit(Transform mole)
+    {
+        if (mole == this.transform)
+        {
+            StopAllCoroutines();
+
+            hole.Status = Hole.HoleStatus.Empty;
+            FieldController.Instance.SwitchHoleGFX(hole);
+
+            hole = FieldController.Instance.Field.GetRandomHole();
+
+            StartCoroutine(SetNewHole());
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -13,6 +14,8 @@ public class PlayerInput : MonoBehaviour
 
     private PowerUp currentPowerUp = PowerUp.None;
 
+    public static event Action<Transform> moleHitted;
+
     void Update()
     {
         //Mouse button down if not hovering over any UI elements
@@ -25,8 +28,9 @@ public class PlayerInput : MonoBehaviour
                 if (currentPowerUp == PowerUp.None)
                 {
                     //Regular hit mole
-                    Debug.Log(hit.transform);
-                } else
+                    moleHitted?.Invoke(hit.transform);
+                }
+                else
                 {
                     //Powerup hit hole
                     Debug.Log("used: " + currentPowerUp.ToString() + " powerup on: " + hit.transform.parent);
