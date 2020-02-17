@@ -92,21 +92,21 @@ public class FieldController : MonoBehaviour
     // Set right grahics to Hole gameobject by tag
     private void SetGFXByTag(string tag, Hole hole)
     {
-        Debug.Log(tag + "   " + hole.Status);
         GameObject holeGO = holeGODictonary[hole];
 
-        foreach (var GFX in holeGO.GetComponentsInChildren<Transform>())
+        foreach (var GFX in holeGO.GetComponentsInChildren<Transform>(true))
         {
-            if (GFX.CompareTag("Hole"))
+            if (GFX.gameObject.CompareTag("Hole"))
             { 
                 continue;
             }
-            else if (GFX.CompareTag(tag))
+
+            if (GFX.gameObject.CompareTag(tag) == true)
             {
                 GFX.gameObject.SetActive(true);
             }
             else
-            {
+            { 
                 GFX.gameObject.SetActive(false);
             }
         }
