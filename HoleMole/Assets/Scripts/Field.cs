@@ -66,6 +66,7 @@ public class Field
     {
         List<Hole> emptyHoles = new List<Hole>();
         List<Hole> noneHoles = new List<Hole>();
+        Hole newHole = null;
 
         foreach (Hole hole in holes)
         {
@@ -84,15 +85,41 @@ public class Field
 
             foreach (Hole hole in noneHoles)
             {
-                if (hole.X < emptyHoles[rndIndex].X - 1)
+                if (hole.X == emptyHoles[rndIndex].X -1 && hole.Z == emptyHoles[rndIndex].Z -1||
+                 hole.X == emptyHoles[rndIndex].X -1 && hole.Z == emptyHoles[rndIndex].Z -1 ||
+                 hole.X == emptyHoles[rndIndex].X -1 && hole.Z == emptyHoles[rndIndex].Z -1 ||
+                 hole.X == emptyHoles[rndIndex].X -1 && hole.Z == emptyHoles[rndIndex].Z -1 ||
+
+                 hole.X == emptyHoles[rndIndex].X + 1 && hole.Z == emptyHoles[rndIndex].Z - 1 ||
+                 hole.X == emptyHoles[rndIndex].X + 1 && hole.Z == emptyHoles[rndIndex].Z - 1 ||
+                 hole.X == emptyHoles[rndIndex].X + 1 && hole.Z == emptyHoles[rndIndex].Z - 1 ||
+                 hole.X == emptyHoles[rndIndex].X + 1 && hole.Z == emptyHoles[rndIndex].Z - 1 ||
+
+
+                 hole.X == emptyHoles[rndIndex].X + 1 && hole.Z == emptyHoles[rndIndex].Z + 1 ||
+                 hole.X == emptyHoles[rndIndex].X + 1 && hole.Z == emptyHoles[rndIndex].Z + 1 ||
+                 hole.X == emptyHoles[rndIndex].X + 1 && hole.Z == emptyHoles[rndIndex].Z + 1 ||
+                 hole.X == emptyHoles[rndIndex].X + 1 && hole.Z == emptyHoles[rndIndex].Z + 1 ||
+
+                 hole.X == emptyHoles[rndIndex].X - 1 && hole.Z == emptyHoles[rndIndex].Z + 1 ||
+                 hole.X == emptyHoles[rndIndex].X - 1 && hole.Z == emptyHoles[rndIndex].Z + 1 ||
+                 hole.X == emptyHoles[rndIndex].X - 1 && hole.Z == emptyHoles[rndIndex].Z + 1 ||
+                 hole.X == emptyHoles[rndIndex].X - 1 && hole.Z == emptyHoles[rndIndex].Z + 1)
                 {
                     flag = false;
+                    newHole = hole;
                 }
             }
 
+            emptyHoles.Remove(emptyHoles[rndIndex]);
+
+            if (emptyHoles.Count <= 0)
+            {
+                flag = false;
+            }
 
         } while (flag);
 
-        return null;
+        return newHole;
     }
 }

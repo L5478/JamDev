@@ -30,6 +30,9 @@ public class Mole : MonoBehaviour
             FieldController.Instance.SwitchHoleGFX(hole);
 
             hole = FieldController.Instance.Field.GetNewHole();
+
+            if (hole == null)
+                hole = FieldController.Instance.Field.GetRandomHole();
         }
     }
 }
