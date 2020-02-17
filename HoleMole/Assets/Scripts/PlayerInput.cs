@@ -5,6 +5,10 @@ using UnityEngine.EventSystems;
 
 public class PlayerInput : MonoBehaviour
 {
+    public Texture2D PlankImg;
+    public Texture2D WaterImg;
+    public Texture2D FireImg;
+
     public enum PowerUp { None, Plank, Water, Fire }
 
     private PowerUp currentPowerUp = PowerUp.None;
@@ -26,6 +30,7 @@ public class PlayerInput : MonoBehaviour
                 {
                     Debug.Log("used: " + currentPowerUp.ToString() + " powerup");
                     currentPowerUp = PowerUp.None;
+                    SetCursorImage();
                 }
                 //Do something with the hit object
             }
@@ -38,15 +43,31 @@ public class PlayerInput : MonoBehaviour
         {
             case 1:
                 currentPowerUp = PowerUp.Plank;
+                SetCursorImage(PlankImg);
                 break;
             case 2:
                 currentPowerUp = PowerUp.Water;
+                SetCursorImage(WaterImg);
                 break;
             case 3:
                 currentPowerUp = PowerUp.Fire;
+                SetCursorImage(FireImg);
                 break;
             default:
                 break;
+        }
+    }
+
+    private void SetCursorImage(Texture2D img = null)
+    {
+        //if method called empty reset image
+        if (img == null)
+        {
+            Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+        }
+        else
+        {
+            Cursor.SetCursor(img, Vector2.zero, CursorMode.Auto);
         }
     }
 }
