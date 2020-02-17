@@ -289,7 +289,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 4.5904e-41, y: 4.51e-43, z: 1.2e-43, w: NaN}
+  m_BoundingSphereOverride: {x: 0, y: 2.3509887e-38, z: -2.3059837e+18, w: 5.820766e-11}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -419,7 +419,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00934463207b2d44393e33db435c83ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  holePrefab: {fileID: 5590748295012080155, guid: 19d53efc26d79674787a55d30d06841d,
+  holePrefab: {fileID: 9000086410223894255, guid: 19d53efc26d79674787a55d30d06841d,
     type: 3}
   emptySpace: 2
   holesX: 11
