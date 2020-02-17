@@ -47,6 +47,7 @@ public class Field
         return null;
     }
 
+    // Get randomly hole which status is not None or Mole
     public Hole GetRandomHole()
     {
         List<Hole> hole_list = new List<Hole>();
@@ -58,5 +59,67 @@ public class Field
         }
 
         return hole_list[Random.Range(0, hole_list.Count)];
+    }
+
+
+    public Hole GetNewHole()
+    {
+        List<Hole> emptyHoles = new List<Hole>();
+        List<Hole> noneHoles = new List<Hole>();
+        Hole newHole = null;
+
+        foreach (Hole hole in holes)
+        {
+            if (hole.Status == Hole.HoleStatus.Empty)
+                emptyHoles.Add(hole);
+
+            if (hole.Status == Hole.HoleStatus.None)
+                noneHoles.Add(hole);
+        }
+
+        bool flag = true;
+          
+        do
+        {
+            int rndIndex = Random.Range(0, emptyHoles.Count);
+
+            foreach (Hole hole in noneHoles)
+            {
+                if (hole.X == emptyHoles[rndIndex].X -1 && hole.Z == emptyHoles[rndIndex].Z -1||
+                 hole.X == emptyHoles[rndIndex].X -1 && hole.Z == emptyHoles[rndIndex].Z -1 ||
+                 hole.X == emptyHoles[rndIndex].X -1 && hole.Z == emptyHoles[rndIndex].Z -1 ||
+                 hole.X == emptyHoles[rndIndex].X -1 && hole.Z == emptyHoles[rndIndex].Z -1 ||
+
+                 hole.X == emptyHoles[rndIndex].X + 1 && hole.Z == emptyHoles[rndIndex].Z - 1 ||
+                 hole.X == emptyHoles[rndIndex].X + 1 && hole.Z == emptyHoles[rndIndex].Z - 1 ||
+                 hole.X == emptyHoles[rndIndex].X + 1 && hole.Z == emptyHoles[rndIndex].Z - 1 ||
+                 hole.X == emptyHoles[rndIndex].X + 1 && hole.Z == emptyHoles[rndIndex].Z - 1 ||
+
+
+                 hole.X == emptyHoles[rndIndex].X + 1 && hole.Z == emptyHoles[rndIndex].Z + 1 ||
+                 hole.X == emptyHoles[rndIndex].X + 1 && hole.Z == emptyHoles[rndIndex].Z + 1 ||
+                 hole.X == emptyHoles[rndIndex].X + 1 && hole.Z == emptyHoles[rndIndex].Z + 1 ||
+                 hole.X == emptyHoles[rndIndex].X + 1 && hole.Z == emptyHoles[rndIndex].Z + 1 ||
+
+                 hole.X == emptyHoles[rndIndex].X - 1 && hole.Z == emptyHoles[rndIndex].Z + 1 ||
+                 hole.X == emptyHoles[rndIndex].X - 1 && hole.Z == emptyHoles[rndIndex].Z + 1 ||
+                 hole.X == emptyHoles[rndIndex].X - 1 && hole.Z == emptyHoles[rndIndex].Z + 1 ||
+                 hole.X == emptyHoles[rndIndex].X - 1 && hole.Z == emptyHoles[rndIndex].Z + 1)
+                {
+                    flag = false;
+                    newHole = hole;
+                }
+            }
+
+            emptyHoles.Remove(emptyHoles[rndIndex]);
+
+            if (emptyHoles.Count <= 0)
+            {
+                flag = false;
+            }
+
+        } while (flag);
+
+        return newHole;
     }
 }
