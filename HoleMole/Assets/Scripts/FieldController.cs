@@ -2,6 +2,11 @@
 
 public class FieldController : MonoBehaviour
 {
+    #region Singleton
+    public static FieldController instance;
+    public static FieldController Instance { get => instance; }
+    #endregion
+
     public GameObject holePrefab;
 
     public float emptySpace = 1f;
@@ -15,16 +20,23 @@ public class FieldController : MonoBehaviour
 
     private void Awake()
     {
+        #region Singleton
+        if (instance != null && instance != this)
+            Destroy(instance);
+        else
+            instance = this;
+        #endregion
+
         // Prevent wierd behaviour
         if (emptySpace <= 0)
             emptySpace = 1;
 
         // Offset, so Holes will be build around of this gameobject
         // i.e. Hole in center of field will sit on the same position as this gameobject
-        offset = new Vector3(-(holesX -1)/2, 0, -(holesZ-1)/2);
+        offset = new Vector3(-(holesX - 1) / 2, 0, -(holesZ - 1) / 2);
 
         // Create starting field / world
-        Field = new Field(holesX,holesZ);
+        Field = new Field(holesX, holesZ);
 
         // Loop through field
         for (int x = 0; x < Field.Width; x++)

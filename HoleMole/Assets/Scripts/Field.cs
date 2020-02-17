@@ -1,4 +1,7 @@
-﻿public class Field
+﻿using UnityEngine;
+using System.Collections.Generic;
+
+public class Field
 {
     private Hole[,] holes;
 
@@ -42,5 +45,18 @@
         }
 
         return null;
+    }
+
+    public Hole GetRandomHole()
+    {
+        List<Hole> hole_list = new List<Hole>();
+
+        foreach (Hole hole in holes)
+        {
+            if (hole.Status != Hole.HoleStatus.Mole && hole.Status != Hole.HoleStatus.None)
+                hole_list.Add(hole);
+        }
+
+        return hole_list[Random.Range(0, hole_list.Count)];
     }
 }
