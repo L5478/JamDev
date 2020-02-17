@@ -16,7 +16,8 @@ public class Mole : MonoBehaviour
 
         StartCoroutine(SetNewHole());
 
-        PlayerInput.moleHitted += Hit;
+        PlayerInput.moleHitted += NormalHit;
+        PlayerInput.waterPowerUP += WaterHit;
     }
 
     private IEnumerator SetNewHole()
@@ -32,6 +33,8 @@ public class Mole : MonoBehaviour
 
             yield return new WaitForSeconds(waitTime);
 
+            transform.position = Vector3.one * -3;
+
             hole.Status = Hole.HoleStatus.Empty;
             FieldController.Instance.SwitchHoleGFX(hole);
 
@@ -42,11 +45,13 @@ public class Mole : MonoBehaviour
         }
     }
 
-    private void Hit(Transform mole)
+    private void NormalHit(Transform mole)
     {
         if (mole == this.transform)
         {
             StopAllCoroutines();
+
+            transform.position = Vector3.one * - 3;
 
             hole.Status = Hole.HoleStatus.Empty;
             FieldController.Instance.SwitchHoleGFX(hole);
@@ -55,5 +60,19 @@ public class Mole : MonoBehaviour
 
             StartCoroutine(SetNewHole());
         }
+    }
+
+    private void WaterHit(Transform mole)
+    {
+        StopAllCoroutines();
+
+        transform.position = Vector3.one * -3;
+
+        hole.Status = Hole.HoleStatus.Empty;
+        FieldController.Instance.SwitchHoleGFX(hole);
+
+        hole = FieldController.Instance.Field.GetRandomHole();
+
+        StartCoroutine(SetNewHole());
     }
 }

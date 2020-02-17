@@ -452,6 +452,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mole (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7461282264255954724, guid: c6a4b71d4840d0542bc6408cb57c81c3,
+        type: 3}
+      propertyPath: spawnTime
+      value: 1.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c6a4b71d4840d0542bc6408cb57c81c3, type: 3}
 --- !u!1 &411068742
@@ -1078,6 +1083,11 @@ PrefabInstance:
       propertyPath: waitTime
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 7461282264255954724, guid: c6a4b71d4840d0542bc6408cb57c81c3,
+        type: 3}
+      propertyPath: spawnTime
+      value: 2.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c6a4b71d4840d0542bc6408cb57c81c3, type: 3}
 --- !u!1 &963194225
@@ -1157,8 +1167,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: -0.44467294, y: -0.0021517547, z: 0.0010686523, w: -0.89568985}
-  m_LocalPosition: {x: 0.12696664, y: 14.290117, z: -15.93683}
+  m_LocalRotation: {x: -0.42846948, y: -0.0062366948, z: 0.0029578917, w: -0.90352994}
+  m_LocalPosition: {x: -0.13516583, y: 6.3922176, z: -6.103158}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1590,6 +1600,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Mole
+      objectReference: {fileID: 0}
+    - target: {fileID: 7461282264255954724, guid: c6a4b71d4840d0542bc6408cb57c81c3,
+        type: 3}
+      propertyPath: waitTime
+      value: 1.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c6a4b71d4840d0542bc6408cb57c81c3, type: 3}
