@@ -10,31 +10,28 @@ public class PowerUpSelector : MonoBehaviour
 
     private PlayerInput playerInput;
     private Animator animator;
+    private float waitTime = 10f;
 
     private void Start()
     {
         playerInput = FindObjectOfType<PlayerInput>();
         animator = FindObjectOfType<Animator>();
-        Invoke("StartPowerupsAnimation", 10f);
+        Invoke("StartPowerupsAnimation", waitTime);
     }
 
     private void StartPowerupsAnimation ()
     {
         animator.SetTrigger("ShowPowerUps");
-        grayBackground.SetActive(true);
         Time.timeScale = .25f; 
-    }
-
-    private void ShowPowerUps()
-    {
-        powerupsGO.SetActive(true);
     }
 
     public void OnPowerUpSelect(int iPowerUp)
     {
         Time.timeScale = 1;
         playerInput.SetCurrentPowerUp(iPowerUp);
+        animator.SetTrigger("Hide");
         powerupsGO.SetActive(false);
         grayBackground.SetActive(false);
+        Invoke("StartPowerupsAnimation", waitTime * 2f);
     }
 }

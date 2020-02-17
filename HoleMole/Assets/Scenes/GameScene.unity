@@ -365,6 +365,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   powerupsGO: {fileID: 543820474}
+  grayBackground: {fileID: 423143286}
 --- !u!95 &147884560
 Animator:
   serializedVersion: 3
@@ -495,7 +496,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &423143287
 RectTransform:
   m_ObjectHideFlags: 0
