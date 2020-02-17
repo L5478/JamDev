@@ -10,7 +10,7 @@ public class PowerUpSelector : MonoBehaviour
 
     private PlayerInput playerInput;
     private Animator animator;
-    private float waitTime = 10f;
+    private float waitTime = 5f;
 
     private void Start()
     {

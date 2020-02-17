@@ -1033,9 +1033,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 473ef146aeeb29d4b9e2616ea5969979, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlankImg: {fileID: 2800000, guid: c8e8649851c38424792dbb8ecbd9a303, type: 3}
+  PlankImg: {fileID: 2800000, guid: a9eea0c71aff6d341a3fc8eeb6f8e311, type: 3}
   WaterImg: {fileID: 2800000, guid: a46f8937b6067814abb2b3a355b6eda5, type: 3}
-  FireImg: {fileID: 2800000, guid: 5663d79f3c1a1424798367ba17ff86f1, type: 3}
+  FireImg: {fileID: 2800000, guid: 8a28dc716d1c6744698dd780a26b3b75, type: 3}
 --- !u!1 &1125153516
 GameObject:
   m_ObjectHideFlags: 0

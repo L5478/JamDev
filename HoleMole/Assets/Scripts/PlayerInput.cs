@@ -25,14 +25,14 @@ public class PlayerInput : MonoBehaviour
                 if (currentPowerUp == PowerUp.None)
                 {
                     //Regular hit mole
-                    Debug.Log(hit.transform.gameObject);
+                    Debug.Log(hit.transform);
                 } else
                 {
-                    Debug.Log("used: " + currentPowerUp.ToString() + " powerup");
+                    //Powerup hit hole
                     currentPowerUp = PowerUp.None;
                     SetCursorImage();
+                    Debug.Log("used: " + currentPowerUp.ToString() + " powerup on: " + hit.transform.parent);
                 }
-                //Do something with the hit object
             }
         }
     }
@@ -60,7 +60,7 @@ public class PlayerInput : MonoBehaviour
 
     private void SetCursorImage(Texture2D img = null)
     {
-        //if method called empty reset image
+        //if method called empty -> reset image
         if (img == null)
         {
             Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
