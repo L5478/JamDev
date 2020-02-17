@@ -7,15 +7,27 @@ public class Mole : MonoBehaviour
 
 
     private Hole hole;
-    private FieldController fieldController;
 
     private void Start()
     {
-        fieldController = FindObjectOfType<FieldController>();
+        StartCoroutine(SetNewHole());
+    }
 
-        hole = fieldController.Field.GetEmptyHole();
-        hole.Status = Hole.HoleStatus.Mole;
+    private IEnumerator SetNewHole()
+    {
+        while (true)
+        {
+            hole = FieldController.Instance.Field.GetRandomHole();
 
-        transform.position = hole.Position;
+            hole.Status = Hole.HoleStatus.Mole;
+            FieldController.Instance.SwitchHoleGFX(hole);
+
+            transform.position = hole.Position;
+
+            yield return new WaitForSeconds(2);
+
+            hole.Status = Hole.HoleStatus.Empty;
+            FieldController.Instance.SwitchHoleGFX(hole);
+        }
     }
 }
