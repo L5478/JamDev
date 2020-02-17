@@ -421,9 +421,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   holePrefab: {fileID: 5590748295012080155, guid: 19d53efc26d79674787a55d30d06841d,
     type: 3}
-  emptySpace: 2
-  holesX: 3
-  holesZ: 3
+  emptySpace: 1.7
+  holesX: 7
+  holesZ: 7
 --- !u!4 &1139722943
 Transform:
   m_ObjectHideFlags: 0

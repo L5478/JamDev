@@ -7,22 +7,22 @@ public class Hole
     private HoleStatus status = HoleStatus.None;
     private int x;
     private int z;
-    private World world;
+    private Field world;
 
     public HoleStatus Status { get => status; set => status = value; }
 
-    public Hole(int x, int z, World world)
+    public Hole(int x, int z, Field world)
     {
         this.x = x;
         this.z = z;
         this.world = world;
 
-        if (this.x == (world.Width - 1)/2 )
+        // Set starting area 3x3 in the middle
+        if (this.x >= (world.Width - 2) /2 && this.x <= (world.Width + 2) / 2)
         {
-            if (this.z == (world.Depth - 1) / 2)
+            if (this.z >= (world.Depth - 2) / 2 && this.z <= (world.Depth + 2) / 2)
             {
                 status = HoleStatus.Empty;
-                Debug.Log("Hole status Empty");
             }
         }
     }

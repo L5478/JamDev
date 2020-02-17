@@ -10,25 +10,36 @@ public class WorldController : MonoBehaviour
 
     private Vector3 offset;
 
-    private World world;
+    private Field field;
     private Transform[] holeGFX;
 
     private void Start()
     {
-        offset = new Vector3(-holesX +1, 0, -holesZ+1);
+        // Offset, so Holes will be build around of this gameobject
+        // i.e. Hole in center of field will sit on the same position as this gameobject
+        offset = new Vector3(-(holesX -1)/2, 0, -(holesZ-1)/2);
 
-        world = new World(holesX,holesZ);
+        // Prevent wierd behaviour
+        if (emptySpace <= 0)
+            emptySpace = 1;
 
-        for (int x = 0; x < world.Width; x++)
+        // Create starting field / world
+        field = new Field(holesX,holesZ);
+
+        // Loop through field
+        for (int x = 0; x < field.Width; x++)
         {
-            for (int z = 0; z < world.Depth; z++)
+            for (int z = 0; z < field.Depth; z++)
             {
-                GameObject holeGO = Instantiate(holePrefab, new Vector3(x, 0, z) * emptySpace + offset, Quaternion.identity, this.transform);
+                // Instantiate Hole gameobject, rename it and get all children obejcts (graphics)
+                GameObject holeGO = Instantiate(holePrefab, (new Vector3(x, 0, z) + offset) * emptySpace, Quaternion.identity, this.transform);
                 holeGO.name = "Hole_" + x + "_" + z;
                 holeGFX = holeGO.GetComponentsInChildren<Transform>();
 
-                Hole hole_data = world.GetHoleAt(x, z);
+                // Get right Hole information
+                Hole hole_data = field.GetHoleAt(x, z);
 
+                // Set right graphics based on Hole status
                 switch (hole_data.Status)
                 {
                     case Hole.HoleStatus.None:
@@ -56,6 +67,7 @@ public class WorldController : MonoBehaviour
         }
     }
 
+    // Set right grahics to Hole gameobject by tag
     private void SetGFXByTag(string tag)
     {
         if (holeGFX == null)
