@@ -29,9 +29,9 @@ public class PlayerInput : MonoBehaviour
                 } else
                 {
                     //Powerup hit hole
+                    Debug.Log("used: " + currentPowerUp.ToString() + " powerup on: " + hit.transform.parent);
                     currentPowerUp = PowerUp.None;
                     SetCursorImage();
-                    Debug.Log("used: " + currentPowerUp.ToString() + " powerup on: " + hit.transform.parent);
                 }
             }
         }
