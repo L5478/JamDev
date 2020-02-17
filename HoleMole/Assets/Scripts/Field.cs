@@ -64,26 +64,34 @@ public class Field
 
     public Hole GetNewHole()
     {
-        Hole emptyHole;
+        List<Hole> emptyHoles = new List<Hole>();
+        List<Hole> noneHoles = new List<Hole>();
 
         foreach (Hole hole in holes)
         {
             if (hole.Status == Hole.HoleStatus.Empty)
-            {
-                emptyHole = hole;
+                emptyHoles.Add(hole);
 
-                foreach (Hole holee in holes)
-                {
-                    if (holee.Status == Hole.HoleStatus.None && holee.X == emptyHole.X-1 && holee.Z == emptyHole.Z-1
-                        || holee.Status == Hole.HoleStatus.None && holee.X == emptyHole.X+1 && holee.Z == emptyHole.Z + 1)
-                    {
-                        return holee;
-                    }
-                }
-            }
+            if (hole.Status == Hole.HoleStatus.None)
+                noneHoles.Add(hole);
         }
 
+        bool flag = true;
+          
+        do
+        {
+            int rndIndex = Random.Range(0, emptyHoles.Count);
 
+            foreach (Hole hole in noneHoles)
+            {
+                if (hole.X < emptyHoles[rndIndex].X - 1)
+                {
+                    flag = false;
+                }
+            }
+
+
+        } while (flag);
 
         return null;
     }
