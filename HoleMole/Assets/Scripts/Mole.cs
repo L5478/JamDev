@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Mole : MonoBehaviour
 {
+
+
     private Hole hole;
-
-
 
     private void Start()
     {
@@ -29,6 +29,5 @@ public class Mole : MonoBehaviour
 
             hole.Status = Hole.HoleStatus.Empty;
         }
-
     }
 }
