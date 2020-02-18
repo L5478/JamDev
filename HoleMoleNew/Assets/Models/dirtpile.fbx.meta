@@ -1,36 +1,20 @@
 fileFormatVersion: 2
-guid: 8f7b7d51f7320f84cb1d773f9e0a8bd5
+guid: 4a5f681e3c7dd9f41b36a94de47d9b0d
 ModelImporter:
   serializedVersion: 26
   internalIDToNameTable:
   - first:
-      74: -3657815793476889231
-    second: Mole001_rig|Dig
+      74: 5903552438253210013
+    second: DirtPile|DirtIdle
   - first:
-      74: -1294904204389369501
-    second: Mole001_rig|GetHit
-  - first:
-      74: 8728981961150528781
-    second: Mole001_rig|Idle
-  - first:
-      74: -8738159541417758348
-    second: Mole001_rig|WaterJet
+      74: -1230112215147986383
+    second: DirtPile|DirtSpawn
   externalObjects:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Mole001Skin
-    second: {fileID: 2100000, guid: 3566247c48744bc45859f5cbc1bd58cd, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: MoleGlasses
-    second: {fileID: 2100000, guid: 73f92374dbe674242812025f6933195a, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Visormat
-    second: {fileID: 2100000, guid: 3e7b7dddb630fac4cb4a30394c9be8f6, type: 2}
+      name: DirtMat
+    second: {fileID: 2100000, guid: 9d99f025064c61341b256c9e6885fd62, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

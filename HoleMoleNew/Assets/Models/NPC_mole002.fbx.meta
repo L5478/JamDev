@@ -18,7 +18,27 @@ ModelImporter:
   - first:
       74: 7436118131408838782
     second: rig|WaterJet
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Glassesmat
+    second: {fileID: 2100000, guid: 73f92374dbe674242812025f6933195a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: HelmetMat
+    second: {fileID: 2100000, guid: 1dfeb14a059fd85439eaad2946ea6f09, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MoleMat
+    second: {fileID: 2100000, guid: 39147f26f4af45546bb0231f292a7a32, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TransparentGlass
+    second: {fileID: 2100000, guid: 3e7b7dddb630fac4cb4a30394c9be8f6, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
