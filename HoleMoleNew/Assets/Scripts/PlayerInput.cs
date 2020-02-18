@@ -30,7 +30,9 @@ public class PlayerInput : MonoBehaviour
                 {
                     //Regular hit mole
 
-                    if (hit.transform.TryGetComponent<Mole>(out Mole mole))
+                    Mole mole = hit.transform.GetComponentInParent<Mole>();
+
+                    if (mole != null)
                     {
                         moleHitted?.Invoke(mole);
                     }
