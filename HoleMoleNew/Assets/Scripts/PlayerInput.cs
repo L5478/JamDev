@@ -14,8 +14,8 @@ public class PlayerInput : MonoBehaviour
 
     private PowerUp currentPowerUp = PowerUp.None;
 
-    public static event Action<Transform> moleHitted;
-    public static event Action<Transform> waterPowerUP;
+    public static event Action<Mole> moleHitted;
+    public static event Action waterPowerUP;
 
     void Update()
     {
@@ -29,7 +29,14 @@ public class PlayerInput : MonoBehaviour
                 if (currentPowerUp == PowerUp.None)
                 {
                     //Regular hit mole
-                    moleHitted?.Invoke(hit.transform);
+
+                    Mole mole = hit.transform.GetComponentInParent<Mole>();
+
+                    if (mole != null)
+                    {
+                        moleHitted?.Invoke(mole);
+                    }
+
                 }
                 else
                 {
@@ -37,7 +44,7 @@ public class PlayerInput : MonoBehaviour
                     Debug.Log("used: " + currentPowerUp.ToString() + " powerup on: " + hit.transform.parent);
                     currentPowerUp = PowerUp.None;
                     SetCursorImage();
-                    waterPowerUP?.Invoke(hit.transform);
+                    waterPowerUP?.Invoke();
                 }
             }
         }

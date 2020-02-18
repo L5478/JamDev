@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class Mole : MonoBehaviour
 {
-    public float waitTime = 1f;
+    public float waitTime = 3f;
     public float spawnTime = 2f;
     private Vector3 offset = new Vector3(0, 0.5f, 0);
 
     private Hole hole;
+    private Animator animator;
 
     private void Start()
     {
         hole = FieldController.Instance.Field.GetRandomHole();
+        animator = GetComponentInChildren<Animator>();
 
         StartCoroutine(SetNewHole());
 
@@ -29,7 +31,9 @@ public class Mole : MonoBehaviour
             hole.Status = Hole.HoleStatus.Mole;
             FieldController.Instance.SwitchHoleGFX(hole);
 
-            transform.position = hole.Position + offset;
+            transform.position = hole.Position;
+
+            animator.SetTrigger("Normal");
 
             yield return new WaitForSeconds(waitTime);
 
@@ -45,9 +49,9 @@ public class Mole : MonoBehaviour
         }
     }
 
-    private void NormalHit(Transform mole)
+    private void NormalHit(Mole mole)
     {
-        if (mole == this.transform)
+        if (mole == this)
         {
             StopAllCoroutines();
 
@@ -62,7 +66,7 @@ public class Mole : MonoBehaviour
         }
     }
 
-    private void WaterHit(Transform mole)
+    private void WaterHit()
     {
         StopAllCoroutines();
 

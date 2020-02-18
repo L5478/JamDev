@@ -8,6 +8,8 @@ TagManager:
   - HoleNone
   - HoleEmpty
   - HolePlank
+  - Mole
+  - HoleMole
   layers:
   - Default
   - TransparentFX
