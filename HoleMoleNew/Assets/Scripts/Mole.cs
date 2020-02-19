@@ -27,7 +27,10 @@ public class Mole : MonoBehaviour
     {
         while (true)
         {
-            hole.Status = Hole.HoleStatus.Mole;
+            if (hole.Status == Hole.HoleStatus.None)
+                hole.Status = Hole.HoleStatus.Mole;
+            else
+                hole.Status = Hole.HoleStatus.Empty;
 
             yield return new WaitForSeconds(spawnTime);
             isActive = true;
@@ -44,7 +47,6 @@ public class Mole : MonoBehaviour
 
             transform.position = Vector3.one * -3;
 
-            hole.Status = Hole.HoleStatus.Empty;
             FieldController.Instance.SwitchHoleGFX(hole);
 
             hole = FieldController.Instance.Field.GetNewHole();
