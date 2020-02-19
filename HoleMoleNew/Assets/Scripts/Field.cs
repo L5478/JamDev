@@ -54,7 +54,7 @@ public class Field
 
         foreach (Hole hole in holes)
         {
-            if (hole.Status != Hole.HoleStatus.Mole && hole.Status != Hole.HoleStatus.None)
+            if (hole.Status != Hole.HoleStatus.Mole && hole.Status != Hole.HoleStatus.None && hole.Status != Hole.HoleStatus.NewHole)
                 hole_list.Add(hole);
         }
 

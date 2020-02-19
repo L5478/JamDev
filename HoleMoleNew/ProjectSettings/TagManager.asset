@@ -11,6 +11,8 @@ TagManager:
   - Mole
   - HoleMole
   - HoleWater
+  - HoleNew
+  - HoleFire
   layers:
   - Default
   - TransparentFX

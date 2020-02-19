@@ -14,37 +14,54 @@ public class PlayerInput : MonoBehaviour
 
     private PowerUp currentPowerUp = PowerUp.None;
 
-    public static event Action<Mole> moleHitted;
-    public static event Action waterPowerUP;
+    public static event Action<Mole> MoleHitted;
+    public static event Action WaterPowerUp;
+    public static event Action<Hole> PlankPowerUp;
+    public static event Action<Hole> FirePowerUp;
 
     void Update()
     {
         //Mouse button down if not hovering over any UI elements
         if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
         {
-            RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out hit, 100f))
+            if (Physics.Raycast(ray, out RaycastHit hit, 100f))
             {
                 if (currentPowerUp == PowerUp.None)
                 {
                     //Regular hit mole
-
                     Mole mole = hit.transform.GetComponentInParent<Mole>();
 
                     if (mole != null)
                     {
-                        moleHitted?.Invoke(mole);
+                        MoleHitted?.Invoke(mole);
                     }
-
                 }
                 else
                 {
-                    //Powerup hit hole
-                    Debug.Log("used: " + currentPowerUp.ToString() + " powerup on: " + hit.transform.parent);
+                    Hole hole = hit.transform.GetComponent<Hole>();
+                    hole = hole == null ? null : hole;
+
+                    //PowerUp hit EVENTS hole
+                    switch (currentPowerUp)
+                    {
+                        case PowerUp.None:
+                            break;
+                        case PowerUp.Plank:
+                            PlankPowerUp?.Invoke(hole);
+                            break;
+                        case PowerUp.Water:
+                            WaterPowerUp?.Invoke();
+                            break;
+                        case PowerUp.Fire:
+                            FirePowerUp?.Invoke(hole);
+                            break;
+                        default:
+                            break;
+                    }
+
                     currentPowerUp = PowerUp.None;
                     SetCursorImage();
-                    waterPowerUP?.Invoke();
                 }
             }
         }

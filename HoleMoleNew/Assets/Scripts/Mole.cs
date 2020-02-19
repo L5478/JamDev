@@ -10,26 +10,31 @@ public class Mole : MonoBehaviour
     private Hole hole;
     private Animator animator;
     private bool isActive = false;
+    private Hole.HoleStatus currentHoleStatus;
 
     private void Start()
     {
         hole = FieldController.Instance.Field.GetRandomHole();
+        hole.Status = Hole.HoleStatus.Mole;
+
         animator = GetComponentInChildren<Animator>();
 
         StartCoroutine(SetNewHole());
 
-        PlayerInput.moleHitted += NormalHit;
-        PlayerInput.waterPowerUP += WaterHit;
+        PlayerInput.MoleHitted += NormalHit;
+        PlayerInput.WaterPowerUp += WaterHit;
     }
 
     private IEnumerator SetNewHole()
     {
         while (true)
         {
-            if (hole.Status == Hole.HoleStatus.None)
-                hole.Status = Hole.HoleStatus.Mole;
+            if (hole.Status == Hole.HoleStatus.Water)
+                WaterHit();
+            else if (hole.Status == Hole.HoleStatus.None)
+                hole.Status = Hole.HoleStatus.NewHole;
             else
-                hole.Status = Hole.HoleStatus.Empty;
+                hole.Status = Hole.HoleStatus.Mole;
 
             yield return new WaitForSeconds(spawnTime);
             isActive = true;
@@ -42,6 +47,8 @@ public class Mole : MonoBehaviour
 
             yield return new WaitForSeconds(waitTime);
 
+            hole.Status = Hole.HoleStatus.Empty;
+
             isActive = false;
 
             transform.position = Vector3.one * -3;
@@ -52,7 +59,6 @@ public class Mole : MonoBehaviour
 
             if (hole == null)
                 hole = FieldController.Instance.Field.GetRandomHole();
-
         }
     }
 
@@ -60,12 +66,13 @@ public class Mole : MonoBehaviour
     {
         if (mole == this && isActive == true)
         {
+            hole.Status = Hole.HoleStatus.Empty;
+
             isActive = false;
             StopAllCoroutines();
 
             animator.SetTrigger("Hit");
 
-            hole.Status = Hole.HoleStatus.Empty;
             FieldController.Instance.SwitchHoleGFX(hole);
 
             hole = FieldController.Instance.Field.GetRandomHole();
@@ -78,12 +85,13 @@ public class Mole : MonoBehaviour
     {
         if (isActive == true)
         {
+            hole.Status = Hole.HoleStatus.Water;
+
             isActive = false;
             StopAllCoroutines();
 
             animator.SetTrigger("Water");
 
-            hole.Status = Hole.HoleStatus.Water;
             FieldController.Instance.SwitchHoleGFX(hole);
 
             hole = FieldController.Instance.Field.GetRandomHole();
