@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6049070914458032184}
+  - component: {fileID: 7653201307653565671}
   m_Layer: 0
   m_Name: Hole
   m_TagString: Hole
@@ -37,6 +38,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &7653201307653565671
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6049070914458032187}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.08
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &4114827087192534690
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -179,7 +193,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: HoleNone
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3701251279733509116, guid: 4447d658ae8876e49a893908d7afb408, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 4447d658ae8876e49a893908d7afb408, type: 3}
 --- !u!4 &1674615994678739718 stripped
 Transform:
@@ -329,7 +344,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: HolePlank
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1721902412595741074, guid: a223c43d9b8228742a9b5b52c8353c35, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a223c43d9b8228742a9b5b52c8353c35, type: 3}
 --- !u!4 &2680148269822622866 stripped
 Transform:

@@ -52,7 +52,7 @@ public class FieldController : MonoBehaviour
                 holeGO.name = "Hole_" + x + "_" + z;
 
                 // Get right Hole information
-                Hole hole_data = Field.GetHoleAt(x, z);
+                Hole hole_data = Field.GetHoleAtCoordinates(x, z);
                 hole_data.Position = holeGO.transform.position;
 
                 holeGODictonary.Add(hole_data, holeGO);
@@ -122,12 +122,14 @@ public class FieldController : MonoBehaviour
         }
     }
 
-    private void SetPlank(Hole hole)
+    private void SetPlank(Transform holeTransform)
     {
+        Hole hole = Field.GetHoleAtPosition(holeTransform.position);
+
         hole.Status = Hole.HoleStatus.Plank;
         SwitchHoleGFX(hole);
 
-        for (int i = 0; i < 1; i++)
+        for (int i = 0; i < 2; i++)
         {
             hole = Field.GetEmptyHole();
             hole.Status = Hole.HoleStatus.Plank;
@@ -136,8 +138,10 @@ public class FieldController : MonoBehaviour
 
     }
 
-    private void SetFire(Hole hole)
+    private void SetFire(Transform holeTransform)
     {
+        Hole hole = Field.GetHoleAtPosition(holeTransform.position);
+
         hole.Status = Hole.HoleStatus.Fire;
         SwitchHoleGFX(hole);
     }

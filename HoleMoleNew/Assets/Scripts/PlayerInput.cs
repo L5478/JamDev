@@ -16,8 +16,8 @@ public class PlayerInput : MonoBehaviour
 
     public static event Action<Mole> MoleHitted;
     public static event Action WaterPowerUp;
-    public static event Action<Hole> PlankPowerUp;
-    public static event Action<Hole> FirePowerUp;
+    public static event Action<Transform> PlankPowerUp;
+    public static event Action<Transform> FirePowerUp;
 
     void Update()
     {
@@ -39,22 +39,19 @@ public class PlayerInput : MonoBehaviour
                 }
                 else
                 {
-                    Hole hole = hit.transform.GetComponent<Hole>();
-                    hole = hole == null ? null : hole;
-
                     //PowerUp hit EVENTS hole
                     switch (currentPowerUp)
                     {
                         case PowerUp.None:
                             break;
                         case PowerUp.Plank:
-                            PlankPowerUp?.Invoke(hole);
+                            PlankPowerUp?.Invoke(hit.transform);
                             break;
                         case PowerUp.Water:
                             WaterPowerUp?.Invoke();
                             break;
                         case PowerUp.Fire:
-                            FirePowerUp?.Invoke(hole);
+                            FirePowerUp?.Invoke(hit.transform);
                             break;
                         default:
                             break;
