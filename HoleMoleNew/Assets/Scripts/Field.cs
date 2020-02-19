@@ -87,6 +87,9 @@ public class Field
             if (hole.Status == Hole.HoleStatus.Empty)
                 emptyHoles.Add(hole);
 
+            if (hole.Status == Hole.HoleStatus.Plank)
+                emptyHoles.Add(hole);
+
             if (hole.Status == Hole.HoleStatus.None)
                 noneHoles.Add(hole);
         }
