@@ -9,6 +9,12 @@ ModelImporter:
   - first:
       74: -1230112215147986383
     second: DirtPile|DirtSpawn
+  - first:
+      74: 4897322835186519224
+    second: Armature|DirtIdle
+  - first:
+      74: 7327631073386265016
+    second: Armature|DirtSpawn
   externalObjects:
   - first:
       type: UnityEngine:Material
