@@ -34,7 +34,6 @@ public class EliteMole : Mole
                     hole.Status = Hole.HoleStatus.NewHole;
                     break;
                 case Hole.HoleStatus.Plank:
-                    FieldController.Instance.AnimatePlank(hole, "Break");
                     dig = "EliteDig";
                     break;
                 case Hole.HoleStatus.Water:
@@ -46,6 +45,10 @@ public class EliteMole : Mole
             }
 
             yield return new WaitForSeconds(spawnTime);
+
+            if (hole.Status == Hole.HoleStatus.Plank)
+                FieldController.Instance.AnimatePlank(hole, "Break");
+
             health = maxHealth;
             isActive = true;
 
