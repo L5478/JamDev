@@ -34,6 +34,7 @@ public class EliteMole : Mole
                     hole.Status = Hole.HoleStatus.NewHole;
                     break;
                 case Hole.HoleStatus.Plank:
+                    FieldController.Instance.AnimatePlank(hole, "Break");
                     dig = "EliteDig";
                     break;
                 case Hole.HoleStatus.Water:
