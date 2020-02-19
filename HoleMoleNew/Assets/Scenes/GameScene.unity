@@ -1415,8 +1415,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 433c0da03b818ca4b9ceadcd309b0862, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  powerupsGO: {fileID: 0}
-  grayBackground: {fileID: 0}
+  powerupsGO: {fileID: 1896601206}
+  grayBackground: {fileID: 1485385248}
 --- !u!1 &1896601206
 GameObject:
   m_ObjectHideFlags: 0

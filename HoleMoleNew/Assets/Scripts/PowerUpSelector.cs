@@ -15,7 +15,7 @@ public class PowerUpSelector : MonoBehaviour
     private void Start()
     {
         playerInput = FindObjectOfType<PlayerInput>();
-        animator = FindObjectOfType<Animator>();
+        animator = GetComponent<Animator>();
         Invoke("StartPowerupsAnimation", waitTime);
     }
 
