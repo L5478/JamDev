@@ -15,7 +15,22 @@ ModelImporter:
   - first:
       74: -8738159541417758348
     second: Mole001_rig|WaterJet
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mole001Skin
+    second: {fileID: 2100000, guid: 3566247c48744bc45859f5cbc1bd58cd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MoleGlasses
+    second: {fileID: 2100000, guid: 73f92374dbe674242812025f6933195a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Visormat
+    second: {fileID: 2100000, guid: 3e7b7dddb630fac4cb4a30394c9be8f6, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
