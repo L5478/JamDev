@@ -37,10 +37,11 @@ public class Mole : MonoBehaviour
                     hole.Status = Hole.HoleStatus.NewHole;
                     break;
                 case Hole.HoleStatus.Plank:
-                    Debug.Log("Plank hole founded");
+                    //Debug.Log("Plank hole founded");
                     temp = true;
                     hole = FieldController.Instance.Field.GetRandomHole();
-                    break;
+                    yield return null;
+                    continue;
                 case Hole.HoleStatus.Water:
                     WaterHit();
                     break;
@@ -51,7 +52,7 @@ public class Mole : MonoBehaviour
 
             if (temp )
             {
-                Debug.Log("temp went through");
+                //Debug.Log("temp went through");
             }
             yield return new WaitForSeconds(spawnTime);
             isActive = true;
