@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class Mole : MonoBehaviour
 {
-    public float waitTime = 1f;
+    public float waitTime = 3f;
     public float spawnTime = 2f;
     private Vector3 offset = new Vector3(0, 0.5f, 0);
 
     private Hole hole;
+    private Animator animator;
+    private bool isActive = false;
 
     private void Start()
     {
         hole = FieldController.Instance.Field.GetRandomHole();
+        animator = GetComponentInChildren<Animator>();
 
         StartCoroutine(SetNewHole());
 
@@ -24,14 +27,20 @@ public class Mole : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(spawnTime);
-
             hole.Status = Hole.HoleStatus.Mole;
+
+            yield return new WaitForSeconds(spawnTime);
+            isActive = true;
+
             FieldController.Instance.SwitchHoleGFX(hole);
 
-            transform.position = hole.Position + offset;
+            transform.position = hole.Position;
+
+            animator.SetTrigger("Normal");
 
             yield return new WaitForSeconds(waitTime);
+
+            isActive = false;
 
             transform.position = Vector3.one * -3;
 
@@ -42,16 +51,18 @@ public class Mole : MonoBehaviour
 
             if (hole == null)
                 hole = FieldController.Instance.Field.GetRandomHole();
+
         }
     }
 
-    private void NormalHit(Transform mole)
+    private void NormalHit(Mole mole)
     {
-        if (mole == this.transform)
+        if (mole == this && isActive == true)
         {
+            isActive = false;
             StopAllCoroutines();
 
-            transform.position = Vector3.one * - 3;
+            animator.SetTrigger("Hit");
 
             hole.Status = Hole.HoleStatus.Empty;
             FieldController.Instance.SwitchHoleGFX(hole);
@@ -62,17 +73,22 @@ public class Mole : MonoBehaviour
         }
     }
 
-    private void WaterHit(Transform mole)
+    private void WaterHit()
     {
-        StopAllCoroutines();
+        if (isActive == true)
+        {
+            isActive = false;
+            StopAllCoroutines();
 
-        transform.position = Vector3.one * -3;
+            animator.SetTrigger("Water");
 
-        hole.Status = Hole.HoleStatus.Empty;
-        FieldController.Instance.SwitchHoleGFX(hole);
+            hole.Status = Hole.HoleStatus.Water;
+            FieldController.Instance.SwitchHoleGFX(hole);
 
-        hole = FieldController.Instance.Field.GetRandomHole();
+            hole = FieldController.Instance.Field.GetRandomHole();
 
-        StartCoroutine(SetNewHole());
+            StartCoroutine(SetNewHole());
+
+        }
     }
 }

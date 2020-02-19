@@ -15,7 +15,7 @@ public class PowerUpSelector : MonoBehaviour
     private void Start()
     {
         playerInput = FindObjectOfType<PlayerInput>();
-        animator = FindObjectOfType<Animator>();
+        animator = GetComponent<Animator>();
         Invoke("StartPowerupsAnimation", waitTime);
     }
 
@@ -30,8 +30,6 @@ public class PowerUpSelector : MonoBehaviour
         Time.timeScale = 1;
         playerInput.SetCurrentPowerUp(iPowerUp);
         animator.SetTrigger("Hide");
-        powerupsGO.SetActive(false);
-        grayBackground.SetActive(false);
         Invoke("StartPowerupsAnimation", waitTime * 2f);
     }
 }
