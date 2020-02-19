@@ -39,6 +39,7 @@ public class Mole : MonoBehaviour
                 case Hole.HoleStatus.Plank:
                     //Debug.Log("Plank hole founded");
                     temp = true;
+                    FieldController.Instance.AnimatePlank(hole, "Block");
                     hole = FieldController.Instance.Field.GetRandomHole();
                     yield return null;
                     continue;

@@ -145,4 +145,15 @@ public class FieldController : MonoBehaviour
         hole.Status = Hole.HoleStatus.Fire;
         SwitchHoleGFX(hole);
     }
+
+    public void AnimatePlank(Hole hole, string animationTrigger)
+    {
+        GameObject holeGO = holeGODictonary[hole];
+        Animator animator = holeGO.GetComponentInChildren<Animator>();
+
+        if (animator != null)
+            animator.SetTrigger(animationTrigger);
+        else
+            Debug.LogWarning("Couldn't find any Animators in " + holeGO + " or in children");
+    }
 }
