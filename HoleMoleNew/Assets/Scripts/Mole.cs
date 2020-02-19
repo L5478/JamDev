@@ -6,7 +6,6 @@ public class Mole : MonoBehaviour
 {
     public float waitTime = 3f;
     public float spawnTime = 2f;
-    private Vector3 offset = new Vector3(0, 0.5f, 0);
 
     private Hole hole;
     private Animator animator;
