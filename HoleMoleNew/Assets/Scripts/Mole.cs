@@ -10,7 +10,8 @@ public class Mole : MonoBehaviour
     private Hole hole;
     private Animator animator;
     private bool isActive = false;
-    private Hole.HoleStatus currentHoleStatus;
+
+    private float health = 1f;
 
     private void Start()
     {
@@ -25,17 +26,33 @@ public class Mole : MonoBehaviour
         PlayerInput.WaterPowerUp += WaterHit;
     }
 
+    bool temp = false;
     private IEnumerator SetNewHole()
     {
         while (true)
         {
-            if (hole.Status == Hole.HoleStatus.Water)
-                WaterHit();
-            else if (hole.Status == Hole.HoleStatus.None)
-                hole.Status = Hole.HoleStatus.NewHole;
-            else
-                hole.Status = Hole.HoleStatus.Mole;
+            switch (hole.Status)
+            {
+                case Hole.HoleStatus.None:
+                    hole.Status = Hole.HoleStatus.NewHole;
+                    break;
+                case Hole.HoleStatus.Plank:
+                    Debug.Log("Plank hole founded");
+                    temp = true;
+                    hole = FieldController.Instance.Field.GetRandomHole();
+                    break;
+                case Hole.HoleStatus.Water:
+                    WaterHit();
+                    break;
+                default:
+                    hole.Status = Hole.HoleStatus.Mole;
+                    break;
+            }
 
+            if (temp )
+            {
+                Debug.Log("temp went through");
+            }
             yield return new WaitForSeconds(spawnTime);
             isActive = true;
 
@@ -51,6 +68,8 @@ public class Mole : MonoBehaviour
 
             isActive = false;
 
+            health = 1;
+
             transform.position = Vector3.one * -3;
 
             FieldController.Instance.SwitchHoleGFX(hole);
@@ -64,7 +83,9 @@ public class Mole : MonoBehaviour
 
     private void NormalHit(Mole mole)
     {
-        if (mole == this && isActive == true)
+        health--;
+
+        if (mole == this && isActive == true && health <= 0)
         {
             hole.Status = Hole.HoleStatus.Empty;
 
