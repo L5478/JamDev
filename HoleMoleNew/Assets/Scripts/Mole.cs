@@ -11,9 +11,6 @@ public class Mole : MonoBehaviour
     protected Animator animator;
     protected bool isActive = false;
 
-    protected float health;
-    protected float maxHealth;
-
     protected string dig;
     protected string hit;
     protected string water;
@@ -23,11 +20,9 @@ public class Mole : MonoBehaviour
         yield return null;
     }
 
-    protected void NormalHit(Mole mole)
+    protected virtual void NormalHit(Mole mole)
     {
-        health--;
-
-        if (mole == this && isActive == true && health <= 0)
+        if (mole == this && isActive == true)
         {
             hole.Status = Hole.HoleStatus.Empty;
 

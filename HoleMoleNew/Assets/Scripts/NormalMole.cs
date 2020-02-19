@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class NormalMole : Mole
 {
+    private float health;
+    private float maxHealth = 1f;
+
     private void Start()
     {
         dig = "Normal";
         hit = "Hit";
         water = "Water";
-        maxHealth = 1f;
 
         health = maxHealth;
 
@@ -73,5 +75,14 @@ public class NormalMole : Mole
             if (hole == null)
                 hole = FieldController.Instance.Field.GetRandomHole();
         }
+    }
+
+    protected override void NormalHit(Mole mole)
+    {
+        if (mole == this)
+            health--;
+        
+        if (health <= 0)
+            base.NormalHit(mole);
     }
 }
