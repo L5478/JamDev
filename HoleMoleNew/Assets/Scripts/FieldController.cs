@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class FieldController : MonoBehaviour
@@ -62,6 +63,12 @@ public class FieldController : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        PlayerInput.PlankPowerUp += SetPlank;
+        PlayerInput.FirePowerUp += SetFire;
+    }
+
     public void SwitchHoleGFX(Hole hole)
     {
         switch (hole.Status)
@@ -74,6 +81,9 @@ public class FieldController : MonoBehaviour
                 break;
             case Hole.HoleStatus.Mole:
                 SetGFXByTag("HoleMole", hole);
+                break;
+            case Hole.HoleStatus.NewHole:
+                SetGFXByTag("HoleNew", hole);
                 break;
             case Hole.HoleStatus.Plank:
                 SetGFXByTag("HolePlank", hole);
@@ -110,5 +120,25 @@ public class FieldController : MonoBehaviour
                 GFX.gameObject.SetActive(false);
             }
         }
+    }
+
+    private void SetPlank(Hole hole)
+    {
+        hole.Status = Hole.HoleStatus.Plank;
+        SwitchHoleGFX(hole);
+
+        for (int i = 0; i < 1; i++)
+        {
+            hole = Field.GetEmptyHole();
+            hole.Status = Hole.HoleStatus.Plank;
+            SwitchHoleGFX(hole);
+        }
+
+    }
+
+    private void SetFire(Hole hole)
+    {
+        hole.Status = Hole.HoleStatus.Fire;
+        SwitchHoleGFX(hole);
     }
 }
