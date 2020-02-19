@@ -126,6 +126,17 @@ public class FieldController : MonoBehaviour
     {
         Hole hole = Field.GetHoleAtPosition(holeTransform.position);
 
+        try
+        {
+            hole.Status = Hole.HoleStatus.Plank;
+        }
+        catch (Exception)
+        {
+            // TODO: Tell player that he/she can't put plank on top of MOLE
+            Debug.LogWarning("CAN'T PUT A PLANK ON TOP OF MOLE.   TODO: TELL THIS TO PLAYER");
+            throw;
+        }
+
         hole.Status = Hole.HoleStatus.Plank;
         SwitchHoleGFX(hole);
 
