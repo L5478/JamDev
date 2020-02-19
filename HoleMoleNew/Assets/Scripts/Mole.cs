@@ -7,83 +7,23 @@ public class Mole : MonoBehaviour
     public float waitTime = 3f;
     public float spawnTime = 2f;
 
-    private Hole hole;
-    private Animator animator;
-    private bool isActive = false;
+    protected Hole hole;
+    protected Animator animator;
+    protected bool isActive = false;
 
-    private float health = 1f;
+    protected float health;
+    protected float maxHealth;
 
-    private void Start()
+    protected string dig;
+    protected string hit;
+    protected string water;
+
+    protected virtual IEnumerator SetNewHole()
     {
-        hole = FieldController.Instance.Field.GetRandomHole();
-        hole.Status = Hole.HoleStatus.Mole;
-
-        animator = GetComponentInChildren<Animator>();
-
-        StartCoroutine(SetNewHole());
-
-        PlayerInput.MoleHitted += NormalHit;
-        PlayerInput.WaterPowerUp += WaterHit;
+        yield return null;
     }
 
-    bool temp = false;
-    private IEnumerator SetNewHole()
-    {
-        while (true)
-        {
-            switch (hole.Status)
-            {
-                case Hole.HoleStatus.None:
-                    hole.Status = Hole.HoleStatus.NewHole;
-                    break;
-                case Hole.HoleStatus.Plank:
-                    //Debug.Log("Plank hole founded");
-                    temp = true;
-                    FieldController.Instance.AnimatePlank(hole, "Block");
-                    hole = FieldController.Instance.Field.GetRandomHole();
-                    yield return null;
-                    continue;
-                case Hole.HoleStatus.Water:
-                    WaterHit();
-                    break;
-                default:
-                    hole.Status = Hole.HoleStatus.Mole;
-                    break;
-            }
-
-            if (temp )
-            {
-                //Debug.Log("temp went through");
-            }
-            yield return new WaitForSeconds(spawnTime);
-            isActive = true;
-
-            FieldController.Instance.SwitchHoleGFX(hole);
-
-            transform.position = hole.Position;
-
-            animator.SetTrigger("Normal");
-
-            yield return new WaitForSeconds(waitTime);
-
-            hole.Status = Hole.HoleStatus.Empty;
-
-            isActive = false;
-
-            health = 1;
-
-            transform.position = Vector3.one * -3;
-
-            FieldController.Instance.SwitchHoleGFX(hole);
-
-            hole = FieldController.Instance.Field.GetNewHole();
-
-            if (hole == null)
-                hole = FieldController.Instance.Field.GetRandomHole();
-        }
-    }
-
-    private void NormalHit(Mole mole)
+    protected void NormalHit(Mole mole)
     {
         health--;
 
@@ -94,7 +34,7 @@ public class Mole : MonoBehaviour
             isActive = false;
             StopAllCoroutines();
 
-            animator.SetTrigger("Hit");
+            animator.SetTrigger(hit);
 
             FieldController.Instance.SwitchHoleGFX(hole);
 
@@ -104,7 +44,7 @@ public class Mole : MonoBehaviour
         }
     }
 
-    private void WaterHit()
+    protected void WaterHit()
     {
         if (isActive == true)
         {
@@ -113,14 +53,13 @@ public class Mole : MonoBehaviour
             isActive = false;
             StopAllCoroutines();
 
-            animator.SetTrigger("Water");
+            animator.SetTrigger(water);
 
             FieldController.Instance.SwitchHoleGFX(hole);
 
             hole = FieldController.Instance.Field.GetRandomHole();
 
             StartCoroutine(SetNewHole());
-
         }
     }
 }
