@@ -32,15 +32,16 @@ public class PowerUpSelector : MonoBehaviour
         var rdm2 = GetRandomPowerUp();
         Spot1.GetComponentInChildren<Text>().text = rdm1.name;
         Spot1.GetComponent<Image>().sprite = rdm1.spriteImg;
+        Spot1.onClick.AddListener(() => OnPowerUpSelect(rdm1.name));
         Spot2.GetComponentInChildren<Text>().text = rdm2.name;
         Spot2.GetComponent<Image>().sprite = rdm2.spriteImg;
-        Spot2.onClick.AddListener(() => OnPowerUpSelect(3));
+        Spot2.onClick.AddListener(() => OnPowerUpSelect(rdm2.name));
     }
 
-    public void OnPowerUpSelect(int iPowerUp)
+    public void OnPowerUpSelect(string sPowerUp)
     {
         Time.timeScale = 1;
-        playerInput.SetCurrentPowerUp(iPowerUp);
+        playerInput.SetCurrentPowerUp(sPowerUp);
         animator.SetTrigger("Hide");
         Invoke("StartPowerupsAnimation", waitTime * 2f);
     }
