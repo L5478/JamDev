@@ -34,8 +34,7 @@ public class PowerUpSelector : MonoBehaviour
         Spot1.GetComponent<Image>().sprite = rdm1.spriteImg;
         Spot2.GetComponentInChildren<Text>().text = rdm2.name;
         Spot2.GetComponent<Image>().sprite = rdm2.spriteImg;
-
-
+        Spot2.onClick.AddListener(() => OnPowerUpSelect(3));
     }
 
     public void OnPowerUpSelect(int iPowerUp)
