@@ -30,9 +30,23 @@ public class Field
     }
 
     // Get Hole at given coordinates
-    public Hole GetHoleAt(int x, int z)
+    public Hole GetHoleAtCoordinates(int x, int z)
     {
         return holes[x, z];
+    }
+
+    // Get Hole at given position
+    public Hole GetHoleAtPosition(Vector3 position)
+    {
+        foreach (Hole hole in holes)
+        {
+            if (hole.Position == position)
+            {
+                return hole;
+            }
+        }
+
+        return null;
     }
 
     // Get empty Hole
