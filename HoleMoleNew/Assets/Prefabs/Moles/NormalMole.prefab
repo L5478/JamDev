@@ -26,7 +26,7 @@ GameObject:
   - component: {fileID: 2948553485723264723}
   m_Layer: 0
   m_Name: NormalMole
-  m_TagString: Mole
+  m_TagString: MoleNormal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -59,8 +59,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b28ce78f998f48248959c76464ea45ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waitTime: 3
-  spawnTime: 1.5
+  waitForAnimationsEnd: 3
+  spawnNextTime: 2
   damageEffect: {fileID: 1805924066608367480}
 --- !u!1001 &3851905042909800963
 PrefabInstance:

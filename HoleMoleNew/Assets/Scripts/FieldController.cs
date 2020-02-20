@@ -21,7 +21,6 @@ public class FieldController : MonoBehaviour
     private Vector3 offset;
 
     public Field Field;
-    private List<Transform> holeGFX = new List<Transform>();
 
     private Dictionary<Hole, GameObject> holeGODictonary = new Dictionary<Hole, GameObject>();
 
@@ -166,7 +165,9 @@ public class FieldController : MonoBehaviour
 
     public IEnumerator ResetHole(Hole hole, Hole.HoleStatus status)
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(1.5f);
         hole.Status = status;
+        SwitchHoleGFX(hole);
+        Debug.Log("ResetHole");
     }
 }

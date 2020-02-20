@@ -6,6 +6,7 @@ public class NormalMole : Mole
 {
     private float health;
     private float maxHealth = 1f;
+    private bool skip = false;
 
     private void Start()
     {
@@ -43,15 +44,15 @@ public class NormalMole : Mole
                 case Hole.HoleStatus.Plank:
                     FieldController.Instance.AnimatePlank(hole, "Block");
                     hole = FieldController.Instance.Field.GetRandomHole();
-                    yield return null;
-                    continue;
+                    skip = true;
+                    break;
                 case Hole.HoleStatus.Water:
                     WaterHit();
                     break;
                 case Hole.HoleStatus.Mole:
                     hole = FieldController.Instance.Field.GetRandomHole();
-                    yield return null;
-                    continue;
+                    skip = true;
+                    break;
                 default:
                     hole.Status = Hole.HoleStatus.Mole;
                     break;
@@ -82,8 +83,6 @@ public class NormalMole : Mole
 
             if (hole == null)
                 hole = FieldController.Instance.Field.GetRandomHole();
-
-
         }
     }
 

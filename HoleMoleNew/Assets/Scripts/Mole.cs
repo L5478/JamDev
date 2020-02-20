@@ -16,6 +16,8 @@ public class Mole : MonoBehaviour
     protected string hit;
     protected string water;
 
+    public bool IsActive { get => isActive; }
+
     protected virtual IEnumerator SetNewHole()
     {
         yield return null;

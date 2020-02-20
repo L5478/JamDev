@@ -81,59 +81,58 @@ public class Field
 
     public Hole GetNewHole()
     {
-        List<Hole> emptyHoles = new List<Hole>();
+        List<Hole> availableHoles = new List<Hole>();
         List<Hole> noneHoles = new List<Hole>();
         Hole newHole = null;
+        bool flag = true;
 
         foreach (Hole hole in holes)
         {
             if (hole.Status == Hole.HoleStatus.Empty)
-                emptyHoles.Add(hole);
+                availableHoles.Add(hole);
 
             if (hole.Status == Hole.HoleStatus.Plank)
-                emptyHoles.Add(hole);
+                availableHoles.Add(hole);
 
             if (hole.Status == Hole.HoleStatus.None)
                 noneHoles.Add(hole);
         }
-
-        bool flag = true;
-          
+  
         do
         {
-            int rndIndex = Random.Range(0, emptyHoles.Count);
+            int rndIndex = Random.Range(0, availableHoles.Count);
 
             foreach (Hole hole in noneHoles)
             {
-                if (hole.X == emptyHoles[rndIndex].X -1 && hole.Z == emptyHoles[rndIndex].Z -1||
-                 hole.X == emptyHoles[rndIndex].X -1 && hole.Z == emptyHoles[rndIndex].Z -1 ||
-                 hole.X == emptyHoles[rndIndex].X -1 && hole.Z == emptyHoles[rndIndex].Z -1 ||
-                 hole.X == emptyHoles[rndIndex].X -1 && hole.Z == emptyHoles[rndIndex].Z -1 ||
+                if (hole.X == availableHoles[rndIndex].X -1 && hole.Z == availableHoles[rndIndex].Z -1||
+                 hole.X == availableHoles[rndIndex].X -1 && hole.Z == availableHoles[rndIndex].Z -1 ||
+                 hole.X == availableHoles[rndIndex].X -1 && hole.Z == availableHoles[rndIndex].Z -1 ||
+                 hole.X == availableHoles[rndIndex].X -1 && hole.Z == availableHoles[rndIndex].Z -1 ||
 
-                 hole.X == emptyHoles[rndIndex].X + 1 && hole.Z == emptyHoles[rndIndex].Z - 1 ||
-                 hole.X == emptyHoles[rndIndex].X + 1 && hole.Z == emptyHoles[rndIndex].Z - 1 ||
-                 hole.X == emptyHoles[rndIndex].X + 1 && hole.Z == emptyHoles[rndIndex].Z - 1 ||
-                 hole.X == emptyHoles[rndIndex].X + 1 && hole.Z == emptyHoles[rndIndex].Z - 1 ||
+                 hole.X == availableHoles[rndIndex].X + 1 && hole.Z == availableHoles[rndIndex].Z - 1 ||
+                 hole.X == availableHoles[rndIndex].X + 1 && hole.Z == availableHoles[rndIndex].Z - 1 ||
+                 hole.X == availableHoles[rndIndex].X + 1 && hole.Z == availableHoles[rndIndex].Z - 1 ||
+                 hole.X == availableHoles[rndIndex].X + 1 && hole.Z == availableHoles[rndIndex].Z - 1 ||
 
 
-                 hole.X == emptyHoles[rndIndex].X + 1 && hole.Z == emptyHoles[rndIndex].Z + 1 ||
-                 hole.X == emptyHoles[rndIndex].X + 1 && hole.Z == emptyHoles[rndIndex].Z + 1 ||
-                 hole.X == emptyHoles[rndIndex].X + 1 && hole.Z == emptyHoles[rndIndex].Z + 1 ||
-                 hole.X == emptyHoles[rndIndex].X + 1 && hole.Z == emptyHoles[rndIndex].Z + 1 ||
+                 hole.X == availableHoles[rndIndex].X + 1 && hole.Z == availableHoles[rndIndex].Z + 1 ||
+                 hole.X == availableHoles[rndIndex].X + 1 && hole.Z == availableHoles[rndIndex].Z + 1 ||
+                 hole.X == availableHoles[rndIndex].X + 1 && hole.Z == availableHoles[rndIndex].Z + 1 ||
+                 hole.X == availableHoles[rndIndex].X + 1 && hole.Z == availableHoles[rndIndex].Z + 1 ||
 
-                 hole.X == emptyHoles[rndIndex].X - 1 && hole.Z == emptyHoles[rndIndex].Z + 1 ||
-                 hole.X == emptyHoles[rndIndex].X - 1 && hole.Z == emptyHoles[rndIndex].Z + 1 ||
-                 hole.X == emptyHoles[rndIndex].X - 1 && hole.Z == emptyHoles[rndIndex].Z + 1 ||
-                 hole.X == emptyHoles[rndIndex].X - 1 && hole.Z == emptyHoles[rndIndex].Z + 1)
+                 hole.X == availableHoles[rndIndex].X - 1 && hole.Z == availableHoles[rndIndex].Z + 1 ||
+                 hole.X == availableHoles[rndIndex].X - 1 && hole.Z == availableHoles[rndIndex].Z + 1 ||
+                 hole.X == availableHoles[rndIndex].X - 1 && hole.Z == availableHoles[rndIndex].Z + 1 ||
+                 hole.X == availableHoles[rndIndex].X - 1 && hole.Z == availableHoles[rndIndex].Z + 1)
                 {
                     flag = false;
                     newHole = hole;
                 }
             }
 
-            emptyHoles.Remove(emptyHoles[rndIndex]);
+            availableHoles.Remove(availableHoles[rndIndex]);
 
-            if (emptyHoles.Count <= 0)
+            if (availableHoles.Count <= 0)
             {
                 flag = false;
             }

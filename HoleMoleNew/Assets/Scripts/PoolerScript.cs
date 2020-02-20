@@ -23,10 +23,7 @@ public class PoolerScript : MonoBehaviour
     private void Awake()
     {
         current = this;
-    }
 
-    private void Start()
-    {
         pooledObjects = new List<GameObject>();
         
         foreach (ObjectPoolItem item in itemsToPool)
