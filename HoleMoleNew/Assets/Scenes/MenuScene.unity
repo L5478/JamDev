@@ -240,7 +240,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 742cbbb931a223b48b136fbb5c2654a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HammerAnim: {fileID: 0}
+  Hammer: {fileID: 739501738}
 --- !u!114 &450735723
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -427,7 +427,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 498642930}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0.99, y: 4.865262, z: -2.94}
+  m_LocalPosition: {x: 0.99, y: 4.35, z: -2.94}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 116411873}
@@ -849,6 +849,12 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!1 &739501738 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6978707778391784630, guid: 859419a8cdab7084085d0fb0c77bec60,
+    type: 3}
+  m_PrefabInstance: {fileID: 626654741}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &846720253
 GameObject:
   m_ObjectHideFlags: 0
@@ -1706,7 +1712,6 @@ MonoBehaviour:
   eliteDamageEffect: {fileID: 6869304356125345040}
   helmetEffect: {fileID: 8367530618504815863}
   helmet: {fileID: 538074112679860259}
-  HammerAnim: {fileID: 0}
 --- !u!4 &2127209207
 Transform:
   m_ObjectHideFlags: 0
