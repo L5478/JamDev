@@ -59,8 +59,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71b17d983ddfdd34a819a31aaaae3ad1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waitTime: 3
-  spawnTime: 2
+  waitForAnimationsEnd: 3
+  spawnNextTime: 1.5
   damageEffect: {fileID: 6278433145615842983}
   helmet: {fileID: 1081512386801738644}
   helmetBreakEffect: {fileID: 8965156710779084608}

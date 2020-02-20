@@ -33,7 +33,7 @@ public class EliteMole : Mole
     {
         while (true)
         {
-            yield return new WaitForSeconds(spawnTime);
+            yield return new WaitForSeconds(spawnNextTime);
 
             switch (hole.Status)
             {
@@ -74,7 +74,7 @@ public class EliteMole : Mole
 
             animator.SetTrigger(dig);
 
-            yield return new WaitForSeconds(waitTime);
+            yield return new WaitForSeconds(waitForAnimationsEnd);
 
             dig = "Elite";
 

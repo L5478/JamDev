@@ -30,7 +30,7 @@ public class NormalMole : Mole
     {
         while (true)
         {
-            yield return new WaitForSeconds(spawnTime);
+            yield return new WaitForSeconds(spawnNextTime);
 
             switch (hole.Status)
             {
@@ -66,7 +66,7 @@ public class NormalMole : Mole
 
             animator.SetTrigger(dig);
 
-            yield return new WaitForSeconds(waitTime);
+            yield return new WaitForSeconds(waitForAnimationsEnd);
 
             hole.Status = Hole.HoleStatus.Empty;
 

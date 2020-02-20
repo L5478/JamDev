@@ -12,9 +12,11 @@ public class FieldController : MonoBehaviour
 
     public GameObject holePrefab;
 
-    public float emptySpace = 1f;
-    public int holesX;
-    public int holesZ;
+    public FieldSizeSO fieldData;
+
+    private float emptySpace;
+    private int holesX;
+    private int holesZ;
 
     private Vector3 offset;
 
@@ -31,6 +33,10 @@ public class FieldController : MonoBehaviour
         else
             instance = this;
         #endregion
+
+        emptySpace = fieldData.emptySpace;
+        holesX = fieldData.holesX;
+        holesZ = fieldData.holesZ;
 
         // Prevent wierd behaviour
         if (emptySpace <= 0)

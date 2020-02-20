@@ -60,7 +60,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waitTime: 3
-  spawnTime: 2
+  spawnTime: 1.5
   damageEffect: {fileID: 1805924066608367480}
 --- !u!1001 &3851905042909800963
 PrefabInstance:
