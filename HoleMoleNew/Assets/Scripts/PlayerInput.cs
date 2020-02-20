@@ -6,22 +6,50 @@ using UnityEngine.EventSystems;
 
 public class PlayerInput : MonoBehaviour
 {
+    public Texture2D DefaultImg;
     public Texture2D PlankImg;
     public Texture2D WaterImg;
     public Texture2D ExplosionImg;
+
+    public List<AudioClip> normalHits;
+    public List<AudioClip> EliteHits;
+
+    public GameObject Hammer;
+    [SerializeField]
+    private float zOffset;
+    private RaycastHit hit;
+    private Ray ray1;
+    private float yAxis;
+    [SerializeField]
+    private LayerMask posLayer;
 
     public enum PowerUp { None, Plank, Water, Fire }
 
     private PowerUp currentPowerUp = PowerUp.None;
     private Hole hole;
+    private Animator HammerAnim;
+    private AudioSource audioSource;
 
     public static event Action<Mole> MoleHitted;
     public static event Action WaterPowerUp;
     public static event Action<Hole> PlankPowerUp;
     public static event Action<Hole> FirePowerUp;
 
+    private void Start()
+    {
+        yAxis = Hammer.transform.position.y;
+        HammerAnim = Hammer.GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
+    }
+
     void Update()
     {
+        Ray ray1 = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray1, out RaycastHit hitPos, 40f, posLayer))
+        {
+            Hammer.transform.position = new Vector3(hitPos.point.x, yAxis, hitPos.point.z - zOffset);
+        };
+
         //Mouse button down if not hovering over any UI elements
         if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
         {
@@ -33,8 +61,12 @@ public class PlayerInput : MonoBehaviour
                     //Regular hit mole
                     Mole mole = hit.transform.GetComponentInParent<Mole>();
 
+
                     if (mole != null)
                     {
+                        HammerAnim.SetTrigger("SLAP");
+                        audioSource.PlayOneShot(normalHits[UnityEngine.Random.Range(0, normalHits.Count)]);
+
                         MoleHitted?.Invoke(mole);
                     }
                 }
@@ -81,7 +113,7 @@ public class PlayerInput : MonoBehaviour
                 currentPowerUp = PowerUp.Water;
                 SetCursorImage(WaterImg);
                 break;
-            case "Fire":
+            case "Explosion":
                 currentPowerUp = PowerUp.Fire;
                 SetCursorImage(ExplosionImg);
                 break;
@@ -95,10 +127,12 @@ public class PlayerInput : MonoBehaviour
         //if method called empty -> reset image
         if (img == null)
         {
-            Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+            Hammer.SetActive(true);
+            Cursor.SetCursor(DefaultImg, Vector2.zero, CursorMode.Auto);
         }
         else
         {
+            Hammer.SetActive(false);
             Cursor.SetCursor(img, Vector2.zero, CursorMode.Auto);
         }
     }
