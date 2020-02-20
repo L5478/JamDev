@@ -8,7 +8,7 @@ public class PlayerInput : MonoBehaviour
 {
     public Texture2D PlankImg;
     public Texture2D WaterImg;
-    public Texture2D FireImg;
+    public Texture2D ExplosionImg;
 
     public enum PowerUp { None, Plank, Water, Fire }
 
@@ -83,7 +83,7 @@ public class PlayerInput : MonoBehaviour
                 break;
             case "Fire":
                 currentPowerUp = PowerUp.Fire;
-                SetCursorImage(FireImg);
+                SetCursorImage(ExplosionImg);
                 break;
             default:
                 break;
