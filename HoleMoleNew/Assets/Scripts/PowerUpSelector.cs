@@ -10,11 +10,11 @@ public class PowerUpSelector : MonoBehaviour
     public List<PowerUpSO> listPowerUps;
     public Button Spot1;
     public Button Spot2;
-    
+
 
     private PlayerInput playerInput;
     private Animator animator;
-    private float waitTime = 5f;
+    private float waitTime = 15f;
 
     private void Start()
     {
@@ -23,7 +23,7 @@ public class PowerUpSelector : MonoBehaviour
         Invoke("StartPowerupsAnimation", waitTime);
     }
 
-    private void StartPowerupsAnimation ()
+    private void StartPowerupsAnimation()
     {
         animator.SetTrigger("ShowPowerUps");
         Time.timeScale = .20f;
@@ -61,7 +61,8 @@ public class PowerUpSelector : MonoBehaviour
         //Keep subtracting untill you find your random weighed number
         for (int i = 0; i < listPowerUps.Count; i++)
         {
-            if (randomN < listPowerUps[i].weight) {
+            if (randomN < listPowerUps[i].weight)
+            {
                 return listPowerUps[i];
             }
             randomN -= listPowerUps[i].weight;
