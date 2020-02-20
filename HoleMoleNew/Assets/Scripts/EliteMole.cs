@@ -9,6 +9,7 @@ public class EliteMole : Mole
 
     private float health;
     private float maxHealth = 2f;
+    private bool skip = false;
 
     private void Start()
     {
@@ -33,7 +34,8 @@ public class EliteMole : Mole
     {
         while (true)
         {
-            yield return new WaitForSeconds(spawnTime);
+            yield return new WaitForSeconds(spawnNextTime);
+            skip = false;
 
             switch (hole.Status)
             {
@@ -51,49 +53,50 @@ public class EliteMole : Mole
                     break;
                 case Hole.HoleStatus.Mole:
                     hole = FieldController.Instance.Field.GetRandomHole();
-                    yield return null;
-                    continue;
+                    skip = true;
+                    break;
                 default:
                     hole.Status = Hole.HoleStatus.Mole;
                     break;
             }
 
+            if (skip == false)
+            {
+                health = maxHealth;
 
-            health = maxHealth;
+                if (hole.Status == Hole.HoleStatus.Plank)
+                {
+                    FieldController.Instance.AnimatePlank(hole, "Break");
+                    StartCoroutine(FieldController.Instance.ResetHole(hole, Hole.HoleStatus.Empty));
+                }
 
-            if (hole.Status == Hole.HoleStatus.Plank)
-                FieldController.Instance.AnimatePlank(hole, "Break");
+                helmet.SetActive(true);
 
-            helmet.SetActive(true);
+                isActive = true;
 
-            isActive = true;
+                FieldController.Instance.SwitchHoleGFX(hole);
 
-            FieldController.Instance.SwitchHoleGFX(hole);
+                transform.position = hole.Position;
 
-            transform.position = hole.Position;
+                animator.SetTrigger(dig);
 
-            animator.SetTrigger(dig);
+                yield return new WaitForSeconds(waitForAnimationsEnd);
 
-            yield return new WaitForSeconds(waitTime);
+                dig = "Elite";
 
-            dig = "Elite";
+                isActive = false;
 
-            //if (hole.Status != Hole.HoleStatus.Plank)
-            //    hole.Status = Hole.HoleStatus.Empty;
+                health = maxHealth;
 
-            isActive = false;
+                transform.position = Vector3.one * -3;
 
-            health = maxHealth;
+                FieldController.Instance.SwitchHoleGFX(hole);
 
-            transform.position = Vector3.one * -3;
+                hole = FieldController.Instance.Field.GetNewHole();
 
-            FieldController.Instance.SwitchHoleGFX(hole);
-
-            hole = FieldController.Instance.Field.GetNewHole();
-
-            if (hole == null)
-                hole = FieldController.Instance.Field.GetRandomHole();
-
+                if (hole == null)
+                    hole = FieldController.Instance.Field.GetRandomHole();
+            }
         }
     }
 
