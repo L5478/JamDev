@@ -556,11 +556,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moleContainer: {fileID: 506617258}
   itemsToPool:
-  - amount: 4
+  - amount: 10
     objectToPool: {fileID: 7973962295226427427, guid: ea7487edd52d6904ea69c26e55d85bde,
       type: 3}
     canGrow: 1
-  - amount: 2
+  - amount: 6
     objectToPool: {fileID: 7973962295226427427, guid: 3b5e0c8ae1f8f8146951b854aabccfef,
       type: 3}
     canGrow: 1
