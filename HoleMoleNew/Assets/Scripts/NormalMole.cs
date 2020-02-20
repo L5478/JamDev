@@ -16,7 +16,7 @@ public class NormalMole : Mole
         health = maxHealth;
 
         hole = FieldController.Instance.Field.GetRandomHole();
-        hole.Status = Hole.HoleStatus.Mole;
+        hole.Status = Hole.HoleStatus.Empty;
 
         animator = GetComponentInChildren<Animator>();
 
@@ -29,9 +29,12 @@ public class NormalMole : Mole
     protected override IEnumerator SetNewHole()
     {
         while (true)
-        {
+        { 
             switch (hole.Status)
             {
+                case Hole.HoleStatus.Empty:
+                    hole.Status = Hole.HoleStatus.Mole;
+                    break;
                 case Hole.HoleStatus.None:
                     hole.Status = Hole.HoleStatus.NewHole;
                     break;
@@ -43,12 +46,17 @@ public class NormalMole : Mole
                 case Hole.HoleStatus.Water:
                     WaterHit();
                     break;
+                case Hole.HoleStatus.Mole:
+                    hole = FieldController.Instance.Field.GetRandomHole();
+                    yield return null;
+                    continue;
                 default:
                     hole.Status = Hole.HoleStatus.Mole;
                     break;
             }
 
             yield return new WaitForSeconds(spawnTime);
+
             health = maxHealth;
             isActive = true;
 
@@ -80,9 +88,14 @@ public class NormalMole : Mole
     protected override void NormalHit(Mole mole)
     {
         if (mole == this)
+        {
             health--;
-        
-        if (health <= 0)
-            base.NormalHit(mole);
+
+            if (health <= 0)
+            {
+                damageEffect.SetActive(true);
+                base.NormalHit(mole);
+            }
+        }
     }
 }

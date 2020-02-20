@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class EliteMole : Mole
 {
+    public GameObject helmet;
+    public GameObject helmetBreakEffect;
+
     private float health;
     private float maxHealth = 2f;
 
@@ -16,7 +19,7 @@ public class EliteMole : Mole
         health = maxHealth;
 
         hole = FieldController.Instance.Field.GetRandomHole();
-        hole.Status = Hole.HoleStatus.Mole;
+        hole.Status = Hole.HoleStatus.Empty;
 
         animator = GetComponentInChildren<Animator>();
 
@@ -32,6 +35,9 @@ public class EliteMole : Mole
         {
             switch (hole.Status)
             {
+                case Hole.HoleStatus.Empty:
+                    hole.Status = Hole.HoleStatus.Mole;
+                    break;
                 case Hole.HoleStatus.None:
                     hole.Status = Hole.HoleStatus.NewHole;
                     break;
@@ -41,16 +47,23 @@ public class EliteMole : Mole
                 case Hole.HoleStatus.Water:
                     WaterHit();
                     break;
+                case Hole.HoleStatus.Mole:
+                    hole = FieldController.Instance.Field.GetRandomHole();
+                    yield return null;
+                    continue;
                 default:
                     hole.Status = Hole.HoleStatus.Mole;
                     break;
             }
 
-            health = maxHealth;
             yield return new WaitForSeconds(spawnTime);
+
+            health = maxHealth;
 
             if (hole.Status == Hole.HoleStatus.Plank)
                 FieldController.Instance.AnimatePlank(hole, "Break");
+
+            helmet.SetActive(true);
 
             isActive = true;
 
@@ -64,7 +77,8 @@ public class EliteMole : Mole
 
             dig = "Elite";
 
-            hole.Status = Hole.HoleStatus.Empty;
+            //if (hole.Status != Hole.HoleStatus.Plank)
+            //    hole.Status = Hole.HoleStatus.Empty;
 
             isActive = false;
 
@@ -84,9 +98,21 @@ public class EliteMole : Mole
     protected override void NormalHit(Mole mole)
     {
         if (mole == this)
+        {
             health--;
 
-        if (health <= 0)
-            base.NormalHit(mole);
+            if (health == 1 && helmet != null)
+            {
+                helmet.SetActive(false);
+                helmetBreakEffect.SetActive(true);
+            }
+
+            if (health <= 0)
+            { 
+                damageEffect.SetActive(true);
+                base.NormalHit(mole);
+            }
+        }
+
     }
 }
