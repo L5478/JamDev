@@ -35,6 +35,7 @@ public class EliteMole : Mole
         while (true)
         {
             yield return new WaitForSeconds(spawnNextTime);
+            skip = false;
 
             switch (hole.Status)
             {
@@ -52,49 +53,50 @@ public class EliteMole : Mole
                     break;
                 case Hole.HoleStatus.Mole:
                     hole = FieldController.Instance.Field.GetRandomHole();
-                    yield return null;
-                    continue;
+                    skip = true;
+                    break;
                 default:
                     hole.Status = Hole.HoleStatus.Mole;
                     break;
             }
 
-
-            health = maxHealth;
-
-            if (hole.Status == Hole.HoleStatus.Plank)
+            if (skip == false)
             {
-                FieldController.Instance.AnimatePlank(hole, "Break");
-                StartCoroutine(FieldController.Instance.ResetHole(hole, Hole.HoleStatus.Empty));
+                health = maxHealth;
+
+                if (hole.Status == Hole.HoleStatus.Plank)
+                {
+                    FieldController.Instance.AnimatePlank(hole, "Break");
+                    StartCoroutine(FieldController.Instance.ResetHole(hole, Hole.HoleStatus.Empty));
+                }
+
+                helmet.SetActive(true);
+
+                isActive = true;
+
+                FieldController.Instance.SwitchHoleGFX(hole);
+
+                transform.position = hole.Position;
+
+                animator.SetTrigger(dig);
+
+                yield return new WaitForSeconds(waitForAnimationsEnd);
+
+                dig = "Elite";
+
+                isActive = false;
+
+                health = maxHealth;
+
+                transform.position = Vector3.one * -3;
+
+                FieldController.Instance.SwitchHoleGFX(hole);
+
+                hole = FieldController.Instance.Field.GetNewHole();
+
+                if (hole == null)
+                    hole = FieldController.Instance.Field.GetRandomHole();
             }
-
-            helmet.SetActive(true);
-
-            isActive = true;
-
-            FieldController.Instance.SwitchHoleGFX(hole);
-
-            transform.position = hole.Position;
-
-            animator.SetTrigger(dig);
-
-            yield return new WaitForSeconds(waitForAnimationsEnd);
-
-            dig = "Elite";
-
-            isActive = false;
-
-            health = maxHealth;
-
-            transform.position = Vector3.one * -3;
-
-            FieldController.Instance.SwitchHoleGFX(hole);
-
-            hole = FieldController.Instance.Field.GetNewHole();
-
-            if (hole == null)
-                hole = FieldController.Instance.Field.GetRandomHole();
-
         }
     }
 

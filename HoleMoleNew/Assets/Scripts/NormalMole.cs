@@ -32,6 +32,7 @@ public class NormalMole : Mole
         while (true)
         {
             yield return new WaitForSeconds(spawnNextTime);
+            skip = false;
 
             switch (hole.Status)
             {
@@ -58,31 +59,34 @@ public class NormalMole : Mole
                     break;
             }
 
-            health = maxHealth;
-            isActive = true;
+            if (skip == false)
+            {
+                health = maxHealth;
+                isActive = true;
 
-            FieldController.Instance.SwitchHoleGFX(hole);
+                FieldController.Instance.SwitchHoleGFX(hole);
 
-            transform.position = hole.Position;
+                transform.position = hole.Position;
 
-            animator.SetTrigger(dig);
+                animator.SetTrigger(dig);
 
-            yield return new WaitForSeconds(waitForAnimationsEnd);
+                yield return new WaitForSeconds(waitForAnimationsEnd);
 
-            hole.Status = Hole.HoleStatus.Empty;
+                hole.Status = Hole.HoleStatus.Empty;
 
-            isActive = false;
+                isActive = false;
 
-            health = maxHealth;
+                health = maxHealth;
 
-            transform.position = Vector3.one * -3;
+                transform.position = Vector3.one * -3;
 
-            FieldController.Instance.SwitchHoleGFX(hole);
+                FieldController.Instance.SwitchHoleGFX(hole);
 
-            hole = FieldController.Instance.Field.GetNewHole();
+                hole = FieldController.Instance.Field.GetNewHole();
 
-            if (hole == null)
-                hole = FieldController.Instance.Field.GetRandomHole();
+                if (hole == null)
+                    hole = FieldController.Instance.Field.GetRandomHole();
+            } 
         }
     }
 
