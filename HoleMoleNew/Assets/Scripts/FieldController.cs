@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -91,7 +92,7 @@ public class FieldController : MonoBehaviour
             case Hole.HoleStatus.Water:
                 SetGFXByTag("HoleWater", hole);
                 break;
-            case Hole.HoleStatus.Fire:
+            case Hole.HoleStatus.Exploded:
                 SetGFXByTag("HoleFire", hole);
                 break;
             default:
@@ -140,8 +141,10 @@ public class FieldController : MonoBehaviour
 
     private void Explode(Hole hole)
     {
-        hole.Status = Hole.HoleStatus.Fire;
+        hole.Status = Hole.HoleStatus.Exploded;
         SwitchHoleGFX(hole);
+
+        StartCoroutine(ResetHole(hole, Hole.HoleStatus.None));
     }
 
     public void AnimatePlank(Hole hole, string animationTrigger)
@@ -153,5 +156,11 @@ public class FieldController : MonoBehaviour
             animator.SetTrigger(animationTrigger);
         else
             Debug.LogWarning("Couldn't find any Animators in " + holeGO + " or in children");
+    }
+
+    public IEnumerator ResetHole(Hole hole, Hole.HoleStatus status)
+    {
+        yield return new WaitForSeconds(3);
+        hole.Status = status;
     }
 }

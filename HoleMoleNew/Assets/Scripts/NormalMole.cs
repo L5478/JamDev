@@ -29,7 +29,9 @@ public class NormalMole : Mole
     protected override IEnumerator SetNewHole()
     {
         while (true)
-        { 
+        {
+            yield return new WaitForSeconds(spawnTime);
+
             switch (hole.Status)
             {
                 case Hole.HoleStatus.Empty:
@@ -54,8 +56,6 @@ public class NormalMole : Mole
                     hole.Status = Hole.HoleStatus.Mole;
                     break;
             }
-
-            yield return new WaitForSeconds(spawnTime);
 
             health = maxHealth;
             isActive = true;
@@ -82,6 +82,8 @@ public class NormalMole : Mole
 
             if (hole == null)
                 hole = FieldController.Instance.Field.GetRandomHole();
+
+
         }
     }
 

@@ -33,6 +33,8 @@ public class EliteMole : Mole
     {
         while (true)
         {
+            yield return new WaitForSeconds(spawnTime);
+
             switch (hole.Status)
             {
                 case Hole.HoleStatus.Empty:
@@ -56,7 +58,6 @@ public class EliteMole : Mole
                     break;
             }
 
-            yield return new WaitForSeconds(spawnTime);
 
             health = maxHealth;
 
@@ -92,6 +93,7 @@ public class EliteMole : Mole
 
             if (hole == null)
                 hole = FieldController.Instance.Field.GetRandomHole();
+
         }
     }
 
