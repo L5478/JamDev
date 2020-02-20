@@ -54,11 +54,25 @@ public class MoleController : MonoBehaviour
         plankCount = FieldController.Instance.Field.GetHoleCount(Hole.HoleStatus.Plank);
         moleCount = FieldController.Instance.Field.GetHoleCount(Hole.HoleStatus.Mole);
 
-        if (plankCount >= 5)
-        {
-            GameObject mole = SpawnNewMole("MoleElite", 3, 2);
-            mole.SetActive(true);
-        }
-    }
+        //if (plankCount >= 5)
+        //{
+        //    GameObject mole = SpawnNewMole("MoleElite", 3, 2);
+        //    mole.SetActive(true);
+        //}
 
+        //if (emptyCount >= 15)
+        //{
+        //    GameObject mole = SpawnNewMole("MoleNormal", 3, 1.5f);
+        //    mole.SetActive(true);
+        //}
+
+        //if (emptyCount >= 20)
+        //{
+        //    GameObject mole = SpawnNewMole("MoleNormal", 3, 1.5f);
+        //    mole.SetActive(true);
+
+        //    GameObject moleE = SpawnNewMole("MoleElite", 3, 2);
+        //    moleE.SetActive(true);
+        //}
+    }
 }

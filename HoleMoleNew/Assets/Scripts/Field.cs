@@ -7,10 +7,11 @@ public class Field
 
     private int width;
     private int depth;
-    private int holesAmount;
+    private int holesAmount = 0;
 
     public int Width { get => width; }
     public int Depth { get => depth; }
+    public int HolesAmount { get => holesAmount; }
 
     public Field(int width = 3, int depth = 3)
     {
@@ -25,6 +26,7 @@ public class Field
             for (int z = 0; z < depth; z++)
             {
                 holes[x, z] = new Hole(x, z, this);
+                holesAmount++;
             }
         }
     }
