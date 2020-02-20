@@ -66,7 +66,7 @@ public class FieldController : MonoBehaviour
     private void Start()
     {
         PlayerInput.PlankPowerUp += SetPlank;
-        PlayerInput.FirePowerUp += SetFire;
+        PlayerInput.FirePowerUp += Explode;
     }
 
     public void SwitchHoleGFX(Hole hole)
@@ -138,10 +138,8 @@ public class FieldController : MonoBehaviour
         }
     }
 
-    private void SetFire(Transform holeTransform)
+    private void Explode(Hole hole)
     {
-        Hole hole = Field.GetHoleAtPosition(holeTransform.position);
-
         hole.Status = Hole.HoleStatus.Fire;
         SwitchHoleGFX(hole);
     }

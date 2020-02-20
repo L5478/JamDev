@@ -13,11 +13,12 @@ public class PlayerInput : MonoBehaviour
     public enum PowerUp { None, Plank, Water, Fire }
 
     private PowerUp currentPowerUp = PowerUp.None;
+    private Hole hole;
 
     public static event Action<Mole> MoleHitted;
     public static event Action WaterPowerUp;
     public static event Action<Hole> PlankPowerUp;
-    public static event Action<Transform> FirePowerUp;
+    public static event Action<Hole> FirePowerUp;
 
     void Update()
     {
@@ -45,7 +46,7 @@ public class PlayerInput : MonoBehaviour
                         case PowerUp.None:
                             break;
                         case PowerUp.Plank:
-                            Hole hole = FieldController.Instance.Field.GetHoleAtPosition(hit.transform.position);
+                            hole = FieldController.Instance.Field.GetHoleAtPosition(hit.transform.position);
                             if (hole != null)
                                 PlankPowerUp?.Invoke(hole);
                             break;
@@ -53,7 +54,9 @@ public class PlayerInput : MonoBehaviour
                             WaterPowerUp?.Invoke();
                             break;
                         case PowerUp.Fire:
-                            FirePowerUp?.Invoke(hit.transform);
+                            hole = FieldController.Instance.Field.GetHoleAtPosition(hit.transform.position);
+                            if (hole != null)
+                                FirePowerUp?.Invoke(hole);
                             break;
                         default:
                             break;
