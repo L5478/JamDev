@@ -6,6 +6,7 @@ public class Mole : MonoBehaviour
 {
     public float waitTime = 3f;
     public float spawnTime = 2f;
+    public GameObject damageEffect;
 
     protected Hole hole;
     protected Animator animator;

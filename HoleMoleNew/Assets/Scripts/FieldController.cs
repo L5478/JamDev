@@ -122,31 +122,20 @@ public class FieldController : MonoBehaviour
         }
     }
 
-    private void SetPlank(Transform holeTransform)
+    private void SetPlank(Hole hole)
     {
-        Hole hole = Field.GetHoleAtPosition(holeTransform.position);
-
-        try
-        {
-            hole.Status = Hole.HoleStatus.Plank;
-        }
-        catch (Exception)
-        {
-            // TODO: Tell player that he/she can't put plank on top of MOLE
-            Debug.LogWarning("CAN'T PUT A PLANK ON TOP OF MOLE.   TODO: TELL THIS TO PLAYER");
-            throw;
-        }
-
         hole.Status = Hole.HoleStatus.Plank;
         SwitchHoleGFX(hole);
 
         for (int i = 0; i < 2; i++)
         {
             hole = Field.GetEmptyHole();
-            hole.Status = Hole.HoleStatus.Plank;
-            SwitchHoleGFX(hole);
+            if (hole != null)
+            {
+                hole.Status = Hole.HoleStatus.Plank;
+                SwitchHoleGFX(hole);
+            }
         }
-
     }
 
     private void SetFire(Transform holeTransform)
