@@ -2,7 +2,7 @@
 
 public class Hole
 {
-    public enum HoleStatus { None, Empty, NewHole, Mole, Plank, Water, Fire, }
+    public enum HoleStatus { None, Empty, NewHole, Mole, Plank, Water, Exploded, }
 
     private HoleStatus status = HoleStatus.None;
     private int x;
