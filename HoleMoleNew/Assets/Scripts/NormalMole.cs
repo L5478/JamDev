@@ -6,6 +6,7 @@ public class NormalMole : Mole
 {
     private float health;
     private float maxHealth = 1f;
+    private bool skip = false;
 
     private void Start()
     {
@@ -30,7 +31,8 @@ public class NormalMole : Mole
     {
         while (true)
         {
-            yield return new WaitForSeconds(spawnTime);
+            yield return new WaitForSeconds(spawnNextTime);
+            skip = false;
 
             switch (hole.Status)
             {
@@ -43,47 +45,48 @@ public class NormalMole : Mole
                 case Hole.HoleStatus.Plank:
                     FieldController.Instance.AnimatePlank(hole, "Block");
                     hole = FieldController.Instance.Field.GetRandomHole();
-                    yield return null;
-                    continue;
+                    skip = true;
+                    break;
                 case Hole.HoleStatus.Water:
                     WaterHit();
                     break;
                 case Hole.HoleStatus.Mole:
                     hole = FieldController.Instance.Field.GetRandomHole();
-                    yield return null;
-                    continue;
+                    skip = true;
+                    break;
                 default:
                     hole.Status = Hole.HoleStatus.Mole;
                     break;
             }
 
-            health = maxHealth;
-            isActive = true;
+            if (skip == false)
+            {
+                health = maxHealth;
+                isActive = true;
 
-            FieldController.Instance.SwitchHoleGFX(hole);
+                FieldController.Instance.SwitchHoleGFX(hole);
 
-            transform.position = hole.Position;
+                transform.position = hole.Position;
 
-            animator.SetTrigger(dig);
+                animator.SetTrigger(dig);
 
-            yield return new WaitForSeconds(waitTime);
+                yield return new WaitForSeconds(waitForAnimationsEnd);
 
-            hole.Status = Hole.HoleStatus.Empty;
+                hole.Status = Hole.HoleStatus.Empty;
 
-            isActive = false;
+                isActive = false;
 
-            health = maxHealth;
+                health = maxHealth;
 
-            transform.position = Vector3.one * -3;
+                transform.position = Vector3.one * -3;
 
-            FieldController.Instance.SwitchHoleGFX(hole);
+                FieldController.Instance.SwitchHoleGFX(hole);
 
-            hole = FieldController.Instance.Field.GetNewHole();
+                hole = FieldController.Instance.Field.GetNewHole();
 
-            if (hole == null)
-                hole = FieldController.Instance.Field.GetRandomHole();
-
-
+                if (hole == null)
+                    hole = FieldController.Instance.Field.GetRandomHole();
+            } 
         }
     }
 

@@ -8,11 +8,12 @@ TagManager:
   - HoleNone
   - HoleEmpty
   - HolePlank
-  - Mole
   - HoleMole
   - HoleWater
   - HoleNew
   - HoleFire
+  - MoleNormal
+  - MoleElite
   layers:
   - Default
   - TransparentFX
@@ -22,7 +23,7 @@ TagManager:
   - UI
   - 
   - 
-  - HammerLayer
+  - 
   - 
   - 
   - 
