@@ -487,7 +487,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ab4960ae1fa4fb49a1b59a5d5d64ca2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DefaultImg: {fileID: 2800000, guid: 380e85a7d4cd70547852cd8dc94f4b38, type: 3}
+  DefaultImg: {fileID: 2800000, guid: dadce3402dce71b44860cb5b2b4d6043, type: 3}
   PlankImg: {fileID: 2800000, guid: 6f4d69391cc009948a646d5da478dc9a, type: 3}
   WaterImg: {fileID: 2800000, guid: 3064774872d5688439dc670d2cd3f3ae, type: 3}
   ExplosionImg: {fileID: 2800000, guid: 7c3a448b5e5f2b549af1e63878827a80, type: 3}
