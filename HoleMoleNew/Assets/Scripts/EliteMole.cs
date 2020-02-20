@@ -9,6 +9,7 @@ public class EliteMole : Mole
 
     private float health;
     private float maxHealth = 2f;
+    private bool skip = false;
 
     private void Start()
     {
@@ -33,7 +34,7 @@ public class EliteMole : Mole
     {
         while (true)
         {
-            yield return new WaitForSeconds(spawnTime);
+            yield return new WaitForSeconds(spawnNextTime);
 
             switch (hole.Status)
             {
@@ -62,7 +63,10 @@ public class EliteMole : Mole
             health = maxHealth;
 
             if (hole.Status == Hole.HoleStatus.Plank)
+            {
                 FieldController.Instance.AnimatePlank(hole, "Break");
+                StartCoroutine(FieldController.Instance.ResetHole(hole, Hole.HoleStatus.Empty));
+            }
 
             helmet.SetActive(true);
 
@@ -74,12 +78,9 @@ public class EliteMole : Mole
 
             animator.SetTrigger(dig);
 
-            yield return new WaitForSeconds(waitTime);
+            yield return new WaitForSeconds(waitForAnimationsEnd);
 
             dig = "Elite";
-
-            //if (hole.Status != Hole.HoleStatus.Plank)
-            //    hole.Status = Hole.HoleStatus.Empty;
 
             isActive = false;
 

@@ -81,7 +81,7 @@ public class PlayerInput : MonoBehaviour
                 currentPowerUp = PowerUp.Water;
                 SetCursorImage(WaterImg);
                 break;
-            case "Fire":
+            case "Explosion":
                 currentPowerUp = PowerUp.Fire;
                 SetCursorImage(ExplosionImg);
                 break;

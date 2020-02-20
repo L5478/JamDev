@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Mole : MonoBehaviour
 {
-    public float waitTime = 3f;
-    public float spawnTime = 2f;
+    public float waitForAnimationsEnd = 3f;
+    public float spawnNextTime = 2f;
     public GameObject damageEffect;
 
     protected Hole hole;
@@ -15,6 +15,8 @@ public class Mole : MonoBehaviour
     protected string dig;
     protected string hit;
     protected string water;
+
+    public bool IsActive { get => isActive; }
 
     protected virtual IEnumerator SetNewHole()
     {

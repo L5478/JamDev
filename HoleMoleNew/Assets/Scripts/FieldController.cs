@@ -12,14 +12,15 @@ public class FieldController : MonoBehaviour
 
     public GameObject holePrefab;
 
-    public float emptySpace = 1f;
-    public int holesX;
-    public int holesZ;
+    public FieldSizeSO fieldData;
+
+    private float emptySpace;
+    private int holesX;
+    private int holesZ;
 
     private Vector3 offset;
 
     public Field Field;
-    private List<Transform> holeGFX = new List<Transform>();
 
     private Dictionary<Hole, GameObject> holeGODictonary = new Dictionary<Hole, GameObject>();
 
@@ -31,6 +32,10 @@ public class FieldController : MonoBehaviour
         else
             instance = this;
         #endregion
+
+        emptySpace = fieldData.emptySpace;
+        holesX = fieldData.holesX;
+        holesZ = fieldData.holesZ;
 
         // Prevent wierd behaviour
         if (emptySpace <= 0)
@@ -160,7 +165,9 @@ public class FieldController : MonoBehaviour
 
     public IEnumerator ResetHole(Hole hole, Hole.HoleStatus status)
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(1.5f);
         hole.Status = status;
+        SwitchHoleGFX(hole);
+        Debug.Log("ResetHole");
     }
 }
