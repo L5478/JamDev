@@ -8,6 +8,7 @@ public class GameCamera : MonoBehaviour
     [Header("Camera will move between these positions")]
     public Transform nearestPos;
     public Transform midPos;
+    public Transform midFarPos;
     public Transform farestPos;
 
     public float zoomSpeed = .1f;
@@ -34,14 +35,21 @@ public class GameCamera : MonoBehaviour
     private void HoleStatusHasChanged()
     {
 
-        if (FieldController.Instance.Field.IsThereHolesInRow(0))
+        if (FieldController.Instance.Field.IsThereHolesInColum(1) || FieldController.Instance.Field.IsThereHolesInColum(13))
         {
             targetPos = farestPos.position;
             time = 0;
             return;
         }
 
-        if (FieldController.Instance.Field.IsThereHolesInRow(1))
+        if (FieldController.Instance.Field.IsThereHolesInRow(0))
+        {
+            targetPos = midFarPos.position;
+            time = 0;
+            return;
+        }
+
+        if (FieldController.Instance.Field.IsThereHolesInRow(1) || FieldController.Instance.Field.IsThereHolesInRow(5))
         {
             targetPos = midPos.position;
             time = 0;

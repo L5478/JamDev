@@ -166,7 +166,18 @@ public class Field
                 return true;
             }
         }
+        return false;
+    }
 
+    public bool IsThereHolesInColum(int colum)
+    {
+        foreach (Hole hole in holes)
+        {
+            if (hole.Status != Hole.HoleStatus.None && hole.X == colum)
+            {
+                return true;
+            }
+        }
         return false;
     }
 }
