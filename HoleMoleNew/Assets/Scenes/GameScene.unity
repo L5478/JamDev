@@ -871,8 +871,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0371b25a735ce1c498fb6aaef7f2a29f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalMole: 8
-  eliteMole: 3
+  normalMole: 3
+  eliteMole: 1
   maxNormalMole: 10
   maxEliteMole: 5
 --- !u!114 &973198518
