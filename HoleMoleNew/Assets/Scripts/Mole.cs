@@ -34,6 +34,8 @@ public class Mole : MonoBehaviour
 
             animator.SetTrigger(hit);
 
+            PowerUpSelector.instance.AdjustCoins(2);
+
             FieldController.Instance.SwitchHoleGFX(hole);
 
             hole = FieldController.Instance.Field.GetRandomHole();
@@ -52,6 +54,8 @@ public class Mole : MonoBehaviour
             StopAllCoroutines();
 
             animator.SetTrigger(water);
+
+            PowerUpSelector.instance.AdjustCoins(1);
 
             FieldController.Instance.SwitchHoleGFX(hole);
 

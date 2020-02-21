@@ -5,6 +5,11 @@ using UnityEngine.UI;
 
 public class PowerUpSelector : MonoBehaviour
 {
+#region Singleton
+    public static PowerUpSelector instance;
+    public static PowerUpSelector Instance { get => instance; }
+#endregion
+
     public GameObject powerupsGO;
     public GameObject grayBackground;
     public List<PowerUpSO> listPowerUps;
@@ -12,10 +17,20 @@ public class PowerUpSelector : MonoBehaviour
     public Text coinsText;
     public Button skipBtn;
 
-    private int coins = 50;
+    private int coins = 0;
     private PlayerInput playerInput;
     private Animator animator;
     public float waitTime = 15f;
+
+    private void Awake()
+    {
+        #region Singleton
+        if (instance != null && instance != this)
+            Destroy(instance);
+        else
+            instance = this;
+        #endregion
+    }
 
     private void Start()
     {
