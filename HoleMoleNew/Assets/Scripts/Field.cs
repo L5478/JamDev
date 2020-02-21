@@ -77,6 +77,9 @@ public class Field
                 hole_list.Add(hole);
         }
 
+        if (hole_list.Count == 0)
+            return null;
+
         return hole_list[Random.Range(0, hole_list.Count)];
     }
 

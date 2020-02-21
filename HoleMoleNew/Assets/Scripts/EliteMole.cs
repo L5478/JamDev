@@ -22,9 +22,9 @@ public class EliteMole : Mole
         hole = FieldController.Instance.Field.GetRandomHole();
         hole.Status = Hole.HoleStatus.Empty;
 
-        animator = GetComponentInChildren<Animator>();
-
         StartCoroutine(SetNewHole());
+
+        animator = GetComponentInChildren<Animator>();
 
         PlayerInput.MoleHitted += NormalHit;
         PlayerInput.WaterPowerUp += WaterHit;

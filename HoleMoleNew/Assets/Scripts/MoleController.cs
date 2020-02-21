@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class MoleController : MonoBehaviour
 {
@@ -90,9 +89,13 @@ public class MoleController : MonoBehaviour
 
         PlankEliteMoleBalance();
 
+        NormalMoleBalance();
     }
 
+    private void NormalMoleBalance()
+    {
 
+    }
 
     private void PlankEliteMoleBalance()
     {
