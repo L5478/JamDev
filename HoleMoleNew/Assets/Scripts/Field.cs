@@ -70,9 +70,9 @@ public class Field
 
         foreach (Hole hole in holes)
         {
-            if (hole.Status != Hole.HoleStatus.Mole && 
-                hole.Status != Hole.HoleStatus.None && 
-                hole.Status != Hole.HoleStatus.Exploded && 
+            if (hole.Status != Hole.HoleStatus.Mole &&
+                hole.Status != Hole.HoleStatus.None &&
+                hole.Status != Hole.HoleStatus.Exploded &&
                 hole.Status != Hole.HoleStatus.NewHole)
                 hole_list.Add(hole);
         }
@@ -99,17 +99,17 @@ public class Field
             if (hole.Status == Hole.HoleStatus.None)
                 noneHoles.Add(hole);
         }
-  
+
         do
         {
             int rndIndex = Random.Range(0, availableHoles.Count);
 
             foreach (Hole hole in noneHoles)
             {
-                if (hole.X == availableHoles[rndIndex].X -1 && hole.Z == availableHoles[rndIndex].Z -1||
-                 hole.X == availableHoles[rndIndex].X -1 && hole.Z == availableHoles[rndIndex].Z -1 ||
-                 hole.X == availableHoles[rndIndex].X -1 && hole.Z == availableHoles[rndIndex].Z -1 ||
-                 hole.X == availableHoles[rndIndex].X -1 && hole.Z == availableHoles[rndIndex].Z -1 ||
+                if (hole.X == availableHoles[rndIndex].X - 1 && hole.Z == availableHoles[rndIndex].Z - 1 ||
+                 hole.X == availableHoles[rndIndex].X - 1 && hole.Z == availableHoles[rndIndex].Z - 1 ||
+                 hole.X == availableHoles[rndIndex].X - 1 && hole.Z == availableHoles[rndIndex].Z - 1 ||
+                 hole.X == availableHoles[rndIndex].X - 1 && hole.Z == availableHoles[rndIndex].Z - 1 ||
 
                  hole.X == availableHoles[rndIndex].X + 1 && hole.Z == availableHoles[rndIndex].Z - 1 ||
                  hole.X == availableHoles[rndIndex].X + 1 && hole.Z == availableHoles[rndIndex].Z - 1 ||
@@ -142,5 +142,18 @@ public class Field
         } while (flag);
 
         return newHole;
+    }
+
+    public int GetHoleCount(Hole.HoleStatus holeStatus)
+    {
+        int value = 0;
+
+        foreach (Hole hole in holes)
+        {
+            if (hole.Status == holeStatus)
+                value++;
+        }
+
+        return value;
     }
 }
