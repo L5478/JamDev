@@ -34,8 +34,6 @@ public class Mole : MonoBehaviour
 
             animator.SetTrigger(hit);
 
-            PowerUpSelector.instance.AdjustCoins(2);
-
             FieldController.Instance.SwitchHoleGFX(hole);
 
             hole = FieldController.Instance.Field.GetRandomHole();

@@ -18,6 +18,8 @@ public class PowerUpSelector : MonoBehaviour
     public Button skipBtn;
 
     private int coins = 0;
+    private int normalMolesSlammed = 0;
+    private int eliteMolesSlammed= 0;
     private PlayerInput playerInput;
     private Animator animator;
     public float waitTime = 15f;
@@ -76,6 +78,15 @@ public class PowerUpSelector : MonoBehaviour
     {
         coins += amount;
         coinsText.text = coins.ToString();
+    }
+
+    public void AddNormalMole()
+    {
+        normalMolesSlammed++;
+    }
+    public void AddEliteMole()
+    {
+        eliteMolesSlammed++;
     }
 
     public void OnPowerUpSelect(string sPowerUp = null)
