@@ -23,8 +23,6 @@ public class MenuMole : MonoBehaviour
         currentMole.SetActive(true);
         health = currentMole == normalMole ? 1f : 2f;
         currentDamageEffect = currentMole == normalMole ? normalDamageEffect : eliteDamageEffect;
-        currentDamageEffect.SetActive(false);
-        helmetEffect.SetActive(false);
     }
 
     public IEnumerator GetHit()

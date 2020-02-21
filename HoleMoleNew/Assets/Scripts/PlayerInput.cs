@@ -25,6 +25,7 @@ public class PlayerInput : MonoBehaviour
     private PowerUp currentPowerUp = PowerUp.None;
     private Hole hole;
     private Animator HammerAnim;
+    private new Camera camera;
 
     public static event Action<Mole> MoleHitted;
     public static event Action WaterPowerUp;
@@ -35,12 +36,13 @@ public class PlayerInput : MonoBehaviour
     {
         yAxis = Hammer.transform.position.y;
         HammerAnim = Hammer.GetComponent<Animator>();
+        camera = GetComponent<Camera>();
         SetCursorImage();
     }
 
     void Update()
     {
-        Ray ray1 = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Ray ray1 = camera.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray1, out RaycastHit hitPos, 40f, posLayer))
         {
             Hammer.transform.position = new Vector3(hitPos.point.x, yAxis, hitPos.point.z - zOffset);
@@ -49,7 +51,7 @@ public class PlayerInput : MonoBehaviour
         //Mouse button down if not hovering over any UI elements
         if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Ray ray = camera.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out RaycastHit hit, 100f))
             {
                 if (currentPowerUp == PowerUp.None)

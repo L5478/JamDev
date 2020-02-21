@@ -7,10 +7,11 @@ public class Field
 
     private int width;
     private int depth;
-    private int holesAmount;
+    private int holesAmount = 0;
 
     public int Width { get => width; }
     public int Depth { get => depth; }
+    public int HolesAmount { get => holesAmount; }
 
     public Field(int width = 3, int depth = 3)
     {
@@ -25,6 +26,7 @@ public class Field
             for (int z = 0; z < depth; z++)
             {
                 holes[x, z] = new Hole(x, z, this);
+                holesAmount++;
             }
         }
     }
@@ -68,9 +70,9 @@ public class Field
 
         foreach (Hole hole in holes)
         {
-            if (hole.Status != Hole.HoleStatus.Mole && 
-                hole.Status != Hole.HoleStatus.None && 
-                hole.Status != Hole.HoleStatus.Exploded && 
+            if (hole.Status != Hole.HoleStatus.Mole &&
+                hole.Status != Hole.HoleStatus.None &&
+                hole.Status != Hole.HoleStatus.Exploded &&
                 hole.Status != Hole.HoleStatus.NewHole)
                 hole_list.Add(hole);
         }
@@ -97,17 +99,17 @@ public class Field
             if (hole.Status == Hole.HoleStatus.None)
                 noneHoles.Add(hole);
         }
-  
+
         do
         {
             int rndIndex = Random.Range(0, availableHoles.Count);
 
             foreach (Hole hole in noneHoles)
             {
-                if (hole.X == availableHoles[rndIndex].X -1 && hole.Z == availableHoles[rndIndex].Z -1||
-                 hole.X == availableHoles[rndIndex].X -1 && hole.Z == availableHoles[rndIndex].Z -1 ||
-                 hole.X == availableHoles[rndIndex].X -1 && hole.Z == availableHoles[rndIndex].Z -1 ||
-                 hole.X == availableHoles[rndIndex].X -1 && hole.Z == availableHoles[rndIndex].Z -1 ||
+                if (hole.X == availableHoles[rndIndex].X - 1 && hole.Z == availableHoles[rndIndex].Z - 1 ||
+                 hole.X == availableHoles[rndIndex].X - 1 && hole.Z == availableHoles[rndIndex].Z - 1 ||
+                 hole.X == availableHoles[rndIndex].X - 1 && hole.Z == availableHoles[rndIndex].Z - 1 ||
+                 hole.X == availableHoles[rndIndex].X - 1 && hole.Z == availableHoles[rndIndex].Z - 1 ||
 
                  hole.X == availableHoles[rndIndex].X + 1 && hole.Z == availableHoles[rndIndex].Z - 1 ||
                  hole.X == availableHoles[rndIndex].X + 1 && hole.Z == availableHoles[rndIndex].Z - 1 ||

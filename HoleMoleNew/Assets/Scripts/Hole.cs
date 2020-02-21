@@ -32,7 +32,7 @@ public class Hole
         this.field = field;
 
         // Set starting area 3x3 in the middle
-        if (this.x >= (field.Width - 2) /2 && this.x <= (field.Width + 2) / 2)
+        if (this.x >= (field.Width - 2) / 2 && this.x <= (field.Width + 2) / 2)
         {
             if (this.z >= (field.Depth - 2) / 2 && this.z <= (field.Depth + 2) / 2)
             {

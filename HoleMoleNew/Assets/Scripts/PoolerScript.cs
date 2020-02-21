@@ -31,6 +31,7 @@ public class PoolerScript : MonoBehaviour
             for (int i = 0; i < item.amount; i++)
             {
                 GameObject obj = (GameObject)Instantiate(item.objectToPool, moleContainer);
+                obj.name = item.objectToPool.tag;
                 obj.SetActive(false);
                 pooledObjects.Add(obj);
             }
@@ -55,6 +56,7 @@ public class PoolerScript : MonoBehaviour
                 {
                     GameObject obj = (GameObject)Instantiate(item.objectToPool, moleContainer);
                     obj.SetActive(false);
+                    obj.name = tag;
                     pooledObjects.Add(obj);
                     return obj;
                 }
