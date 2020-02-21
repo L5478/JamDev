@@ -19,9 +19,9 @@ public class NormalMole : Mole
         hole = FieldController.Instance.Field.GetRandomHole();
         hole.Status = Hole.HoleStatus.Empty;
 
-        StartCoroutine(SetNewHole());
-
         animator = GetComponentInChildren<Animator>();
+
+        StartCoroutine(SetNewHole());
 
         PlayerInput.MoleHitted += NormalHit;
         PlayerInput.WaterPowerUp += WaterHit;
@@ -84,10 +84,8 @@ public class NormalMole : Mole
 
                 hole = FieldController.Instance.Field.GetNewHole();
 
-                    hole = FieldController.Instance.Field.GetRandomHole();
-
                 if (hole == null)
-                    hole = FieldController.Instance.Field.GetNewHole();
+                    hole = FieldController.Instance.Field.GetRandomHole();
             } 
         }
     }

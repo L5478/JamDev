@@ -22,9 +22,9 @@ public class EliteMole : Mole
         hole = FieldController.Instance.Field.GetRandomHole();
         hole.Status = Hole.HoleStatus.Empty;
 
-        StartCoroutine(SetNewHole());
-
         animator = GetComponentInChildren<Animator>();
+
+        StartCoroutine(SetNewHole());
 
         PlayerInput.MoleHitted += NormalHit;
         PlayerInput.WaterPowerUp += WaterHit;
@@ -67,7 +67,7 @@ public class EliteMole : Mole
                 if (hole.Status == Hole.HoleStatus.Plank)
                 {
                     FieldController.Instance.AnimatePlank(hole, "Break");
-                    StartCoroutine(FieldController.Instance.ResetHole(hole, Hole.HoleStatus.Empty, 1.5f));
+                    StartCoroutine(FieldController.Instance.ResetHole(hole, Hole.HoleStatus.Empty));
                 }
 
                 helmet.SetActive(true);

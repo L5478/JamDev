@@ -77,9 +77,6 @@ public class Field
                 hole_list.Add(hole);
         }
 
-        if (hole_list.Count == 0)
-            return null;
-
         return hole_list[Random.Range(0, hole_list.Count)];
     }
 
@@ -158,29 +155,5 @@ public class Field
         }
 
         return value;
-    }
-
-    public bool IsThereHolesInRow(int row)
-    {
-        foreach (Hole hole in holes)
-        {
-            if (hole.Status != Hole.HoleStatus.None && hole.Z == row)
-            {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public bool IsThereHolesInColum(int colum)
-    {
-        foreach (Hole hole in holes)
-        {
-            if (hole.Status != Hole.HoleStatus.None && hole.X == colum)
-            {
-                return true;
-            }
-        }
-        return false;
     }
 }

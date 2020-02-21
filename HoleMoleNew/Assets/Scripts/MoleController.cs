@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class MoleController : MonoBehaviour
 {
@@ -6,7 +7,6 @@ public class MoleController : MonoBehaviour
     public int normalMole;
     public int eliteMole;
 
-    [Header("Max number of moles in game")]
     public int maxNormalMole;
     public int maxEliteMole = 3;
 
@@ -22,7 +22,7 @@ public class MoleController : MonoBehaviour
 
     private void Start()
     {
-        Hole.HoleStatusChange += HoleStatusHasChanged;
+        Hole.HoleStatusChange += StatusChanged;
 
         lastHoleCount = FieldController.Instance.Field.GetHoleCount(Hole.HoleStatus.Plank);
 
@@ -80,7 +80,7 @@ public class MoleController : MonoBehaviour
 
     // Count how many hole in certain status is active in game
     // and act on changes in realtime
-    private void HoleStatusHasChanged()
+    private void StatusChanged()
     {
         emptyHoleCount = FieldController.Instance.Field.GetHoleCount(Hole.HoleStatus.Empty);
         noneHoleCount = FieldController.Instance.Field.GetHoleCount(Hole.HoleStatus.None);
@@ -89,13 +89,9 @@ public class MoleController : MonoBehaviour
 
         PlankEliteMoleBalance();
 
-        NormalMoleBalance();
     }
 
-    private void NormalMoleBalance()
-    {
 
-    }
 
     private void PlankEliteMoleBalance()
     {

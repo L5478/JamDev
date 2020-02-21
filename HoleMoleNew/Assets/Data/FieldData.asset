@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afde327619348c64b92d534af56e4fec, type: 3}
   m_Name: FieldData
   m_EditorClassIdentifier: 
-  holesX: 15
+  holesX: 11
   holesZ: 7
   emptySpace: 2
