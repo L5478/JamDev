@@ -11,7 +11,7 @@ public class Mole : MonoBehaviour
     protected Hole hole;
     protected Animator animator;
     protected bool isActive = false;
-
+    
     protected string dig;
     protected string hit;
     protected string water;
