@@ -35,6 +35,7 @@ public class PlayerInput : MonoBehaviour
     {
         yAxis = Hammer.transform.position.y;
         HammerAnim = Hammer.GetComponent<Animator>();
+        SetCursorImage();
     }
 
     void Update()
