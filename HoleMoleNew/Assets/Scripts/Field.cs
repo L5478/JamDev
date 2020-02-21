@@ -156,4 +156,17 @@ public class Field
 
         return value;
     }
+
+    public bool IsThereHolesInRow(int row)
+    {
+        foreach (Hole hole in holes)
+        {
+            if (hole.Status != Hole.HoleStatus.None && hole.Z == row)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

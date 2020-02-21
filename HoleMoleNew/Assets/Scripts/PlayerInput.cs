@@ -24,6 +24,7 @@ public class PlayerInput : MonoBehaviour
 
     private PowerUp currentPowerUp = PowerUp.None;
     private Hole hole;
+    private Mole mole;
     private Animator HammerAnim;
     private new Camera camera;
 
@@ -57,7 +58,7 @@ public class PlayerInput : MonoBehaviour
                 if (currentPowerUp == PowerUp.None)
                 {
                     //Regular hit mole
-                    Mole mole = hit.transform.GetComponentInParent<Mole>();
+                    mole = hit.transform.GetComponentInParent<Mole>();
 
 
                     if (mole != null)
@@ -84,6 +85,7 @@ public class PlayerInput : MonoBehaviour
                             break;
                         case PowerUp.Fire:
                             hole = FieldController.Instance.Field.GetHoleAtPosition(hit.transform.position);
+                            mole = hit.transform.GetComponentInChildren<Mole>();
                             if (hole != null)
                                 FirePowerUp?.Invoke(hole);
                             break;
