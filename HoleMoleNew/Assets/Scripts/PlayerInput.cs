@@ -48,7 +48,6 @@ public class PlayerInput : MonoBehaviour
         if (Physics.Raycast(ray1, out RaycastHit hitPos, 40f, posLayer))
         {
             hammerDistance = Vector3.Distance(ray1.origin, hitPos.point);
-            Debug.Log(hammerDistance);
             Hammer.transform.position = new Vector3(hitPos.point.x, yAxis, hitPos.point.z - zOffset - (hammerDistance - 6)/5);
         };
 

@@ -16,3 +16,4 @@ MonoBehaviour:
   spriteImg: {fileID: 21300000, guid: 3064774872d5688439dc670d2cd3f3ae, type: 3}
   cursorImg: {fileID: 2800000, guid: 3064774872d5688439dc670d2cd3f3ae, type: 3}
   weight: 5
+  cost: 25
