@@ -17,6 +17,7 @@ public class PlayerInput : MonoBehaviour
     private RaycastHit hit;
     private Ray ray1;
     private float yAxis;
+    private float hammerDistance;
     [SerializeField]
     private LayerMask posLayer;
 
@@ -46,7 +47,9 @@ public class PlayerInput : MonoBehaviour
         Ray ray1 = camera.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray1, out RaycastHit hitPos, 40f, posLayer))
         {
-            Hammer.transform.position = new Vector3(hitPos.point.x, yAxis, hitPos.point.z - zOffset);
+            hammerDistance = Vector3.Distance(ray1.origin, hitPos.point);
+            Debug.Log(hammerDistance);
+            Hammer.transform.position = new Vector3(hitPos.point.x, yAxis, hitPos.point.z - zOffset - (hammerDistance - 6)/5);
         };
 
         //Mouse button down if not hovering over any UI elements
