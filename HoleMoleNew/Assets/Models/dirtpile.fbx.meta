@@ -15,6 +15,12 @@ ModelImporter:
   - first:
       74: 7327631073386265016
     second: Armature|DirtSpawn
+  - first:
+      74: 5342966878942705839
+    second: Armature|Armature|Armature|DirtIdle|Armature|DirtIdle
+  - first:
+      74: 198997204333063044
+    second: Armature|Armature|Armature|DirtSpawn|Armature|DirtSpawn
   externalObjects:
   - first:
       type: UnityEngine:Material
