@@ -75,7 +75,7 @@ public class PowerUpSelector : MonoBehaviour
     public void AdjustCoins(int amount)
     {
         coins += amount;
-        coinsText.text = "Coins: " + coins.ToString();
+        coinsText.text = coins.ToString();
     }
 
     public void OnPowerUpSelect(string sPowerUp = null)
