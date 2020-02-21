@@ -996,17 +996,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 880966916}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 118643317}
-  m_Father: {fileID: 1741161544}
+  m_Father: {fileID: 1896601207}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -40, y: 40}
+  m_AnchoredPosition: {x: 417, y: -140}
   m_SizeDelta: {x: 132.3, y: 53.8}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &880966918
@@ -2614,7 +2614,6 @@ RectTransform:
   - {fileID: 1485385249}
   - {fileID: 1896601207}
   - {fileID: 192545090}
-  - {fileID: 880966917}
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2665,6 +2664,7 @@ MonoBehaviour:
   - {fileID: 1899601392}
   - {fileID: 1247773025}
   coinsText: {fileID: 192545091}
+  skipBtn: {fileID: 0}
   waitTime: 7
 --- !u!1 &1832175656
 GameObject:
@@ -2726,6 +2726,7 @@ RectTransform:
   - {fileID: 2058844463}
   - {fileID: 1899601389}
   - {fileID: 1247773028}
+  - {fileID: 880966917}
   m_Father: {fileID: 1741161544}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
