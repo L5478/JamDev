@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Hole
 {
@@ -11,19 +10,10 @@ public class Hole
     private Vector3 position;
     private Field field;
 
-    public HoleStatus Status
-    {
-        get => status; set
-        {
-            status = value;
-            HoleStatusChange?.Invoke();
-        }
-    }
+    public HoleStatus Status { get => status; set => status = value; }
     public Vector3 Position { get => position; set => position = value; }
     public int X { get => x; }
     public int Z { get => z; }
-
-    public static event Action HoleStatusChange;
 
     public Hole(int x, int z, Field field)
     {

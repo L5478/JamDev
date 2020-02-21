@@ -7,17 +7,10 @@ public class MoleController : MonoBehaviour
     public int normalMole;
     public int eliteMole;
 
-    private int emptyCount;
-    private int noneCount;
-    private int plankCount;
-    private int moleCount;
-
     private float step = 0.1f;
 
     private void Start()
     {
-        Hole.HoleStatusChange += StatusChanged;
-
         for (int i = 0; i < normalMole; i++)
         {
             GameObject mole = SpawnNewMole("MoleNormal", 3, 1 + step);
@@ -33,6 +26,7 @@ public class MoleController : MonoBehaviour
             mole.SetActive(true);
             step += 0.1f;
         }
+
     }
 
     private GameObject SpawnNewMole(string tag, float wait, float spawn)
@@ -45,15 +39,5 @@ public class MoleController : MonoBehaviour
         }
 
         return moleGO;
-    }
-
-    private void StatusChanged()
-    {
-        emptyCount = FieldController.Instance.Field.GetHoleCount(Hole.HoleStatus.Empty);
-        noneCount = FieldController.Instance.Field.GetHoleCount(Hole.HoleStatus.None);
-        plankCount = FieldController.Instance.Field.GetHoleCount(Hole.HoleStatus.Plank);
-        moleCount = FieldController.Instance.Field.GetHoleCount(Hole.HoleStatus.Mole);
-
-        Debug.Log("Empty: " + emptyCount + "    None:" + noneCount + "    Plank:" + plankCount + "   Mole:" + moleCount);
     }
 }

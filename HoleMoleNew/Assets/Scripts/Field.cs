@@ -141,17 +141,4 @@ public class Field
 
         return newHole;
     }
-
-    public int GetHoleCount(Hole.HoleStatus holeStatus)
-    {
-        int value = 0;
-
-        foreach (Hole hole in holes)
-        {
-            if (hole.Status == holeStatus)
-                value++;
-        }
-
-        return value;
-    }
 }
