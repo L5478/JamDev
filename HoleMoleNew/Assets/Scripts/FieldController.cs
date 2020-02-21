@@ -149,7 +149,7 @@ public class FieldController : MonoBehaviour
         hole.Status = Hole.HoleStatus.Exploded;
         SwitchHoleGFX(hole);
 
-        StartCoroutine(ResetHole(hole, Hole.HoleStatus.None));
+        StartCoroutine(ResetHole(hole, Hole.HoleStatus.None, 1.5f));
     }
 
     public void AnimatePlank(Hole hole, string animationTrigger)
@@ -163,9 +163,11 @@ public class FieldController : MonoBehaviour
             Debug.LogWarning("Couldn't find any Animators in " + holeGO + " or in children");
     }
 
-    public IEnumerator ResetHole(Hole hole, Hole.HoleStatus status)
+
+    // Resets Hole to given status after given time in seconds
+    public IEnumerator ResetHole(Hole hole, Hole.HoleStatus status, float time)
     {
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(time);
         hole.Status = status;
         SwitchHoleGFX(hole);
         Debug.Log("ResetHole");
