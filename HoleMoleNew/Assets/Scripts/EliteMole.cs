@@ -11,6 +11,8 @@ public class EliteMole : Mole
     private float maxHealth = 2f;
     private bool skip = false;
 
+    private MoleSoundEffects soundEffects;
+
     private void Start()
     {
         dig = "Elite";
@@ -25,6 +27,7 @@ public class EliteMole : Mole
         StartCoroutine(SetNewHole());
 
         animator = GetComponentInChildren<Animator>();
+        soundEffects = GetComponentInChildren<MoleSoundEffects>();
 
         PlayerInput.MoleHitted += NormalHit;
         PlayerInput.WaterPowerUp += WaterHit;
@@ -110,6 +113,7 @@ public class EliteMole : Mole
             {
                 helmet.SetActive(false);
                 helmetBreakEffect.SetActive(true);
+                soundEffects.PlayHelmethitSound();
             }
 
             if (health <= 0)
