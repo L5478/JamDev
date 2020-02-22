@@ -8,7 +8,6 @@ public class GameCamera : MonoBehaviour
     [Header("Camera will move between these positions")]
     public Transform nearestPos;
     public Transform midPos;
-    public Transform midFarPos;
     public Transform farestPos;
 
     public float zoomSpeed = .1f;
@@ -41,33 +40,25 @@ public class GameCamera : MonoBehaviour
             nearestPos = GameObject.FindGameObjectWithTag("NearCam").transform;
         if (midPos == null)
             midPos = GameObject.FindGameObjectWithTag("MidCam").transform;
-        if (midFarPos == null)
-            midFarPos = GameObject.FindGameObjectWithTag("MidFarCam").transform;
         if (farestPos == null)
             farestPos = GameObject.FindGameObjectWithTag("FarCam").transform;
 
-        if (FieldController.Instance.Field.IsThereHolesInColum(0) && !gameEnded || FieldController.Instance.Field.IsThereHolesInColum(FieldController.Instance.Field.Width-1) && !gameEnded)
+        if (FieldController.Instance.Field.IsThereHolesInColum(0) && !gameEnded || FieldController.Instance.Field.IsThereHolesInColum(FieldController.Instance.Field.Width-1) && !gameEnded ||
+            FieldController.Instance.Field.IsThereHolesInRow(0) && !gameEnded || FieldController.Instance.Field.IsThereHolesInRow(FieldController.Instance.Field.Depth - 1) && !gameEnded)
         {
             PowerUpSelector.instance.ShowEndScreen();
             gameEnded = true;
             return;
         }
 
-        if (FieldController.Instance.Field.IsThereHolesInColum(1) || FieldController.Instance.Field.IsThereHolesInColum(FieldController.Instance.Field.Width - 2))
+        if (FieldController.Instance.Field.IsThereHolesInRow(1))
         {
             targetPos = farestPos.position;
             time = 0;
             return;
         }
 
-        if (FieldController.Instance.Field.IsThereHolesInRow(0))
-        {
-            targetPos = midFarPos.position;
-            time = 0;
-            return;
-        }
-
-        if (FieldController.Instance.Field.IsThereHolesInRow(1) || FieldController.Instance.Field.IsThereHolesInRow(FieldController.Instance.Field.Depth - 2))
+        if (FieldController.Instance.Field.IsThereHolesInRow(2) || FieldController.Instance.Field.IsThereHolesInRow(FieldController.Instance.Field.Depth - 3))
         {
             targetPos = midPos.position;
             time = 0;

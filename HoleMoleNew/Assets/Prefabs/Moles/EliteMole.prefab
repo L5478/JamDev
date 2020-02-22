@@ -1,19 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!136 &1028204836221989247
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6144769860645096297}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.011776919
-  m_Height: 0.054474104
-  m_Direction: 2
-  m_Center: {x: -0.0051369397, y: 0.002096474, z: 0.018095829}
 --- !u!82 &8243703053992130798
 AudioSource:
   m_ObjectHideFlags: 0
@@ -131,17 +117,18 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 2d226cb838c39e14ebc306623b81c3ac, type: 3}
   - {fileID: 8300000, guid: f2bc27883c641024696144aed454ada6, type: 3}
   - {fileID: 8300000, guid: e360e9958c6dbed47a791dc7d811b8c7, type: 3}
-  normalDeadSounds:
-  - {fileID: 8300000, guid: 497a1979cc7086840b26dc56fc2c5641, type: 3}
-  - {fileID: 8300000, guid: 3e654cab656b2344e8ec6cc646432ef8, type: 3}
   normalDigSounds:
   - {fileID: 8300000, guid: 13382720be021764996f2e90321c792e, type: 3}
   - {fileID: 8300000, guid: d669ee2a3d10eea468c4cd314d228435, type: 3}
+  normalDeadSounds:
+  - {fileID: 8300000, guid: 497a1979cc7086840b26dc56fc2c5641, type: 3}
+  - {fileID: 8300000, guid: 3e654cab656b2344e8ec6cc646432ef8, type: 3}
   normalAppearSounds:
   - {fileID: 8300000, guid: f664cabd15b9a3f4daa0afc63849322f, type: 3}
   - {fileID: 8300000, guid: f36ea8cead5c2f54b9303e1db0af02f9, type: 3}
   - {fileID: 8300000, guid: 467d0e1374df7744f956f734dc17bdb6, type: 3}
   - {fileID: 8300000, guid: c3a1f9bc063b6084bb404a8f77062903, type: 3}
+  plankBlockSounds: []
   helmetHitSounds:
   - {fileID: 8300000, guid: a6bd726e04e40e8459401d0350ee90ba, type: 3}
   - {fileID: 8300000, guid: e67eae7d34535444cb8efb94711a17bf, type: 3}
@@ -155,6 +142,21 @@ MonoBehaviour:
   eliteAppearSounds:
   - {fileID: 8300000, guid: 79aef5aa5def13d4d8e36ef90e7cfa78, type: 3}
   - {fileID: 8300000, guid: a076a9672a42cd641aabbeb1b6858933, type: 3}
+  plankBreakSounds: []
+--- !u!136 &1028204836221989247
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6144769860645096297}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.013538512
+  m_Height: 0.054474104
+  m_Direction: 2
+  m_Center: {x: -0.0051369397, y: 0.002096473, z: 0.018095827}
 --- !u!1 &7973962295226427427
 GameObject:
   m_ObjectHideFlags: 0
