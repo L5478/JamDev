@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class Options : MonoBehaviour
 {
+    //Temp options
     public GameObject optionsMenu;
 
     private AudioListener audioListener;
+    private bool openedDuringAnimation;
 
     private void Start()
     {
@@ -15,25 +17,35 @@ public class Options : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.M))
-        {
-            ToggleMute();
-        }
-
         if (Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Escape))
         {
-            if (optionsMenu.active == true)
+            ToggleOptions();
+        }
+    }
+
+    public void ToggleOptions()
+    {
+        if (optionsMenu.active == true)
+        {
+            optionsMenu.SetActive(false);
+            if (openedDuringAnimation)
             {
-                optionsMenu.SetActive(false);
+                Time.timeScale = 0.15f;
+                openedDuringAnimation = false;
             }
-            else
+        }
+        else
+        {
+            optionsMenu.SetActive(true);
+            if (Time.timeScale < 1)
             {
-                optionsMenu.SetActive(true);
+                openedDuringAnimation = true;
+                Time.timeScale = 0;
             }
         }
     }
 
-    private void ToggleMute()
+    public void ToggleMute()
     {
         AudioListener.volume = AudioListener.volume == 1 ? 0 : 1;
     }
