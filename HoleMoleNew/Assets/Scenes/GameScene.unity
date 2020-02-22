@@ -2192,7 +2192,7 @@ MonoBehaviour:
   waterSound: {fileID: 8300000, guid: d8ae1c6460caa5942ab6fa96586ba91f, type: 3}
   explosionSound: {fileID: 8300000, guid: e1939a7a02ec8db449528f6ec7386d7b, type: 3}
   plankMakeSound: {fileID: 8300000, guid: 93608cc424e55eb41b39c14a499f987a, type: 3}
-  clickSound: {fileID: 0}
+  clickSound: {fileID: 8300000, guid: 1c68b3df0ad3911458ac1baa093379da, type: 3}
 --- !u!114 &963194230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4054,7 +4054,7 @@ MonoBehaviour:
   Hosed: {fileID: 1021847820}
   Exploded: {fileID: 1567777893}
   waitTime: 7
-  clickSound: {fileID: 0}
+  clickSound: {fileID: 8300000, guid: 1c68b3df0ad3911458ac1baa093379da, type: 3}
 --- !u!82 &1741161547
 AudioSource:
   m_ObjectHideFlags: 0
