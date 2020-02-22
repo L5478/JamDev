@@ -2,16 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class Options : MonoBehaviour
 {
     //Temp options
     public GameObject optionsMenu;
+    public AudioClip clickSound;
+
+    private AudioSource audioSource;
 
     private AudioListener audioListener;
     private bool openedDuringAnimation = false;
 
+    private bool mute = false;
+
     private void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         audioListener = FindObjectOfType<AudioListener>();
     }
 
@@ -25,6 +32,8 @@ public class Options : MonoBehaviour
 
     public void ToggleOptions()
     {
+        audioSource.PlayOneShot(clickSound);
+
         if (optionsMenu.active == true)
         {
             optionsMenu.SetActive(false);
@@ -34,6 +43,7 @@ public class Options : MonoBehaviour
                 openedDuringAnimation = false;
             } else
             {
+                
                 Time.timeScale = 1;
             }
         }
@@ -46,10 +56,14 @@ public class Options : MonoBehaviour
             }
             Time.timeScale = 0;
         }
+
+        AudioListener.volume = mute == true ? 0 : 1;
+
     }
 
     public void ToggleMute()
     {
-        AudioListener.volume = AudioListener.volume == 1 ? 0 : 1;
+        mute = mute == false ? true : false;
+        audioSource.PlayOneShot(clickSound);
     }
 }

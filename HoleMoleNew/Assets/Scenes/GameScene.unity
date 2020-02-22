@@ -2223,6 +2223,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   optionsMenu: {fileID: 896914785}
+  clickSound: {fileID: 8300000, guid: 1c68b3df0ad3911458ac1baa093379da, type: 3}
 --- !u!82 &963194232
 AudioSource:
   m_ObjectHideFlags: 0
