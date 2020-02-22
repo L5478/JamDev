@@ -2253,7 +2253,7 @@ TerrainCollider:
   m_GameObject: {fileID: 1474094952}
   m_Material: {fileID: 0}
   m_Enabled: 1
-  m_TerrainData: {fileID: 15600000, guid: 58e40310092a20045ab6edb5ea4a07c2, type: 2}
+  m_TerrainData: {fileID: 15600000, guid: bdefc2bdaf71a674a8fff097fb2cac56, type: 2}
   m_EnableTreeColliders: 1
 --- !u!218 &1474094954
 Terrain:
@@ -2374,7 +2374,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 2.0089e-41, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: NaN, y: 1.02e-43, z: NaN, w: 0}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
