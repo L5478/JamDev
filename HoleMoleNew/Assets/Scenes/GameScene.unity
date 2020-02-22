@@ -439,7 +439,7 @@ GameObject:
   - component: {fileID: 319502935}
   m_Layer: 0
   m_Name: MidFarCameraPos
-  m_TagString: Untagged
+  m_TagString: MidFarCam
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -671,7 +671,7 @@ GameObject:
   - component: {fileID: 532946406}
   m_Layer: 0
   m_Name: FarestCameraPos
-  m_TagString: Untagged
+  m_TagString: FarCam
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -932,7 +932,7 @@ GameObject:
   - component: {fileID: 688105368}
   m_Layer: 0
   m_Name: MidCameraPos
-  m_TagString: Untagged
+  m_TagString: MidCam
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2312,6 +2312,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lookAt: {fileID: 499873861}
+  cameraPositions:
+  - {fileID: 1832175657}
   nearestPos: {fileID: 1832175657}
   midPos: {fileID: 688105368}
   midFarPos: {fileID: 319502935}
@@ -4434,7 +4436,7 @@ GameObject:
   - component: {fileID: 1832175657}
   m_Layer: 0
   m_Name: NearestCameraPos
-  m_TagString: Untagged
+  m_TagString: NearCam
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

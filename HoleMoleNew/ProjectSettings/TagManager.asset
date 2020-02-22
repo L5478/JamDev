@@ -14,6 +14,11 @@ TagManager:
   - HoleFire
   - MoleNormal
   - MoleElite
+  - Mole
+  - NearCam
+  - MidCam
+  - MidFarCam
+  - FarCam
   layers:
   - Default
   - TransparentFX

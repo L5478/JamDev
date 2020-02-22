@@ -16,10 +16,13 @@ public class GameCamera : MonoBehaviour
     private Vector3 targetPos = new Vector3();
     private float time = 0;
 
+    private bool gameEnded = false;
+
     private void Start()
     {
         transform.position = nearestPos.position;
         targetPos = nearestPos.position;
+
         Hole.HoleStatusChange += HoleStatusHasChanged;
     }
 
@@ -34,10 +37,19 @@ public class GameCamera : MonoBehaviour
 
     private void HoleStatusHasChanged()
     {
+        if (nearestPos == null)
+            nearestPos = GameObject.FindGameObjectWithTag("NearCam").transform;
+        if (midPos == null)
+            midPos = GameObject.FindGameObjectWithTag("MidCam").transform;
+        if (midFarPos == null)
+            midFarPos = GameObject.FindGameObjectWithTag("MidFarCam").transform;
+        if (farestPos == null)
+            farestPos = GameObject.FindGameObjectWithTag("FarCam").transform;
 
-        if (FieldController.Instance.Field.IsThereHolesInColum(0) || FieldController.Instance.Field.IsThereHolesInColum(14))
+        if (FieldController.Instance.Field.IsThereHolesInColum(0) && !gameEnded || FieldController.Instance.Field.IsThereHolesInColum(14) && !gameEnded)
         {
             PowerUpSelector.instance.ShowEndScreen();
+            gameEnded = true;
             return;
         }
 
