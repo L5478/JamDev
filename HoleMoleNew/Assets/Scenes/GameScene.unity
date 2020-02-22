@@ -1463,6 +1463,7 @@ MonoBehaviour:
   eliteMole: 1
   maxNormalMole: 10
   maxEliteMole: 5
+  waves: 0a0000000b0000000c000000
 --- !u!114 &973198518
 MonoBehaviour:
   m_ObjectHideFlags: 0
