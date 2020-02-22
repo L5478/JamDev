@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+[RequireComponent(typeof(AudioSource))]
 public class PlayerInput : MonoBehaviour
 {
     public Texture2D DefaultImg;
@@ -34,8 +35,15 @@ public class PlayerInput : MonoBehaviour
     public static event Action<Hole> PlankPowerUp;
     public static event Action<Hole> FirePowerUp;
 
+    public AudioClip waterSound;
+    public AudioClip explosionSound;
+    public AudioClip plankMakeSound;
+    private AudioSource audioSource;
+    public AudioClip clickSound;
+
     private void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         yAxis = Hammer.transform.position.y;
         HammerAnim = Hammer.GetComponent<Animator>();
         camera = GetComponent<Camera>();
@@ -86,10 +94,12 @@ public class PlayerInput : MonoBehaviour
                             {
                                 PowerUpSelector.instance.AddPlanks();
                                 PlankPowerUp?.Invoke(hole);
+                                audioSource.PlayOneShot(plankMakeSound, .5f);
                             }
                             break;
                         case PowerUp.Water:
                             WaterPowerUp?.Invoke();
+                            audioSource.PlayOneShot(waterSound, .5f);
                             break;
                         case PowerUp.Fire:
                             hole = FieldController.Instance.Field.GetHoleAtPosition(hit.transform.position);
@@ -98,6 +108,7 @@ public class PlayerInput : MonoBehaviour
                             {
                                 PowerUpSelector.instance.AddHolesExploded();
                                 FirePowerUp?.Invoke(hole);
+                                audioSource.PlayOneShot(explosionSound, .5f);
                             }
                             break;
                         default:
@@ -113,6 +124,8 @@ public class PlayerInput : MonoBehaviour
 
     public void SetCurrentPowerUp(string i)
     {
+        audioSource.PlayOneShot(clickSound);
+
         switch (i)
         {
             case "Plank":
