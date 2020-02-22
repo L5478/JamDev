@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(AudioSource))]
 public class Options : MonoBehaviour
@@ -65,5 +66,11 @@ public class Options : MonoBehaviour
     {
         mute = mute == false ? true : false;
         audioSource.PlayOneShot(clickSound);
+    }
+
+    public void Menu()
+    {
+        audioSource.PlayOneShot(clickSound);
+        SceneManager.LoadScene(0, LoadSceneMode.Single);
     }
 }
