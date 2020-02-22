@@ -8,7 +8,7 @@ public class Options : MonoBehaviour
     public GameObject optionsMenu;
 
     private AudioListener audioListener;
-    private bool openedDuringAnimation;
+    private bool openedDuringAnimation = false;
 
     private void Start()
     {
@@ -32,6 +32,9 @@ public class Options : MonoBehaviour
             {
                 Time.timeScale = 0.15f;
                 openedDuringAnimation = false;
+            } else
+            {
+                Time.timeScale = 1;
             }
         }
         else
@@ -40,8 +43,8 @@ public class Options : MonoBehaviour
             if (Time.timeScale < 1)
             {
                 openedDuringAnimation = true;
-                Time.timeScale = 0;
             }
+            Time.timeScale = 0;
         }
     }
 
