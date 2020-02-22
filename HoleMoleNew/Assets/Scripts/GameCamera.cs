@@ -35,6 +35,12 @@ public class GameCamera : MonoBehaviour
     private void HoleStatusHasChanged()
     {
 
+        if (FieldController.Instance.Field.IsThereHolesInColum(0) || FieldController.Instance.Field.IsThereHolesInColum(14))
+        {
+            PowerUpSelector.instance.ShowEndScreen();
+            return;
+        }
+
         if (FieldController.Instance.Field.IsThereHolesInColum(1) || FieldController.Instance.Field.IsThereHolesInColum(13))
         {
             targetPos = farestPos.position;
@@ -53,13 +59,6 @@ public class GameCamera : MonoBehaviour
         {
             targetPos = midPos.position;
             time = 0;
-            return;
-        }
-
-        if (FieldController.Instance.Field.IsThereHolesInColum(4) || FieldController.Instance.Field.IsThereHolesInColum(9))
-        {
-            Debug.Log("showEnd");
-            PowerUpSelector.instance.ShowEndScreen();
             return;
         }
 
