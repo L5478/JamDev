@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class FieldController : MonoBehaviour
 {
-    #region Singleton
-    public static FieldController instance;
-    public static FieldController Instance { get => instance; }
-    #endregion
+    //#region Singleton
+    //public static FieldController instance;
+    //public static FieldController Instance { get => instance; }
+    //#endregion
 
     public GameObject holePrefab;
 
@@ -26,12 +26,12 @@ public class FieldController : MonoBehaviour
 
     private void Awake()
     {
-        #region Singleton
-        if (instance != null && instance != this)
-            Destroy(instance);
-        else
-            instance = this;
-        #endregion
+        //#region Singleton
+        //if (instance != null && instance != this)
+        //    Destroy(instance);
+        //else
+        //    instance = this;
+        //#endregion
 
         emptySpace = fieldData.emptySpace;
         holesX = fieldData.holesX;
@@ -71,9 +71,13 @@ public class FieldController : MonoBehaviour
 
     private void Start()
     {
-        PlayerInput.PlankPowerUp += SetPlank;
-        PlayerInput.FirePowerUp += Explode;
+        PlayerInput.PlankPowerUpHole += SetPlankHole;
+        PlayerInput.FirePowerUpHole += ExplodeHole;
+        PlayerInput.PlankPowerUpMole += SetPlankMole;
+        PlayerInput.FirePowerUpMole += ExplodeMole;
     }
+
+
 
     public void SwitchHoleGFX(Hole hole)
     {
@@ -128,39 +132,86 @@ public class FieldController : MonoBehaviour
         }
     }
 
-    private void SetPlank(Hole hole)
+    private void SetPlankHole(Hole hole)
     {
-        hole.Status = Hole.HoleStatus.Plank;
-        SwitchHoleGFX(hole);
+        Hole thishole = hole;
+        thishole.Status = Hole.HoleStatus.Plank;
+        SwitchHoleGFX(thishole);
+        PowerUpSelector.instance.AddPlanks();
 
         for (int i = 0; i < 2; i++)
         {
-            hole = Field.GetEmptyHole();
-            if (hole != null)
+            thishole = Field.GetEmptyHole();
+            if (thishole != null)
             {
-                hole.Status = Hole.HoleStatus.Plank;
-                SwitchHoleGFX(hole);
+                thishole.Status = Hole.HoleStatus.Plank;
+                SwitchHoleGFX(thishole);
+                PowerUpSelector.instance.AddPlanks();
             }
         }
     }
 
-    private void Explode(Hole hole)
+    private void ExplodeHole(Hole hole)
     {
-        hole.Status = Hole.HoleStatus.Exploded;
-        SwitchHoleGFX(hole);
+        Hole thishole = hole;
+        thishole.Status = Hole.HoleStatus.Exploded;
+        SwitchHoleGFX(thishole);
+        StartCoroutine(ResetHole(thishole, Hole.HoleStatus.None, 1.5f));
+        PowerUpSelector.instance.AddHolesExploded();
 
         for (int i = 0; i < 2; i++)
         {
-            hole = Field.GetEmptyHole();
-            if (hole != null)
+            thishole = Field.GetEmptyHole();
+            if (thishole != null)
             {
-                hole.Status = Hole.HoleStatus.Exploded;
-                SwitchHoleGFX(hole);
-                StartCoroutine(ResetHole(hole, Hole.HoleStatus.None, 1.5f));
+                thishole.Status = Hole.HoleStatus.Exploded;
+                SwitchHoleGFX(thishole);
+                StartCoroutine(ResetHole(thishole, Hole.HoleStatus.None, 1.5f));
+                PowerUpSelector.instance.AddHolesExploded();
             }
         }
+    }
 
-       
+    private void ExplodeMole(Mole mole)
+    {
+        Hole thishole = mole.Hole;
+        thishole.Status = Hole.HoleStatus.Exploded;
+        mole.KillMole(mole);
+        SwitchHoleGFX(thishole);
+        StartCoroutine(ResetHole(thishole, Hole.HoleStatus.None, 1.5f));
+        PowerUpSelector.instance.AddHolesExploded();
+
+        for (int i = 0; i < 2; i++)
+        {
+            thishole = Field.GetEmptyHole();
+            if (thishole != null)
+            {
+                thishole.Status = Hole.HoleStatus.Exploded;
+                SwitchHoleGFX(thishole);
+                StartCoroutine(ResetHole(thishole, Hole.HoleStatus.None, 1.5f));
+                PowerUpSelector.instance.AddHolesExploded();
+            }
+        }
+    }
+
+    private void SetPlankMole(Mole mole)
+    {
+        Hole thishole = mole.Hole;
+        thishole.Status = Hole.HoleStatus.Plank;
+        mole.KillMole(mole);
+        SwitchHoleGFX(thishole);
+        PowerUpSelector.instance.AddPlanks();
+
+        for (int i = 0; i < 2; i++)
+        {
+            thishole = Field.GetEmptyHole();
+            if (thishole != null)
+            {
+                thishole.Status = Hole.HoleStatus.Plank;
+                SwitchHoleGFX(thishole);
+                PowerUpSelector.instance.AddPlanks();
+            }
+        }
     }
 
     public void AnimatePlank(Hole hole, string animationTrigger)
