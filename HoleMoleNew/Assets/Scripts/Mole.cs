@@ -17,10 +17,28 @@ public class Mole : MonoBehaviour
     protected string water;
 
     public bool IsActive { get => isActive; }
+    public Hole Hole { get => hole; set => hole = value; }
+
+    protected FieldController Instance;
 
     protected virtual IEnumerator SetNewHole()
     {
         yield return null;
+    }
+
+    public void KillMole(Mole mole)
+    {
+        if (mole == this && isActive == true)
+        {
+            isActive = false;
+            StopAllCoroutines();
+
+            animator.SetTrigger(hit);
+
+            hole = Instance.Field.GetRandomHole();
+
+            StartCoroutine(SetNewHole());
+        }
     }
 
     protected virtual void NormalHit(Mole mole)
@@ -34,22 +52,24 @@ public class Mole : MonoBehaviour
 
             animator.SetTrigger(hit);
 
-            FieldController.Instance.SwitchHoleGFX(hole);
+            Instance.SwitchHoleGFX(hole);
 
-            hole = FieldController.Instance.Field.GetRandomHole();
+            hole = Instance.Field.GetRandomHole();
 
             StartCoroutine(SetNewHole());
         }
     }
 
-    protected void WaterHit()
+    protected void WaterHit(Mole mole)
     {
         if (isActive == true)
         {
             hole.Status = Hole.HoleStatus.Water;
 
             isActive = false;
-            StopAllCoroutines();
+
+            if(mole != null)
+                StopAllCoroutines();
 
             animator.SetTrigger(water);
 
@@ -57,9 +77,9 @@ public class Mole : MonoBehaviour
 
             PowerUpSelector.instance.AddWaterHosed();
 
-            FieldController.Instance.SwitchHoleGFX(hole);
+            Instance.SwitchHoleGFX(hole);
 
-            hole = FieldController.Instance.Field.GetRandomHole();
+            hole = Instance.Field.GetRandomHole();
 
             StartCoroutine(SetNewHole());
         }
