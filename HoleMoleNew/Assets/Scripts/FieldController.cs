@@ -149,7 +149,18 @@ public class FieldController : MonoBehaviour
         hole.Status = Hole.HoleStatus.Exploded;
         SwitchHoleGFX(hole);
 
-        StartCoroutine(ResetHole(hole, Hole.HoleStatus.None, 1.5f));
+        for (int i = 0; i < 2; i++)
+        {
+            hole = Field.GetEmptyHole();
+            if (hole != null)
+            {
+                hole.Status = Hole.HoleStatus.Exploded;
+                SwitchHoleGFX(hole);
+                StartCoroutine(ResetHole(hole, Hole.HoleStatus.None, 1.5f));
+            }
+        }
+
+       
     }
 
     public void AnimatePlank(Hole hole, string animationTrigger)
