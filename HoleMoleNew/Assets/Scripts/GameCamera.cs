@@ -16,10 +16,14 @@ public class GameCamera : MonoBehaviour
     private Vector3 targetPos = new Vector3();
     private float time = 0;
 
-    private void Start()
+    private void Awake()
     {
         transform.position = nearestPos.position;
         targetPos = nearestPos.position;
+    }
+
+    private void Start()
+    {
         Hole.HoleStatusChange += HoleStatusHasChanged;
     }
 

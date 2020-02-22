@@ -153,7 +153,7 @@ public class PowerUpSelector : MonoBehaviour
 
     public void PlayAgain()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
     }
 
     public void GoToMenu()
