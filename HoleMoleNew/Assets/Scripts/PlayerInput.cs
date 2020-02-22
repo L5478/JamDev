@@ -80,7 +80,10 @@ public class PlayerInput : MonoBehaviour
                         case PowerUp.Plank:
                             hole = FieldController.Instance.Field.GetHoleAtPosition(hit.transform.position);
                             if (hole != null)
+                            {
+                                PowerUpSelector.instance.AddPlanks();
                                 PlankPowerUp?.Invoke(hole);
+                            }
                             break;
                         case PowerUp.Water:
                             WaterPowerUp?.Invoke();
@@ -89,7 +92,10 @@ public class PlayerInput : MonoBehaviour
                             hole = FieldController.Instance.Field.GetHoleAtPosition(hit.transform.position);
                             mole = hit.transform.GetComponentInChildren<Mole>();
                             if (hole != null)
+                            {
+                                PowerUpSelector.instance.AddHolesExploded();
                                 FirePowerUp?.Invoke(hole);
+                            }
                             break;
                         default:
                             break;

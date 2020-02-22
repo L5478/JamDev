@@ -52,7 +52,6 @@ public class EliteMole : Mole
                     dig = "EliteDig";
                     break;
                 case Hole.HoleStatus.Water:
-                    PowerUpSelector.instance.AddEliteMole();
                     WaterHit();
                     break;
                 case Hole.HoleStatus.Mole:

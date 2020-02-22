@@ -17,9 +17,14 @@ public class PowerUpSelector : MonoBehaviour
     public Text coinsText;
     public Button skipBtn;
 
-    private int coins = 0;
+    //Summary end screen
     private int normalMolesSlammed = 0;
-    private int eliteMolesSlammed= 0;
+    private int eliteMolesSlammed = 0;
+    private int molesWaterHosed = 0;
+    private int planksPlaced = 0;
+    private int holesExploded = 0;
+
+    private int coins = 0;
     private PlayerInput playerInput;
     private Animator animator;
     public float waitTime = 15f;
@@ -49,7 +54,7 @@ public class PowerUpSelector : MonoBehaviour
     private void StartPowerupsAnimation()
     {
         animator.SetTrigger("ShowPowerUps");
-        Time.timeScale = .20f;
+        Time.timeScale = .15f;
         for (int i = 0; i < btnList.Count; i++)
         {
             if (listPowerUps[i].cost > coins)
@@ -87,6 +92,21 @@ public class PowerUpSelector : MonoBehaviour
     public void AddEliteMole()
     {
         eliteMolesSlammed++;
+    }
+
+    public void AddWaterHosed()
+    {
+        molesWaterHosed++;
+    }
+
+    public void AddPlanks()
+    {
+        planksPlaced += 3;
+    }
+
+    public void AddHolesExploded()
+    {
+        holesExploded++;
     }
 
     public void OnPowerUpSelect(string sPowerUp = null)

@@ -48,7 +48,6 @@ public class NormalMole : Mole
                     skip = true;
                     break;
                 case Hole.HoleStatus.Water:
-                    PowerUpSelector.instance.AddNormalMole();
                     WaterHit();
                     break;
                 case Hole.HoleStatus.Mole:
