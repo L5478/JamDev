@@ -31,9 +31,11 @@ public class PlayerInput : MonoBehaviour
     private new Camera camera;
 
     public static event Action<Mole> MoleHitted;
-    public static event Action WaterPowerUp;
-    public static event Action<Hole> PlankPowerUp;
-    public static event Action<Hole> FirePowerUp;
+    public static event Action<Mole> WaterPowerUp;
+    public static event Action<Hole> PlankPowerUpHole;
+    public static event Action<Mole> PlankPowerUpMole;
+    public static event Action<Hole> FirePowerUpHole;
+    public static event Action<Mole> FirePowerUpMole;
 
     public AudioClip waterSound;
     public AudioClip explosionSound;
@@ -90,24 +92,34 @@ public class PlayerInput : MonoBehaviour
                             break;
                         case PowerUp.Plank:
                             hole = FieldController.Instance.Field.GetHoleAtPosition(hit.transform.position);
+                            mole = hit.transform.GetComponentInParent<Mole>();
                             if (hole != null)
                             {
-                                PowerUpSelector.instance.AddPlanks();
-                                PlankPowerUp?.Invoke(hole);
+                                PlankPowerUpHole?.Invoke(hole);
+                                audioSource.PlayOneShot(plankMakeSound, .5f);
+                            }
+                            if (mole != null)
+                            {
+                                PlankPowerUpMole?.Invoke(mole);
                                 audioSource.PlayOneShot(plankMakeSound, .5f);
                             }
                             break;
                         case PowerUp.Water:
-                            WaterPowerUp?.Invoke();
+                            mole = hit.transform.GetComponentInParent<Mole>();
+                            WaterPowerUp?.Invoke(mole);
                             audioSource.PlayOneShot(waterSound, .5f);
                             break;
                         case PowerUp.Fire:
                             hole = FieldController.Instance.Field.GetHoleAtPosition(hit.transform.position);
-                            mole = hit.transform.GetComponentInChildren<Mole>();
+                            mole = hit.transform.GetComponentInParent<Mole>();
                             if (hole != null)
                             {
-                                PowerUpSelector.instance.AddHolesExploded();
-                                FirePowerUp?.Invoke(hole);
+                                FirePowerUpHole?.Invoke(hole);
+                                audioSource.PlayOneShot(explosionSound, .5f);
+                            }
+                            if (mole != null)
+                            {
+                                FirePowerUpMole?.Invoke(mole);
                                 audioSource.PlayOneShot(explosionSound, .5f);
                             }
                             break;

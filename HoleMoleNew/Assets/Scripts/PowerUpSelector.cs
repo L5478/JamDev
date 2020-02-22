@@ -118,7 +118,7 @@ public class PowerUpSelector : MonoBehaviour
 
     public void AddPlanks()
     {
-        planksPlaced += 3;
+        planksPlaced++; ;
     }
 
     public void AddHolesExploded()
