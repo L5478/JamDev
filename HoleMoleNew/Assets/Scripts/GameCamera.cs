@@ -46,14 +46,14 @@ public class GameCamera : MonoBehaviour
         if (farestPos == null)
             farestPos = GameObject.FindGameObjectWithTag("FarCam").transform;
 
-        if (FieldController.Instance.Field.IsThereHolesInColum(0) && !gameEnded || FieldController.Instance.Field.IsThereHolesInColum(14) && !gameEnded)
+        if (FieldController.Instance.Field.IsThereHolesInColum(0) && !gameEnded || FieldController.Instance.Field.IsThereHolesInColum(FieldController.Instance.Field.Width-1) && !gameEnded)
         {
             PowerUpSelector.instance.ShowEndScreen();
             gameEnded = true;
             return;
         }
 
-        if (FieldController.Instance.Field.IsThereHolesInColum(1) || FieldController.Instance.Field.IsThereHolesInColum(13))
+        if (FieldController.Instance.Field.IsThereHolesInColum(1) || FieldController.Instance.Field.IsThereHolesInColum(FieldController.Instance.Field.Width - 2))
         {
             targetPos = farestPos.position;
             time = 0;
@@ -67,7 +67,7 @@ public class GameCamera : MonoBehaviour
             return;
         }
 
-        if (FieldController.Instance.Field.IsThereHolesInRow(1) || FieldController.Instance.Field.IsThereHolesInRow(5))
+        if (FieldController.Instance.Field.IsThereHolesInRow(1) || FieldController.Instance.Field.IsThereHolesInRow(FieldController.Instance.Field.Depth - 2))
         {
             targetPos = midPos.position;
             time = 0;
