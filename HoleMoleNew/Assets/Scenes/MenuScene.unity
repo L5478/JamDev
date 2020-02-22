@@ -542,6 +542,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Hammer: {fileID: 2049998495}
+  cursorImg: {fileID: 2800000, guid: 7bd78cacacda2284baa5a292573f6690, type: 3}
 --- !u!114 &450735723
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9075,7 +9076,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ad17a2caff5fb343b74fb0bb0eee3f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  masterVolume: 0
+  masterVolume: 0.2
   hitSounds:
   - {fileID: 8300000, guid: 092d064ade060d24a91ab61676803d6b, type: 3}
   - {fileID: 8300000, guid: 78844aec79629be429c50074302b58db, type: 3}
@@ -14939,7 +14940,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ad17a2caff5fb343b74fb0bb0eee3f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  masterVolume: 0
+  masterVolume: 0.2
   hitSounds:
   - {fileID: 8300000, guid: 092d064ade060d24a91ab61676803d6b, type: 3}
   - {fileID: 8300000, guid: 78844aec79629be429c50074302b58db, type: 3}
