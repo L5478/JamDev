@@ -84,8 +84,6 @@ public class NormalMole : Mole
 
                 hole = FieldController.Instance.Field.GetNewHole();
 
-                    hole = FieldController.Instance.Field.GetRandomHole();
-
                 if (hole == null)
                     hole = FieldController.Instance.Field.GetNewHole();
             } 

@@ -10,6 +10,15 @@ public class MoleController : MonoBehaviour
     public int maxNormalMole;
     public int maxEliteMole = 3;
 
+    [Header("Hole thresholds for mole spawns")]
+    [Tooltip("How many holes there need to be in game to spawn next Normal mole. List should be from lowest to highest")]
+    public int[] holes;
+
+    [Tooltip("How many planks there need to be to spawn extra Elite mole")]
+    public int planks;
+
+    private bool[] wavesRegistered;
+
     private int emptyHoleCount;
     private int noneHoleCount;
     private int plankHoleCount;
@@ -19,6 +28,8 @@ public class MoleController : MonoBehaviour
     private int moleEliteCount;
 
     private int lastHoleCount;
+    private int maxHoles;
+    private int holeCount;
 
     private void Start()
     {
@@ -27,11 +38,20 @@ public class MoleController : MonoBehaviour
         lastHoleCount = FieldController.Instance.Field.GetHoleCount(Hole.HoleStatus.Plank);
 
         StartSpawn();
+        maxHoles = FieldController.Instance.Field.HolesAmount;
+
+        wavesRegistered = new bool[holes.Length];
+
+        for (int i = 0; i < holes.Length; i++)
+        {
+            wavesRegistered[i] = false;
+        }
     }
 
     // Handles mole spawning at start of the game
     private void StartSpawn()
     {
+        //NormalMoleBalance();
         float step = 0.1f;
 
         for (int i = 0; i < normalMole; i++)
@@ -87,23 +107,32 @@ public class MoleController : MonoBehaviour
         plankHoleCount = FieldController.Instance.Field.GetHoleCount(Hole.HoleStatus.Plank);
         moleHoleCount = FieldController.Instance.Field.GetHoleCount(Hole.HoleStatus.Mole);
 
-        PlankEliteMoleBalance();
+        holeCount = maxHoles - noneHoleCount;
 
+        PlankEliteMoleBalance();
         NormalMoleBalance();
     }
 
     private void NormalMoleBalance()
     {
+        for (int i = holes.Length; i > 0; i--)
+        {
+            if (holeCount >= holes[i-1] && wavesRegistered[i-1] == false && moleNormalCount <= maxNormalMole)
+            {
+                GameObject mole = SpawnNewMole("MoleNormal", 3, 1.5f);
+                mole.SetActive(true);
 
+                wavesRegistered[i - 1] = true;
+            }
+        }
     }
 
     private void PlankEliteMoleBalance()
     {
-        if (plankHoleCount != lastHoleCount && plankHoleCount >= 3 && moleEliteCount < maxEliteMole)
+        if (plankHoleCount != lastHoleCount && plankHoleCount >= planks && moleEliteCount <= maxEliteMole)
         {
             GameObject mole = SpawnNewMole("MoleElite", 3, 2);
             mole.SetActive(true);
-            Debug.Log("Elite Mole Spawned, because so many planks.");
             lastHoleCount = plankHoleCount;
         }
     }
