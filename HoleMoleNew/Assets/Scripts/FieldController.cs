@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class FieldController : MonoBehaviour
 {
-    //#region Singleton
-    //public static FieldController instance;
-    //public static FieldController Instance { get => instance; }
-    //#endregion
+    #region Singleton
+    public static FieldController instance;
+    public static FieldController Instance { get => instance; }
+    #endregion
 
     public GameObject holePrefab;
 
@@ -26,12 +26,12 @@ public class FieldController : MonoBehaviour
 
     private void Awake()
     {
-        //#region Singleton
-        //if (instance != null && instance != this)
-        //    Destroy(instance);
-        //else
-        //    instance = this;
-        //#endregion
+        #region Singleton
+        if (instance != null && instance != this)
+            Destroy(instance);
+        else
+            instance = this;
+        #endregion
 
         emptySpace = fieldData.emptySpace;
         holesX = fieldData.holesX;

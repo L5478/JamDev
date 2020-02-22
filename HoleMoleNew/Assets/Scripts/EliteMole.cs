@@ -52,7 +52,7 @@ public class EliteMole : Mole
                     dig = "EliteDig";
                     break;
                 case Hole.HoleStatus.Water:
-                    WaterHit();
+                    WaterHit(this);
                     break;
                 case Hole.HoleStatus.Mole:
                     hole = FieldController.Instance.Field.GetRandomHole();
