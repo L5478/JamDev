@@ -101,6 +101,8 @@ public class NormalMole : Mole
             if (health <= 0)
             {
                 damageEffect.SetActive(true);
+                PowerUpSelector.instance.AdjustCoins(2);
+                PowerUpSelector.instance.AddNormalMole();
                 base.NormalHit(mole);
             }
         }

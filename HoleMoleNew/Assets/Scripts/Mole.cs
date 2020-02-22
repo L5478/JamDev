@@ -53,6 +53,10 @@ public class Mole : MonoBehaviour
 
             animator.SetTrigger(water);
 
+            PowerUpSelector.instance.AdjustCoins(1);
+
+            PowerUpSelector.instance.AddWaterHosed();
+
             FieldController.Instance.SwitchHoleGFX(hole);
 
             hole = FieldController.Instance.Field.GetRandomHole();

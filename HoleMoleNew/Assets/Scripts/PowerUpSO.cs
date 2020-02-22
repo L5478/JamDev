@@ -8,4 +8,5 @@ public class PowerUpSO : ScriptableObject
     public Sprite spriteImg;
     public Texture2D cursorImg;
     public int weight;
+    public int cost;
 }

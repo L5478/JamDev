@@ -119,6 +119,8 @@ public class EliteMole : Mole
             if (health <= 0)
             { 
                 damageEffect.SetActive(true);
+                PowerUpSelector.instance.AdjustCoins(5);
+                PowerUpSelector.instance.AddEliteMole();
                 base.NormalHit(mole);
             }
         }
