@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PowerUpSelector : MonoBehaviour
@@ -148,6 +149,16 @@ public class PowerUpSelector : MonoBehaviour
         }
         animator.SetTrigger("Hide");
         Invoke("StartPowerupsAnimation", waitTime * 2f);
+    }
+
+    public void PlayAgain()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void GoToMenu()
+    {
+        SceneManager.LoadScene(0);
     }
 
 
