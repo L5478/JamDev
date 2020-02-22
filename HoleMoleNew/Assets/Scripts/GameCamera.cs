@@ -56,6 +56,13 @@ public class GameCamera : MonoBehaviour
             return;
         }
 
+        if (FieldController.Instance.Field.IsThereHolesInColum(4) || FieldController.Instance.Field.IsThereHolesInColum(9))
+        {
+            Debug.Log("showEnd");
+            PowerUpSelector.instance.ShowEndScreen();
+            return;
+        }
+
         targetPos = nearestPos.position;
         time = 0;
     }

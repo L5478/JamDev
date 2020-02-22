@@ -17,12 +17,21 @@ public class PowerUpSelector : MonoBehaviour
     public Text coinsText;
     public Button skipBtn;
 
-    //Summary end screen
+    //Summary end screen (this is ugly)
+    public Text Score;
+    public Text Normal;
+    public Text Elite;
+    public Text Repaired;
+    public Text Hosed;
+    public Text Exploded;
+
+    //Summary end screen private
     private int normalMolesSlammed = 0;
     private int eliteMolesSlammed = 0;
     private int molesWaterHosed = 0;
     private int planksPlaced = 0;
     private int holesExploded = 0;
+    private bool gameOver = false;
 
     private int coins = 0;
     private PlayerInput playerInput;
@@ -53,19 +62,22 @@ public class PowerUpSelector : MonoBehaviour
 
     private void StartPowerupsAnimation()
     {
-        animator.SetTrigger("ShowPowerUps");
-        Time.timeScale = .15f;
-        for (int i = 0; i < btnList.Count; i++)
+        if (!gameOver)
         {
-            if (listPowerUps[i].cost > coins)
+            animator.SetTrigger("ShowPowerUps");
+            Time.timeScale = .15f;
+            for (int i = 0; i < btnList.Count; i++)
             {
-                btnList[i].enabled = false;
-                btnList[i].GetComponentInChildren<RawImage>(true).enabled = true;
-            }
-            else
-            {
-                btnList[i].enabled = true;
-                btnList[i].GetComponentInChildren<RawImage>(true).enabled = false;
+                if (listPowerUps[i].cost > coins)
+                {
+                    btnList[i].enabled = false;
+                    btnList[i].GetComponentInChildren<RawImage>(true).enabled = true;
+                }
+                else
+                {
+                    btnList[i].enabled = true;
+                    btnList[i].GetComponentInChildren<RawImage>(true).enabled = false;
+                }
             }
         }
     }
@@ -107,6 +119,24 @@ public class PowerUpSelector : MonoBehaviour
     public void AddHolesExploded()
     {
         holesExploded++;
+    }
+
+    public void ShowEndScreen()
+    {
+        Debug.Log("game over");
+        if (!gameOver)
+        {
+            int ScoreInt = normalMolesSlammed * 50 + eliteMolesSlammed * 100 + planksPlaced * 25 + molesWaterHosed * 25 + holesExploded * 200;
+            CancelInvoke();
+            animator.SetTrigger("EndScreen");
+            Score.text = ScoreInt.ToString();
+            Normal.text += normalMolesSlammed.ToString();
+            Elite.text += eliteMolesSlammed.ToString();
+            Repaired.text += planksPlaced.ToString();
+            Hosed.text += molesWaterHosed.ToString();
+            Exploded.text += holesExploded.ToString();
+        }
+        gameOver = true;
     }
 
     public void OnPowerUpSelect(string sPowerUp = null)
