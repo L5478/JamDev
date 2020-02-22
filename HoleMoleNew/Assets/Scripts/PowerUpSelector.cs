@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(AudioSource))]
 public class PowerUpSelector : MonoBehaviour
 {
 #region Singleton
@@ -38,6 +39,8 @@ public class PowerUpSelector : MonoBehaviour
     private PlayerInput playerInput;
     private Animator animator;
     public float waitTime = 15f;
+    private AudioSource audioSource;
+    public AudioClip clickSound;
 
     private void Awake()
     {
@@ -51,6 +54,7 @@ public class PowerUpSelector : MonoBehaviour
 
     private void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         playerInput = FindObjectOfType<PlayerInput>();
         animator = GetComponent<Animator>();
         Invoke("StartPowerupsAnimation", waitTime);
@@ -124,7 +128,6 @@ public class PowerUpSelector : MonoBehaviour
 
     public void ShowEndScreen()
     {
-        Debug.Log("game over");
         if (!gameOver)
         {
             int ScoreInt = normalMolesSlammed * 50 + eliteMolesSlammed * 100 + planksPlaced * 25 + molesWaterHosed * 25 + holesExploded * 200;
@@ -153,14 +156,15 @@ public class PowerUpSelector : MonoBehaviour
 
     public void PlayAgain()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
+        audioSource.PlayOneShot(clickSound);
+        SceneManager.LoadScene(1, LoadSceneMode.Single);
     }
 
     public void GoToMenu()
     {
+        audioSource.PlayOneShot(clickSound);
         SceneManager.LoadScene(0);
     }
-
 
     public PowerUpSO GetRandomPowerUp()
     {
