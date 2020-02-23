@@ -24,8 +24,8 @@ public class MoleController : MonoBehaviour
     private int plankHoleCount;
     private int moleHoleCount;
 
-    private int moleNormalCount;
-    private int moleEliteCount;
+    private int moleNormalCount = 0;
+    private int moleEliteCount = 0;
 
     private int lastHoleCount;
     private int maxHoles;
@@ -57,6 +57,8 @@ public class MoleController : MonoBehaviour
         for (int i = 0; i < normalMole; i++)
         {
             GameObject mole = SpawnNewMole("MoleNormal", 3, 1 + step);
+            if (mole == null)
+                return;
             mole.SetActive(true);
             step += 0.1f;
         }
@@ -66,6 +68,9 @@ public class MoleController : MonoBehaviour
         for (int i = 0; i < eliteMole; i++)
         {
             GameObject mole = SpawnNewMole("MoleElite", 3, 2 + step);
+            if (mole == null)
+                return;
+
             mole.SetActive(true);
             step += 0.1f;
         }
@@ -75,6 +80,13 @@ public class MoleController : MonoBehaviour
     // Spawn new mole by tag
     private GameObject SpawnNewMole(string tag, float wait = 3, float spawn = 1.5f)
     {
+        if (moleEliteCount >= maxEliteMole && tag == "MoleElite" || moleNormalCount >= maxNormalMole && tag == "MoleNormal")
+        {
+            Debug.Log("Max amount of "+tag+"s reached");
+            return null;
+        }
+        
+        
         GameObject moleGO = PoolerScript.current.GetPooledObject(tag);
         if(moleGO.TryGetComponent<Mole>(out Mole mole))
         {
@@ -120,6 +132,8 @@ public class MoleController : MonoBehaviour
             if (holeCount >= holes[i-1] && wavesRegistered[i-1] == false && moleNormalCount <= maxNormalMole)
             {
                 GameObject mole = SpawnNewMole("MoleNormal", 3, 1.5f);
+                if (mole == null)
+                    return;
                 mole.SetActive(true);
 
                 wavesRegistered[i - 1] = true;
@@ -132,6 +146,8 @@ public class MoleController : MonoBehaviour
         if (plankHoleCount != lastHoleCount && plankHoleCount >= planks && moleEliteCount <= maxEliteMole)
         {
             GameObject mole = SpawnNewMole("MoleElite", 3, 2);
+            if (mole == null)
+                return;
             mole.SetActive(true);
             lastHoleCount = plankHoleCount;
         }
