@@ -48,6 +48,11 @@ public class MoleController : MonoBehaviour
         }
     }
 
+    private void OnDestroy()
+    {
+        Hole.HoleStatusChange -= HoleStatusHasChanged;
+    }
+
     // Handles mole spawning at start of the game
     private void StartSpawn()
     {

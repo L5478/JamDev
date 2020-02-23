@@ -34,6 +34,11 @@ public class GameCamera : MonoBehaviour
         transform.position = Vector3.Lerp(transform.position, targetPos, time * zoomSpeed);
     }
 
+    private void OnDestroy()
+    {
+        Hole.HoleStatusChange -= HoleStatusHasChanged;
+    }
+
     private void HoleStatusHasChanged()
     {
         if (nearestPos == null)

@@ -77,6 +77,13 @@ public class FieldController : MonoBehaviour
         PlayerInput.FirePowerUpMole += ExplodeMole;
     }
 
+    private void OnDestroy()
+    {
+        PlayerInput.PlankPowerUpHole -= SetPlankHole;
+        PlayerInput.FirePowerUpHole -= ExplodeHole;
+        PlayerInput.PlankPowerUpMole -= SetPlankMole;
+        PlayerInput.FirePowerUpMole -= ExplodeMole;
+    }
 
 
     public void SwitchHoleGFX(Hole hole)

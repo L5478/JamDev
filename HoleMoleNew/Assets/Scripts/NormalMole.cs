@@ -27,6 +27,12 @@ public class NormalMole : Mole
         PlayerInput.WaterPowerUp += WaterHit;
     }
 
+    private void OnDestroy()
+    {
+        PlayerInput.MoleHitted -= NormalHit;
+        PlayerInput.WaterPowerUp -= WaterHit;
+    }
+
     protected override IEnumerator SetNewHole()
     {
         while (true)
