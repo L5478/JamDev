@@ -2299,7 +2299,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1294077384}
   m_LocalRotation: {x: -0, y: 0.37222955, z: -0, w: 0.9281407}
-  m_LocalPosition: {x: 0, y: 0, z: -8}
+  m_LocalPosition: {x: 0, y: 0, z: -12}
   m_LocalScale: {x: 2.6473403, y: 2.6473403, z: 2.6473403}
   m_Children: []
   m_Father: {fileID: 1006350387}
@@ -2307,8 +2307,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 43.706, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 469, y: -8}
-  m_SizeDelta: {x: 128.1, y: 128.1}
+  m_AnchoredPosition: {x: 474, y: -45}
+  m_SizeDelta: {x: 137.2, y: 137.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1294077386
 MonoBehaviour:
@@ -2575,7 +2575,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: NaN, y: 1.02e-43, z: NaN, w: 0}
+  m_BoundingSphereOverride: {x: 5.97e-43, y: -1.3053193e-23, z: 5.97e-43, w: 0}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
