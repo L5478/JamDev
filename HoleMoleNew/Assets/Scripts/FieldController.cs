@@ -22,7 +22,7 @@ public class FieldController : MonoBehaviour
 
     public Field Field;
 
-    private Dictionary<Hole, GameObject> holeGODictonary = new Dictionary<Hole, GameObject>();
+    private Dictionary<string, GameObject> holeGODictonary = new Dictionary<string, GameObject>();
 
     private void Awake()
     {
@@ -61,7 +61,7 @@ public class FieldController : MonoBehaviour
                 Hole hole_data = Field.GetHoleAtCoordinates(x, z);
                 hole_data.Position = holeGO.transform.position;
 
-                holeGODictonary.Add(hole_data, holeGO);
+                holeGODictonary.Add(hole_data.ID, holeGO);
 
                 // Set right graphics based on Hole status
                 SwitchHoleGFX(hole_data);
@@ -112,7 +112,7 @@ public class FieldController : MonoBehaviour
     // Set right grahics to Hole gameobject by tag
     private void SetGFXByTag(string tag, Hole hole)
     {
-        GameObject holeGO = holeGODictonary[hole];
+        GameObject holeGO = holeGODictonary[hole.ID];
 
         foreach (var GFX in holeGO.GetComponentsInChildren<Transform>(true))
         {
@@ -134,7 +134,6 @@ public class FieldController : MonoBehaviour
 
     private void SetPlankHole(Hole hole)
     {
-        Debug.Log(hole);
         Hole thishole = hole;
         thishole.Status = Hole.HoleStatus.Plank;
         SwitchHoleGFX(thishole);
@@ -217,7 +216,7 @@ public class FieldController : MonoBehaviour
 
     public void AnimatePlank(Hole hole, string animationTrigger)
     {
-        GameObject holeGO = holeGODictonary[hole];
+        GameObject holeGO = holeGODictonary[hole.ID];
         Animator animator = holeGO.GetComponentInChildren<Animator>();
 
         if (animator != null)

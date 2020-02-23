@@ -8,7 +8,7 @@ public class NormalMole : Mole
     private float maxHealth = 1f;
     private bool skip = false;
 
-    private void Start()
+    protected override void Start()
     {
         dig = "Normal";
         hit = "Hit";

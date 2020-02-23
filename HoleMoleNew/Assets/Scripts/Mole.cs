@@ -21,8 +21,14 @@ public class Mole : MonoBehaviour
     public bool IsActive { get => isActive; }
     public Hole Hole { get => hole; set => hole = value; }
 
+    protected virtual void Start()
+    {
+        // this will be override
+    }
+
     protected virtual IEnumerator SetNewHole()
     {
+        // this will be override
         yield return null;
     }
 

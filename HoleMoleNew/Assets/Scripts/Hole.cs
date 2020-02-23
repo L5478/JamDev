@@ -11,6 +11,8 @@ public class Hole
     private Vector3 position;
     private Field field;
 
+    private string iD;
+
     public HoleStatus Status
     {
         get => status; set
@@ -22,6 +24,7 @@ public class Hole
     public Vector3 Position { get => position; set => position = value; }
     public int X { get => x; }
     public int Z { get => z; }
+    public string ID { get => iD;}
 
     public static event Action HoleStatusChange;
 
@@ -30,6 +33,8 @@ public class Hole
         this.x = x;
         this.z = z;
         this.field = field;
+
+        iD = "Hole_" + x + "_" + z;
 
         // Set starting area 3x3 in the middle
         if (this.x >= (field.Width - 2) / 2 && this.x <= (field.Width + 2) / 2)

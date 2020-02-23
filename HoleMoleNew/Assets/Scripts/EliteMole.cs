@@ -13,7 +13,7 @@ public class EliteMole : Mole
 
     private MoleSoundEffects soundEffects;
 
-    private void Start()
+    protected override void Start()
     {
         dig = "Elite";
         hit = "EliteHit";
