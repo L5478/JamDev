@@ -51,10 +51,12 @@ public class GameCamera : MonoBehaviour
         if (FieldController.Instance.Field.IsThereHolesInColum(0) && !gameEnded || FieldController.Instance.Field.IsThereHolesInColum(FieldController.Instance.Field.Width-1) && !gameEnded ||
             FieldController.Instance.Field.IsThereHolesInRow(0) && !gameEnded || FieldController.Instance.Field.IsThereHolesInRow(FieldController.Instance.Field.Depth - 1) && !gameEnded)
         {
-            PowerUpSelector.instance.ShowEndScreen();
+            PowerUpSelector.instance.ShowLostScreen();
             gameEnded = true;
             return;
         }
+
+        
 
         if (FieldController.Instance.Field.IsThereHolesInRow(1))
         {

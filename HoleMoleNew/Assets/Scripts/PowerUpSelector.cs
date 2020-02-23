@@ -20,12 +20,20 @@ public class PowerUpSelector : MonoBehaviour
     public Button skipBtn;
 
     //Summary end screen (this is ugly)
-    public Text Score;
-    public Text Normal;
-    public Text Elite;
-    public Text Repaired;
-    public Text Hosed;
-    public Text Exploded;
+    public Text ScoreL;
+    public Text NormalL;
+    public Text EliteL;
+    public Text RepairedL;
+    public Text HosedL;
+    public Text ExplodedL;
+
+    //Summary end screen (this is even uglier)
+    public Text ScoreW;
+    public Text NormalW;
+    public Text EliteW;
+    public Text RepairedW;
+    public Text HosedW;
+    public Text ExplodedW;
 
     //Summary end screen private
     private int normalMolesSlammed = 0;
@@ -126,19 +134,36 @@ public class PowerUpSelector : MonoBehaviour
         holesExploded++;
     }
 
-    public void ShowEndScreen()
+    public void ShowLostScreen()
     {
         if (!gameOver)
         {
             int ScoreInt = normalMolesSlammed * 50 + eliteMolesSlammed * 100 + planksPlaced * 25 + molesWaterHosed * 25 + holesExploded * 200;
             CancelInvoke();
             animator.SetTrigger("EndScreen");
-            Score.text = ScoreInt.ToString();
-            Normal.text += normalMolesSlammed.ToString();
-            Elite.text += eliteMolesSlammed.ToString();
-            Repaired.text += planksPlaced.ToString();
-            Hosed.text += molesWaterHosed.ToString();
-            Exploded.text += holesExploded.ToString();
+            ScoreL.text = ScoreInt.ToString();
+            NormalL.text += normalMolesSlammed.ToString();
+            EliteL.text += eliteMolesSlammed.ToString();
+            RepairedL.text += planksPlaced.ToString();
+            HosedL.text += molesWaterHosed.ToString();
+            ExplodedL.text += holesExploded.ToString();
+        }
+        gameOver = true;
+    }
+
+    public void ShowVictoryScreen()
+    {
+        if (!gameOver)
+        {
+            int ScoreInt = normalMolesSlammed * 50 + eliteMolesSlammed * 100 + planksPlaced * 25 + molesWaterHosed * 25 + holesExploded * 200;
+            CancelInvoke();
+            animator.SetTrigger("VictoryScreen");
+            ScoreW.text = ScoreInt.ToString();
+            NormalW.text += normalMolesSlammed.ToString();
+            EliteW.text += eliteMolesSlammed.ToString();
+            RepairedW.text += planksPlaced.ToString();
+            HosedW.text += molesWaterHosed.ToString();
+            ExplodedW.text += holesExploded.ToString();
         }
         gameOver = true;
     }

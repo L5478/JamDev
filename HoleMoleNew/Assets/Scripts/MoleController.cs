@@ -30,6 +30,7 @@ public class MoleController : MonoBehaviour
     private int lastHoleCount;
     private int maxHoles;
     private int holeCount;
+    private bool gameEnded = false;
 
     private void Start()
     {
@@ -124,10 +125,18 @@ public class MoleController : MonoBehaviour
         plankHoleCount = FieldController.Instance.Field.GetHoleCount(Hole.HoleStatus.Plank);
         moleHoleCount = FieldController.Instance.Field.GetHoleCount(Hole.HoleStatus.Mole);
 
+        if (noneHoleCount == maxHoles && !gameEnded)
+        {
+            PowerUpSelector.instance.ShowVictoryScreen();
+            gameEnded = true;
+            return;
+        }
+
         holeCount = maxHoles - noneHoleCount;
 
         PlankEliteMoleBalance();
         NormalMoleBalance();
+
     }
 
     private void NormalMoleBalance()
