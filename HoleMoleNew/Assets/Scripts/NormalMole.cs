@@ -32,6 +32,10 @@ public class NormalMole : Mole
         while (true)
         {
             yield return new WaitForSeconds(spawnNextTime);
+
+            if (hole.Status != lastHoleStatus)
+                hole = FieldController.Instance.Field.GetRandomHole();
+
             skip = false;
 
             switch (hole.Status)
@@ -86,6 +90,8 @@ public class NormalMole : Mole
 
                 if (hole == null)
                     hole = FieldController.Instance.Field.GetNewHole();
+
+                lastHoleStatus = hole.Status;
             } 
         }
     }

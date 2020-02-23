@@ -134,6 +134,7 @@ public class FieldController : MonoBehaviour
 
     private void SetPlankHole(Hole hole)
     {
+        Debug.Log(hole);
         Hole thishole = hole;
         thishole.Status = Hole.HoleStatus.Plank;
         SwitchHoleGFX(thishole);

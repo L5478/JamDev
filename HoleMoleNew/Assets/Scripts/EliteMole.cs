@@ -38,6 +38,10 @@ public class EliteMole : Mole
         while (true)
         {
             yield return new WaitForSeconds(spawnNextTime);
+
+            if (hole.Status != lastHoleStatus)
+                hole = FieldController.Instance.Field.GetRandomHole();
+
             skip = false;
 
             switch (hole.Status)
@@ -99,6 +103,8 @@ public class EliteMole : Mole
 
                 if (hole == null)
                     hole = FieldController.Instance.Field.GetRandomHole();
+
+                lastHoleStatus = hole.Status;
             }
         }
     }

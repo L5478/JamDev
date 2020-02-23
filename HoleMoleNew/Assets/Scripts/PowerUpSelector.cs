@@ -157,7 +157,7 @@ public class PowerUpSelector : MonoBehaviour
     public void PlayAgain()
     {
         audioSource.PlayOneShot(clickSound);
-        SceneManager.LoadScene(1, LoadSceneMode.Single);
+        SceneManager.LoadScene(1);
     }
 
     public void GoToMenu()

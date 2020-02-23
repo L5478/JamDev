@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.EventSystems;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -35,16 +36,17 @@ public class Options : MonoBehaviour
     {
         audioSource.PlayOneShot(clickSound);
 
-        if (optionsMenu.active == true)
+        if (optionsMenu.activeInHierarchy == true)
         {
             optionsMenu.SetActive(false);
             if (openedDuringAnimation)
             {
                 Time.timeScale = 0.15f;
                 openedDuringAnimation = false;
-            } else
+            }
+            else
             {
-                
+
                 Time.timeScale = 1;
             }
         }
@@ -71,6 +73,8 @@ public class Options : MonoBehaviour
     public void Menu()
     {
         audioSource.PlayOneShot(clickSound);
+        Time.timeScale = 1;
         SceneManager.LoadScene(0, LoadSceneMode.Single);
     }
 }
+

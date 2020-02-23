@@ -9,6 +9,7 @@ public class Mole : MonoBehaviour
     public GameObject damageEffect;
 
     protected Hole hole;
+    protected Hole.HoleStatus lastHoleStatus;
     protected Animator animator;
     protected bool isActive = false;
     
@@ -16,10 +17,9 @@ public class Mole : MonoBehaviour
     protected string hit;
     protected string water;
 
+
     public bool IsActive { get => isActive; }
     public Hole Hole { get => hole; set => hole = value; }
-
-    protected FieldController Instance;
 
     protected virtual IEnumerator SetNewHole()
     {
@@ -35,8 +35,8 @@ public class Mole : MonoBehaviour
 
             animator.SetTrigger(hit);
 
-            hole = Instance.Field.GetRandomHole();
-
+            hole = FieldController.Instance.Field.GetRandomHole();
+            lastHoleStatus = hole.Status;
             StartCoroutine(SetNewHole());
         }
     }
@@ -52,10 +52,10 @@ public class Mole : MonoBehaviour
 
             animator.SetTrigger(hit);
 
-            Instance.SwitchHoleGFX(hole);
+            FieldController.Instance.SwitchHoleGFX(hole);
 
-            hole = Instance.Field.GetRandomHole();
-
+            hole = FieldController.Instance.Field.GetRandomHole();
+            lastHoleStatus = hole.Status;
             StartCoroutine(SetNewHole());
         }
     }
@@ -77,9 +77,11 @@ public class Mole : MonoBehaviour
 
             PowerUpSelector.instance.AddWaterHosed();
 
-            Instance.SwitchHoleGFX(hole);
+            FieldController.Instance.SwitchHoleGFX(hole);
 
-            hole = Instance.Field.GetRandomHole();
+            hole = FieldController.Instance.Field.GetRandomHole();
+
+            lastHoleStatus = hole.Status;
 
             StartCoroutine(SetNewHole());
         }

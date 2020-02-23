@@ -58,7 +58,7 @@ public class GameCamera : MonoBehaviour
             return;
         }
 
-        if (FieldController.Instance.Field.IsThereHolesInRow(2) || FieldController.Instance.Field.IsThereHolesInRow(FieldController.Instance.Field.Depth - 3))
+        if (FieldController.Instance.Field.IsThereHolesInRow(2) || FieldController.Instance.Field.IsThereHolesInRow(FieldController.Instance.Field.Depth - 2))
         {
             targetPos = midPos.position;
             time = 0;
