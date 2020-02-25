@@ -41,12 +41,12 @@ public class GameCamera : MonoBehaviour
 
     private void HoleStatusHasChanged()
     {
-        if (nearestPos == null)
-            nearestPos = GameObject.FindGameObjectWithTag("NearCam").transform;
-        if (midPos == null)
-            midPos = GameObject.FindGameObjectWithTag("MidCam").transform;
-        if (farestPos == null)
-            farestPos = GameObject.FindGameObjectWithTag("FarCam").transform;
+        //if (nearestPos == null)
+        //    nearestPos = GameObject.FindGameObjectWithTag("NearCam").transform;
+        //if (midPos == null)
+        //    midPos = GameObject.FindGameObjectWithTag("MidCam").transform;
+        //if (farestPos == null)
+        //    farestPos = GameObject.FindGameObjectWithTag("FarCam").transform;
 
         if (FieldController.Instance.Field.IsThereHolesInColum(0) && !gameEnded || FieldController.Instance.Field.IsThereHolesInColum(FieldController.Instance.Field.Width-1) && !gameEnded ||
             FieldController.Instance.Field.IsThereHolesInRow(0) && !gameEnded || FieldController.Instance.Field.IsThereHolesInRow(FieldController.Instance.Field.Depth - 1) && !gameEnded)
@@ -54,9 +54,7 @@ public class GameCamera : MonoBehaviour
             PowerUpSelector.instance.ShowLostScreen();
             gameEnded = true;
             return;
-        }
-
-        
+        }     
 
         if (FieldController.Instance.Field.IsThereHolesInRow(1))
         {
@@ -75,4 +73,6 @@ public class GameCamera : MonoBehaviour
         targetPos = nearestPos.position;
         time = 0;
     }
+
+
 }

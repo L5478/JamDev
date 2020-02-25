@@ -61,6 +61,7 @@ public class NormalMole : Mole
                     WaterHit(this);
                     break;
                 case Hole.HoleStatus.Mole:
+                case Hole.HoleStatus.NewHole:
                     hole = FieldController.Instance.Field.GetRandomHole();
                     skip = true;
                     break;

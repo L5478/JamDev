@@ -74,8 +74,7 @@ public class Mole : MonoBehaviour
 
             isActive = false;
 
-            if(mole != null)
-                StopAllCoroutines();
+            StopAllCoroutines();
 
             animator.SetTrigger(water);
 

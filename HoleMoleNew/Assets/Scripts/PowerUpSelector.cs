@@ -42,6 +42,7 @@ public class PowerUpSelector : MonoBehaviour
     private int planksPlaced = 0;
     private int holesExploded = 0;
     private bool gameOver = false;
+    private bool canBuy = true;
 
     private int coins = 0;
     private PlayerInput playerInput;
@@ -67,6 +68,7 @@ public class PowerUpSelector : MonoBehaviour
         animator = GetComponent<Animator>();
         Invoke("StartPowerupsAnimation", waitTime);
         AdjustCoins(0);
+
         for (int i = 0; i < btnList.Count; i++)
         {
             SetPowerupInfo(listPowerUps[i], btnList[i]);
@@ -100,6 +102,7 @@ public class PowerUpSelector : MonoBehaviour
         btn.GetComponentsInChildren<Text>()[0].text = SO.name;
         btn.GetComponentsInChildren<Text>()[1].text = SO.cost.ToString();
         btn.GetComponent<Image>().sprite = SO.spriteImg;
+
         btn.onClick.AddListener(() => OnPowerUpSelect(SO.name));
         btn.onClick.AddListener(() => AdjustCoins(-SO.cost));
     }
@@ -191,6 +194,7 @@ public class PowerUpSelector : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
+    // NOT IN USE RIGHT NOW
     public PowerUpSO GetRandomPowerUp()
     {
         int totalWeight = 0;

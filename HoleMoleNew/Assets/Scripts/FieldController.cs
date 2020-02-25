@@ -239,6 +239,5 @@ public class FieldController : MonoBehaviour
         yield return new WaitForSeconds(time);
         hole.Status = status;
         SwitchHoleGFX(hole);
-        Debug.Log("ResetHole");
     }
 }
