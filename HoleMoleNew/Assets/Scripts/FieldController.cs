@@ -173,6 +173,8 @@ public class FieldController : MonoBehaviour
         else
         {
             mole.KillMole(mole);
+            thishole.Status = Hole.HoleStatus.Plank;
+            SwitchHoleGFX(thishole);
             PowerUpSelector.instance.AddPlanks();
         }
 
