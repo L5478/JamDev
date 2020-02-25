@@ -100,7 +100,8 @@ public class EliteMole : Mole
 
                 yield return new WaitForSeconds(waitForAnimationsEnd);
 
-                hole.Status = Hole.HoleStatus.Empty;
+                if (hole.Status == Hole.HoleStatus.Mole)
+                    hole.Status = Hole.HoleStatus.Empty;
 
                 dig = "Elite";
 

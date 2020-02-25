@@ -87,7 +87,8 @@ public class NormalMole : Mole
 
                 yield return new WaitForSeconds(waitForAnimationsEnd);
 
-                hole.Status = Hole.HoleStatus.Empty;
+                if (hole.Status == Hole.HoleStatus.Mole)   
+                    hole.Status = Hole.HoleStatus.Empty;
 
                 isActive = false;
 
