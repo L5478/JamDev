@@ -10,6 +10,8 @@ public class NormalMole : Mole
 
     protected override void Start()
     {
+        type = MoleType.Normal;
+
         dig = "Normal";
         hit = "Hit";
         water = "Water";

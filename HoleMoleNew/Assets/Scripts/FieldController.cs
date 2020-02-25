@@ -205,9 +205,20 @@ public class FieldController : MonoBehaviour
     {
         Hole thishole = mole.Hole;
         thishole.Status = Hole.HoleStatus.Plank;
-        mole.KillMole(mole);
         SwitchHoleGFX(thishole);
-        PowerUpSelector.instance.AddPlanks();
+
+        if (mole.Type == Mole.MoleType.Elite)
+        {
+            Debug.Log("Break this plank " + thishole.ID + " "+ thishole.Status);
+            AnimatePlank(thishole, "Break");
+            StartCoroutine(ResetHole(thishole, Hole.HoleStatus.Empty, 1.5f));
+        }
+        else
+        {
+            mole.KillMole(mole);
+            PowerUpSelector.instance.AddPlanks();
+        }
+
 
         for (int i = 0; i < 2; i++)
         {

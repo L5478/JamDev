@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class Mole : MonoBehaviour
 {
+    public enum MoleType { Normal, Elite, }
+
     public float waitForAnimationsEnd = 3f;
     public float spawnNextTime = 2f;
     public GameObject damageEffect;
 
+    protected MoleType type;
     protected Hole hole;
     protected Hole.HoleStatus lastHoleStatus;
     protected Animator animator;
@@ -20,6 +23,7 @@ public class Mole : MonoBehaviour
 
     public bool IsActive { get => isActive; }
     public Hole Hole { get => hole; set => hole = value; }
+    public MoleType Type { get => type; }
 
     protected virtual void Start()
     {

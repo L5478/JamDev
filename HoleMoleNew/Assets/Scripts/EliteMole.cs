@@ -15,6 +15,8 @@ public class EliteMole : Mole
 
     protected override void Start()
     {
+        type = MoleType.Elite;
+
         dig = "Elite";
         hit = "EliteHit";
         water = "EliteWater";
