@@ -83,6 +83,8 @@ public class NormalMole : Mole
 
                 animator.SetTrigger(dig);
 
+                hole.Status = Hole.HoleStatus.Mole;
+
                 yield return new WaitForSeconds(waitForAnimationsEnd);
 
                 hole.Status = Hole.HoleStatus.Empty;

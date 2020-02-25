@@ -67,6 +67,8 @@ public class PlayerInput : MonoBehaviour
         //Mouse button down if not hovering over any UI elements
         if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
         {
+            //HammerAnim.SetTrigger("SLAP");
+
             Ray ray = camera.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out RaycastHit hit, 100f))
             {
