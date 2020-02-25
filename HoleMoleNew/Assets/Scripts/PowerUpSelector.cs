@@ -105,8 +105,16 @@ public class PowerUpSelector : MonoBehaviour
 
         btn.onClick.AddListener(() => OnPowerUpSelect(SO.name));
         btn.onClick.AddListener(() => AdjustCoins(-SO.cost));
+        btn.onClick.AddListener(() => DisableButtons());
     }
 
+    private void DisableButtons()
+    {
+        for (int i = 0; i < btnList.Count; i++)
+        {
+            btnList[i].enabled = false;
+        }
+    }
     public void AdjustCoins(int amount)
     {
         coins += amount;
