@@ -52,15 +52,23 @@ public class Field
     }
 
     // Get empty Hole
-    public Hole GetEmptyHole()
+    public Hole GetEmptyHole(bool acceptStatusMole = false)
     {
+        List<Hole> hole_list = new List<Hole>();
+
         foreach (Hole hole in holes)
         {
             if (hole.Status == Hole.HoleStatus.Empty)
-                return hole;
+                hole_list.Add(hole);
+
+            if (acceptStatusMole && hole.Status == Hole.HoleStatus.Mole)
+                hole_list.Add(hole);
         }
 
-        return null;
+        if (hole_list.Count > 0)
+            return hole_list[Random.Range(0, hole_list.Count)];
+        else
+            return null;
     }
 
     // Get randomly hole which status is not None or Mole

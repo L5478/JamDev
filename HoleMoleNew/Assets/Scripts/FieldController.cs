@@ -158,6 +158,37 @@ public class FieldController : MonoBehaviour
         }
     }
 
+    private void SetPlankMole(Mole mole)
+    {
+        Hole thishole = mole.Hole;
+        thishole.Status = Hole.HoleStatus.Plank;
+        SwitchHoleGFX(thishole);
+
+        if (mole.Type == Mole.MoleType.Elite)
+        {
+            Debug.Log("Break this plank " + thishole.ID + " " + thishole.Status);
+            AnimatePlank(thishole, "Break");
+            StartCoroutine(ResetHole(thishole, Hole.HoleStatus.Empty, 1.5f));
+        }
+        else
+        {
+            mole.KillMole(mole);
+            PowerUpSelector.instance.AddPlanks();
+        }
+
+
+        for (int i = 0; i < 2; i++)
+        {
+            thishole = Field.GetEmptyHole();
+            if (thishole != null)
+            {
+                thishole.Status = Hole.HoleStatus.Plank;
+                SwitchHoleGFX(thishole);
+                PowerUpSelector.instance.AddPlanks();
+            }
+        }
+    }
+
     private void ExplodeHole(Hole hole)
     {
         Hole thishole = hole;
@@ -168,7 +199,7 @@ public class FieldController : MonoBehaviour
 
         for (int i = 0; i < 2; i++)
         {
-            thishole = Field.GetEmptyHole();
+            thishole = Field.GetEmptyHole(true);
             if (thishole != null)
             {
                 thishole.Status = Hole.HoleStatus.Exploded;
@@ -190,44 +221,13 @@ public class FieldController : MonoBehaviour
 
         for (int i = 0; i < 2; i++)
         {
-            thishole = Field.GetEmptyHole();
+            thishole = Field.GetEmptyHole(true);
             if (thishole != null)
             {
                 thishole.Status = Hole.HoleStatus.Exploded;
                 SwitchHoleGFX(thishole);
                 StartCoroutine(ResetHole(thishole, Hole.HoleStatus.None, 1.5f));
                 PowerUpSelector.instance.AddHolesExploded();
-            }
-        }
-    }
-
-    private void SetPlankMole(Mole mole)
-    {
-        Hole thishole = mole.Hole;
-        thishole.Status = Hole.HoleStatus.Plank;
-        SwitchHoleGFX(thishole);
-
-        if (mole.Type == Mole.MoleType.Elite)
-        {
-            Debug.Log("Break this plank " + thishole.ID + " "+ thishole.Status);
-            AnimatePlank(thishole, "Break");
-            StartCoroutine(ResetHole(thishole, Hole.HoleStatus.Empty, 1.5f));
-        }
-        else
-        {
-            mole.KillMole(mole);
-            PowerUpSelector.instance.AddPlanks();
-        }
-
-
-        for (int i = 0; i < 2; i++)
-        {
-            thishole = Field.GetEmptyHole();
-            if (thishole != null)
-            {
-                thishole.Status = Hole.HoleStatus.Plank;
-                SwitchHoleGFX(thishole);
-                PowerUpSelector.instance.AddPlanks();
             }
         }
     }
