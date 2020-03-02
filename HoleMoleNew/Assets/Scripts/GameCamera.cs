@@ -12,6 +12,8 @@ public class GameCamera : MonoBehaviour
 
     public float zoomSpeed = .1f;
 
+    public Vector3 offset = new Vector3(-1, 2, -1);
+
     private Vector3 targetPos = new Vector3();
     private float time = 0;
 
@@ -29,9 +31,16 @@ public class GameCamera : MonoBehaviour
     {
         time += Time.deltaTime;
 
-        transform.LookAt(lookAt);
+        Quaternion targetRot = Quaternion.LookRotation(lookAt.position - transform.position);
+
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, time * zoomSpeed);
 
         transform.position = Vector3.Lerp(transform.position, targetPos, time * zoomSpeed);
+
+        if (gameEnded && Vector3.Distance(transform.position, targetPos) <= 1)
+        {
+            PowerUpSelector.Instance.ShowLostScreen();
+        }
     }
 
     private void OnDestroy()
@@ -41,29 +50,21 @@ public class GameCamera : MonoBehaviour
 
     private void HoleStatusHasChanged()
     {
-        //if (nearestPos == null)
-        //    nearestPos = GameObject.FindGameObjectWithTag("NearCam").transform;
-        //if (midPos == null)
-        //    midPos = GameObject.FindGameObjectWithTag("MidCam").transform;
-        //if (farestPos == null)
-        //    farestPos = GameObject.FindGameObjectWithTag("FarCam").transform;
-
-        if (FieldController.Instance.Field.IsThereHolesInColum(0) && !gameEnded || FieldController.Instance.Field.IsThereHolesInColum(FieldController.Instance.Field.Width-1) && !gameEnded ||
-            FieldController.Instance.Field.IsThereHolesInRow(0) && !gameEnded || FieldController.Instance.Field.IsThereHolesInRow(FieldController.Instance.Field.Depth - 1) && !gameEnded)
-        {
-            PowerUpSelector.instance.ShowLostScreen();
-            gameEnded = true;
+        if (gameEnded)
             return;
-        }     
 
-        if (FieldController.Instance.Field.IsThereHolesInRow(1))
+        if (EndGame())
+            return;
+
+        if (FieldController.Instance.Field.IsThereHolesInRow(1) != null)
         {
             targetPos = farestPos.position;
             time = 0;
             return;
         }
 
-        if (FieldController.Instance.Field.IsThereHolesInRow(2) || FieldController.Instance.Field.IsThereHolesInRow(FieldController.Instance.Field.Depth - 2))
+        if (FieldController.Instance.Field.IsThereHolesInRow(2) != null ||
+            FieldController.Instance.Field.IsThereHolesInRow(FieldController.Instance.Field.Depth - 2) != null)
         {
             targetPos = midPos.position;
             time = 0;
@@ -74,5 +75,26 @@ public class GameCamera : MonoBehaviour
         time = 0;
     }
 
+    private bool EndGame()
+    {
+        Hole hole = FieldController.Instance.Field.IsThereHolesInColum(0);
 
+        if (hole == null)
+            hole = FieldController.Instance.Field.IsThereHolesInColum(FieldController.Instance.Field.Width - 1);
+
+        if (hole == null)
+            hole = FieldController.Instance.Field.IsThereHolesInRow(0);
+
+        if (hole == null)
+            hole = FieldController.Instance.Field.IsThereHolesInRow(FieldController.Instance.Field.Depth - 1);
+
+        if (hole == null)
+            return false;
+
+        targetPos = hole.Position + offset;
+        lookAt.position = hole.Position + Vector3.up;
+        gameEnded = true;
+        time = 0;
+        return true;
+    }
 }

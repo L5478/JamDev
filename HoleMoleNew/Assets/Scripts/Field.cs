@@ -168,27 +168,27 @@ public class Field
         return value;
     }
 
-    public bool IsThereHolesInRow(int row)
+    public Hole IsThereHolesInRow(int row)
     {
         foreach (Hole hole in holes)
         {
             if (hole.Status != Hole.HoleStatus.None && hole.Z == row)
             {
-                return true;
+                return hole;
             }
         }
-        return false;
+        return null;
     }
 
-    public bool IsThereHolesInColum(int colum)
+    public Hole IsThereHolesInColum(int colum)
     {
         foreach (Hole hole in holes)
         {
             if (hole.Status != Hole.HoleStatus.None && hole.X == colum)
             {
-                return true;
+                return hole;
             }
         }
-        return false;
+        return null;
     }
 }
