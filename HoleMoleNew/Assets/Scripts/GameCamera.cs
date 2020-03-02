@@ -12,7 +12,7 @@ public class GameCamera : MonoBehaviour
 
     public float zoomSpeed = .1f;
 
-    public Vector3 offset = new Vector3(-1, 2, -1);
+    public Vector3 offset = new Vector3(-2, 2, -2);
 
     private Vector3 targetPos = new Vector3();
     private float time = 0;
