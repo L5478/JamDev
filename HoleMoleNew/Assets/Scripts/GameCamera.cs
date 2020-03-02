@@ -21,6 +21,8 @@ public class GameCamera : MonoBehaviour
 
     private void Start()
     {
+        Time.timeScale = 1f;
+
         transform.position = nearestPos.position;
         targetPos = nearestPos.position;
 
@@ -37,7 +39,7 @@ public class GameCamera : MonoBehaviour
 
         transform.position = Vector3.Lerp(transform.position, targetPos, time * zoomSpeed);
 
-        if (gameEnded && Vector3.Distance(transform.position, targetPos) <= 1)
+        if (gameEnded && Vector3.Distance(transform.position, targetPos) <= .15f)
         {
             PowerUpSelector.Instance.ShowLostScreen();
         }
@@ -93,6 +95,8 @@ public class GameCamera : MonoBehaviour
 
         targetPos = hole.Position + offset;
         lookAt.position = hole.Position + Vector3.up;
+        zoomSpeed *= 2;
+        Time.timeScale = 0.15f;
         gameEnded = true;
         time = 0;
         return true;
