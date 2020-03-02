@@ -3346,6 +3346,7 @@ MonoBehaviour:
   midPos: {fileID: 688105368}
   farestPos: {fileID: 532946406}
   zoomSpeed: 0.1
+  offset: {x: -2, y: 2, z: -2}
 --- !u!114 &963194231
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5570,7 +5571,7 @@ MonoBehaviour:
   RepairedW: {fileID: 1750601258}
   HosedW: {fileID: 789957344}
   ExplodedW: {fileID: 321819541}
-  waitTime: 7
+  waitTime: 7.5
   clickSound: {fileID: 8300000, guid: 1c68b3df0ad3911458ac1baa093379da, type: 3}
 --- !u!82 &1741161547
 AudioSource:
